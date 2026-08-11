@@ -1,0 +1,85 @@
+Class {
+	#name : 'SequentialPlanInMemoryBackendTableQueryRudesheim',
+	#superclass : 'Object',
+	#instVars : [
+		'sourceCollections',
+		'whereExpression',
+		'selectExpression'
+	],
+	#category : 'Rudesheim-Table-Query-InMemory-Private-Optimization',
+	#package : 'Rudesheim-Table-Query-InMemory-Private',
+	#tag : 'Optimization'
+}
+
+{ #category : 'instance creation' }
+SequentialPlanInMemoryBackendTableQueryRudesheim class >> for: anOptimizationContextInMemoryBackendTableQueryRudesheim [
+	^ self
+		sources:	anOptimizationContextInMemoryBackendTableQueryRudesheim sourceCollections
+		where:	anOptimizationContextInMemoryBackendTableQueryRudesheim whereExpression
+		select:	anOptimizationContextInMemoryBackendTableQueryRudesheim selectExpression.
+]
+
+{ #category : 'instance creation' }
+SequentialPlanInMemoryBackendTableQueryRudesheim class >> sources: aSourceCollection
+where: aWhereExpressionTableQueryRudesheim
+select: aSelectExpressionTableQueryRudesheim [
+	^ self new
+		setSources:	aSourceCollection
+		where:	aWhereExpressionTableQueryRudesheim
+		select:	aSelectExpressionTableQueryRudesheim.
+]
+
+{ #category : 'executing' }
+SequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aCollection [
+	|
+		iterator
+		results
+		block
+	|
+
+	iterator :=
+		IteratorTableQueryRudesheim
+			fromCollections:	sourceCollections.
+
+	results := OrderedCollection new.
+
+	block :=
+		[
+			|
+				evaluator
+			|
+
+			evaluator :=
+				EvaluatorForExpressionTableQueryRudesheim
+					rows:	iterator rows
+					parameters:	aCollection.
+
+			(
+				evaluator
+					visit:	whereExpression
+			)
+				ifTrue:
+				[
+					results
+						add:
+						(
+							evaluator
+								visit:	selectExpression
+						).
+				].
+		].
+
+	iterator
+		timesRepeat:	block.
+
+	^ results.
+]
+
+{ #category : 'initialization' }
+SequentialPlanInMemoryBackendTableQueryRudesheim >> setSources: aSourceCollection
+where: aWhereExpressionTableQueryRudesheim
+select: aSelectExpressionTableQueryRudesheim [
+	sourceCollections := aSourceCollection.
+	whereExpression := aWhereExpressionTableQueryRudesheim.
+	selectExpression := aSelectExpressionTableQueryRudesheim.
+]
