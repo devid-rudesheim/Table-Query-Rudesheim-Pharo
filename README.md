@@ -17,15 +17,57 @@ Metacello new
 
 This also loads the required `RudesheimKernel` and `RudesheimUtility` dependencies from GitHub.
 
-## Optional SQLite3 Support
+## Requirements
 
-The default group does not load the SQLite3 adapter. To load it:
+- Pharo with Metacello.
+- Plain in-memory use needs only the default group.
+- SQLite3 use needs a working `SQLite3Connection` from Pharo-SQLite3 in the image.
+
+## Dependencies
+
+The baseline loads these Rudesheim repositories:
+
+- `RudesheimKernel`: `github://devid-rudesheim/Kernel-Rudesheim-Pharo:main`
+- `RudesheimUtility`: `github://devid-rudesheim/Utility-Rudesheim-Pharo:main`
+
+SQLite3 support depends on Pharo-SQLite3 being available in the image.
+
+## Load Options
+
+Default runtime load:
+
+```smalltalk
+Metacello new
+	baseline: 'RudesheimTableQuery';
+	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
+	load
+```
+
+SQLite3 adapter:
 
 ```smalltalk
 Metacello new
 	baseline: 'RudesheimTableQuery';
 	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
 	load: #(sqlite3)
+```
+
+Core tests:
+
+```smalltalk
+Metacello new
+	baseline: 'RudesheimTableQuery';
+	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
+	load: #(tests)
+```
+
+SQLite3 tests:
+
+```smalltalk
+Metacello new
+	baseline: 'RudesheimTableQuery';
+	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
+	load: #(sqlite3 sqlite3Tests)
 ```
 
 ## Groups
@@ -114,6 +156,18 @@ preparedQuery value: 100.
 ```text
 SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))
 ```
+
+## Usage Constraints
+
+- Query capture blocks use exactly three arguments: `:statement :rows :parameters`.
+- `statement select:collect:` records one predicate expression and one projection expression. Calling it more than once in the same capture block overwrites the previously captured expressions.
+- `statement collect:` is the no-filter form. It records a constant true predicate and one projection expression.
+- The blocks are evaluated once against symbolic row and parameter objects. They should build expressions from `rows` and `parameters`; arbitrary side effects are not part of the query model.
+- SQL output is limited to expressions the SQL renderer can translate. Unsupported Smalltalk messages are not automatically executable by a real SQL backend.
+- In-memory execution always works through a plan. If no optimizer accepts the captured expression, it falls back to sequential iteration.
+- The `EqualityIntersection` optimizer applies to connected equality predicates over all source collections, optionally including equality with a runtime parameter. The equality predicates must be expressed with `=` and connected with `&`.
+- Equality keys can be whole rows or supported accessor chains such as `rows first key` or nested value access. Conditions outside this equality shape do not use the intersection plan.
+- Result ordering follows the selected plan and source collections; do not rely on SQL-style ordering unless an explicit backend adds ordering support.
 
 ## Run Tests
 
