@@ -54,10 +54,7 @@ IteratorTableQueryRudesheim >> collections: aCollection [
 				rows
 					add:
 					(
-						Rudesheim
-							Utility
-							Delegator
-							ForAccessing
+						DelegatorForAccessingRudesheim
 							targetFrom:	#value
 							of:	rowProxy
 					).

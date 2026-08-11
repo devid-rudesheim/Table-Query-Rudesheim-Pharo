@@ -32,11 +32,6 @@ SQLBackendTableQueryRudesheim class >> SQLStringForExpression [
 ]
 
 { #category : 'namespace' }
-SQLBackendTableQueryRudesheim class >> SQLite3RelationalDatabaseDriver [
-	^ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
 SQLBackendTableQueryRudesheim class >> Table [
 	^ TableSQLBackendTableQueryRudesheim.
 ]

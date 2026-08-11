@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'connection'
 	],
-	#category : 'Rudesheim-Table-Query-SQL-Tests-Driver',
-	#package : 'Rudesheim-Table-Query-SQL-Tests',
+	#category : 'Rudesheim-Table-Query-SQL-SQLite3-Tests-Driver',
+	#package : 'Rudesheim-Table-Query-SQL-SQLite3-Tests',
 	#tag : 'Driver'
 }
 

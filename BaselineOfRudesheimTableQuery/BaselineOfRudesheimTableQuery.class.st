@@ -33,9 +33,6 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 					spec repository: 'github://devid-rudesheim/Kernel-Rudesheim-Pharo:main'
 				];
 
-				baseline: 'SQLite3'
-				with: [ spec repository: 'github://pharo-rdbms/Pharo-SQLite3/src' ];
-
 				package: 'Rudesheim-Table-Query-Private'
 				with:
 				[
@@ -96,7 +93,21 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-SQL-Private' 'SQLite3' )
+						requires: #( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-SQL-Private' )
+				];
+
+				package: 'Rudesheim-Table-Query-SQL-SQLite3-Private'
+				with:
+				[
+					spec
+						requires: #( 'Rudesheim-Table-Query-SQL-Private' )
+				];
+
+				package: 'Rudesheim-Table-Query-SQL-SQLite3'
+				with:
+				[
+					spec
+						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-SQLite3-Private' )
 				];
 
 				package: 'Rudesheim-Table-Query-SQL-Private-Tests'
@@ -113,11 +124,24 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-Private-Tests' 'Rudesheim-Table-Query-Tests' )
 				];
 
+				package: 'Rudesheim-Table-Query-SQL-SQLite3-Tests'
+				with:
+				[
+					spec
+						requires: #( 'Rudesheim-Table-Query-SQL-SQLite3' 'Rudesheim-Table-Query-SQL-Tests' )
+				];
+
 				group:		#core
 				with:		#( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-SQL' );
 
+				group:		#sqlite3
+				with:		#( 'Rudesheim-Table-Query-SQL-SQLite3' );
+
 				group:		#tests
 				with:		#( 'Rudesheim-Table-Query-Tests' 'Rudesheim-Table-Query-InMemory-Tests' 'Rudesheim-Table-Query-SQL-Tests' );
+
+				group:		#sqlite3Tests
+				with:		#( 'Rudesheim-Table-Query-SQL-SQLite3-Tests' );
 
 				group:		#default
 				with:		#( #core ).

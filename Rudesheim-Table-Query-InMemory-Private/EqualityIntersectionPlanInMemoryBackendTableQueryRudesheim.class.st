@@ -235,10 +235,7 @@ withArguments: aCollection [
 		rowProxies
 			collect:
 			[ :eachRowProxy |
-				Rudesheim
-					Utility
-					Delegator
-					ForAccessing
+				DelegatorForAccessingRudesheim
 					targetFrom:	#value
 					of:	eachRowProxy.
 			].

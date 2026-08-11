@@ -10,8 +10,8 @@ Class {
 		'selectExpression',
 		'sqlString'
 	],
-	#category : 'Rudesheim-Table-Query-SQL-Private-Driver',
-	#package : 'Rudesheim-Table-Query-SQL-Private',
+	#category : 'Rudesheim-Table-Query-SQL-SQLite3-Private-Driver',
+	#package : 'Rudesheim-Table-Query-SQL-SQLite3-Private',
 	#tag : 'Driver'
 }
 

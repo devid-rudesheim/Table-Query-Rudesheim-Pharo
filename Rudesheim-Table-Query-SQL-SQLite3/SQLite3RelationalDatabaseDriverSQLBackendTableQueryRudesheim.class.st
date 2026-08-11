@@ -9,8 +9,8 @@ Class {
 	#instVars : [
 		'connection'
 	],
-	#category : 'Rudesheim-Table-Query-SQL-Driver',
-	#package : 'Rudesheim-Table-Query-SQL',
+	#category : 'Rudesheim-Table-Query-SQL-SQLite3-Driver',
+	#package : 'Rudesheim-Table-Query-SQL-SQLite3',
 	#tag : 'Driver'
 }
 
