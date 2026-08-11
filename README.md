@@ -15,22 +15,27 @@ Metacello new
 	load
 ```
 
-This also loads the required `RudesheimKernel` and `RudesheimUtility` dependencies from GitHub.
+This also loads the required `RudesheimKernel`, `RudesheimUtility`, and `DMirror` dependencies from GitHub.
 
 ## Requirements
 
 - Pharo with Metacello.
-- Plain in-memory use needs only the default group.
-- SQLite3 use needs a working `SQLite3Connection` from Pharo-SQLite3 in the image.
+- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer.
+- SQLite3 use needs the `sqlite3` group. The group loads the `Core` part of Pharo-SQLite3 through the baseline.
 
 ## Dependencies
 
-The baseline loads these Rudesheim repositories:
+The baseline loads these repositories:
 
 - `RudesheimKernel`: `github://devid-rudesheim/Kernel-Rudesheim-Pharo:main`
 - `RudesheimUtility`: `github://devid-rudesheim/Utility-Rudesheim-Pharo:main`
+- `DMirror`: `github://ObjectProfile/DMirror/src`
 
-SQLite3 support depends on Pharo-SQLite3 being available in the image.
+The `sqlite3` group also loads `SQLite3Core` from Pharo-SQLite3:
+
+- `SQLite3`: `github://pharo-rdbms/Pharo-SQLite3/src`, loaded with `#( 'Core' )`
+
+DMirror declares its own OSSubprocess dependency in its baseline.
 
 ## Load Options
 
