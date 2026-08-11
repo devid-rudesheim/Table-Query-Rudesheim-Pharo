@@ -87,15 +87,15 @@ Metacello new
 
 ```smalltalk
 sourceCollections :=
-	{
-		1 to: 200.
-		50 to: 60.
-		1 to: 200
-	}
-		collect:
-		[ :eachRange |
-			eachRange collect: [ :eachInteger | eachInteger -> eachInteger ].
-		].
+{
+	1 to: 200.
+	50 to: 60.
+	1 to: 200
+}
+	collect:
+	[ :eachRange |
+		eachRange collect: [ :eachInteger | eachInteger -> eachInteger ].
+	].
 
 preparedQuery :=
 	sourceCollections asRHTableQuery asInMemory
@@ -122,6 +122,35 @@ The selected plan is `Rudesheim TableQuery Backend InMemory Plan EqualityInterse
 The result is `#( #( 50 50 ) )`.
 For this equality shape, the in-memory backend intersects candidate values instead of evaluating every combination from the three input collections.
 
+Use `inquireTableQuery:` when the query has no runtime parameters and should be evaluated immediately:
+
+```smalltalk
+matchedRows :=
+{
+	1 to: 1000.
+	500 to: 550.
+	1 to: 1000
+} asRHTableQuery asInMemory
+	inquireTableQuery:
+	[ :statement :rows :parameters |
+		statement
+			select:
+			[
+				(rows first = rows second)
+					& (rows second = rows last).
+			]
+			collect:
+			[
+				{ rows first. rows last }.
+			].
+	].
+
+matchedRows size.
+matchedRows first asArray.
+```
+
+The result size is `51`, and the first row is `#( 500 500 )`.
+
 The same expression-capturing interface can target SQL:
 
 ```smalltalk
@@ -130,11 +159,11 @@ driver := backend FakeRelationalDatabaseDriver tables: sourceTables.
 table := backend Table.
 
 query :=
-	{
-		table name: #customers.
-		table name: #orders
-	} asRHTableQuery
-		asInSQLUsing: driver.
+{
+	table name: #customers.
+	table name: #orders
+} asRHTableQuery
+	asInSQLUsing: driver.
 
 preparedQuery :=
 	query
@@ -165,6 +194,7 @@ SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (
 ## Usage Constraints
 
 - Query capture blocks use exactly three arguments: `:statement :rows :parameters`.
+- `inquireTableQuery:` prepares and evaluates immediately with no runtime arguments. Use `prepareTableQuery:` when the query reads from `parameters`.
 - `statement select:collect:` records one predicate expression and one projection expression. Calling it more than once in the same capture block overwrites the previously captured expressions.
 - `statement collect:` is the no-filter form. It records a constant true predicate and one projection expression.
 - The blocks are evaluated once against symbolic row and parameter objects. They should build expressions from `rows` and `parameters`; arbitrary side effects are not part of the query model.
