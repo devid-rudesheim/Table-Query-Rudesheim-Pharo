@@ -39,12 +39,19 @@ Metacello new
 ## Basic Use
 
 ```smalltalk
-preparedQuery :=
+sourceCollections :=
 	{
-		((1 to: 200) collect: [ :eachInteger | eachInteger -> eachInteger ]).
-		((50 to: 60) collect: [ :eachInteger | eachInteger -> eachInteger ]).
-		((1 to: 200) collect: [ :eachInteger | eachInteger -> eachInteger ])
-	} asRHTableQuery asInMemory
+		1 to: 200.
+		50 to: 60.
+		1 to: 200
+	}
+		collect:
+		[ :eachRange |
+			eachRange collect: [ :eachInteger | eachInteger -> eachInteger ].
+		].
+
+preparedQuery :=
+	sourceCollections asRHTableQuery asInMemory
 		prepareTableQuery:
 		[ :statement :rows :parameters |
 			statement
@@ -71,12 +78,14 @@ For this equality shape, the in-memory backend intersects candidate values inste
 The same expression-capturing interface can target SQL:
 
 ```smalltalk
-driver := Rudesheim TableQuery Backend SQL FakeRelationalDatabaseDriver tables: sourceTables.
+backend := Rudesheim TableQuery Backend SQL.
+driver := backend FakeRelationalDatabaseDriver tables: sourceTables.
+table := backend Table.
 
 query :=
 	{
-		(Rudesheim TableQuery Backend SQL Table name: #customers).
-		(Rudesheim TableQuery Backend SQL Table name: #orders)
+		table name: #customers.
+		table name: #orders
 	} asRHTableQuery
 		asInSQLUsing: driver.
 
