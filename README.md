@@ -84,13 +84,14 @@ preparedQuery :=
 			statement
 				select:
 				[
-					(rows first key = rows second key)
-						& (rows first key = rows last key)
-						& (rows first key = parameters first).
+					(rows first key = rows second key) & (rows first key = rows last key) & (rows first key = parameters first).
 				]
 				collect:
 				[
-					{ rows first value. rows last value }.
+					{
+						rows first.
+						rows last
+					}.
 				].
 		].
 
@@ -115,12 +116,14 @@ preparedQuery :=
 		statement
 			select:
 			[
-				(rows first = rows second)
-					& (rows second = rows last).
+				(rows first = rows second) & (rows second = rows last).
 			]
 			collect:
 			[
-				{ rows first. rows last }.
+				{
+					rows first.
+					rows last
+				}.
 			].
 	].
 
@@ -141,12 +144,14 @@ matchedRows :=
 		statement
 			select:
 			[
-				(rows first = rows second)
-					& (rows second = rows last).
+				(rows first = rows second) & (rows second = rows last).
 			]
 			collect:
 			[
-				{ rows first. rows last }.
+				{
+					rows first.
+					rows last
+				}.
 			].
 	].
 
@@ -159,8 +164,34 @@ The result size is `51`, and the first row is `#( 500 500 )`.
 The same expression-capturing interface can target SQL:
 
 ```smalltalk
+connection :=
+	SQLite3Connection memory open
+		execute:	'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);';
+		execute:	'CREATE TABLE orders (customerId INTEGER, total INTEGER);';
+
+		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
+		value:	1
+		value:	'Alice';
+
+		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
+		value:	2
+		value:	'Bob';
+
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	1
+		value:	150;
+
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	1
+		value:	50;
+
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	2
+		value:	300;
+
+		yourself.
+
 backend := Rudesheim TableQuery Backend SQL.
-driver := backend FakeRelationalDatabaseDriver tables: sourceTables.
 table := backend Table.
 
 query :=
@@ -168,7 +199,11 @@ query :=
 	table name: #customers.
 	table name: #orders
 } asRHTableQuery
-	asInSQLUsing: driver.
+	asInSQLUsing:
+	(
+		backend SQLite3RelationalDatabaseDriver
+			connection: connection
+	).
 
 preparedQuery :=
 	query
@@ -177,12 +212,14 @@ preparedQuery :=
 			statement
 				select:
 				[
-					(rows first id = rows second customerId)
-						& (rows second total > parameters first).
+					(rows first id = rows second customerId) & (rows second total > parameters first).
 				]
 				collect:
 				[
-					rows first name.
+					{
+						rows first name.
+						rows second total.
+					}
 				].
 		].
 
@@ -190,11 +227,18 @@ preparedQuery sqlString.
 preparedQuery value: 100.
 ```
 
-`sqlString` returns:
+`#sqlString` returns:
 
 ```text
-SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))
+SELECT t1.name, t2.total FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))
 ```
+
+`#value:` returns:
+
+```text
+#(#('Alice' 150) #('Bob' 300))
+```
+
 
 ## Usage Constraints
 
