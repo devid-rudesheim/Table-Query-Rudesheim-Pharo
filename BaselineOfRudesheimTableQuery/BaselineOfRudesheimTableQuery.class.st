@@ -33,6 +33,25 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 					spec repository: 'github://devid-rudesheim/Kernel-Rudesheim-Pharo:main'
 				];
 
+				baseline: 'DMirror'
+				with:
+				[
+					spec repository: 'github://ObjectProfile/DMirror/src'
+				];
+
+				baseline: 'SQLite3'
+				with:
+				[
+					spec repository: 'github://pharo-rdbms/Pharo-SQLite3/src'
+				];
+
+				project: 'SQLite3Core'
+				copyFrom: 'SQLite3'
+				with:
+				[
+					spec loads: #( 'Core' )
+				];
+
 				package: 'Rudesheim-Table-Query-Private'
 				with:
 				[
@@ -51,7 +70,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-Private' )
+						requires: #( 'Rudesheim-Table-Query-Private' 'DMirror' )
 				];
 
 				package: 'Rudesheim-Table-Query-InMemory'
@@ -107,7 +126,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-SQLite3-Private' )
+						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-SQLite3-Private' 'SQLite3Core' )
 				];
 
 				package: 'Rudesheim-Table-Query-SQL-Private-Tests'
