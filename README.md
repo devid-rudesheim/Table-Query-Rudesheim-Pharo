@@ -122,6 +122,32 @@ The selected plan is `Rudesheim TableQuery Backend InMemory Plan EqualityInterse
 The result is `#( #( 50 50 ) )`.
 For this equality shape, the in-memory backend intersects candidate values instead of evaluating every combination from the three input collections.
 
+When a prepared query does not need runtime parameters, omit the third block argument:
+
+```smalltalk
+preparedQuery :=
+{
+	1 to: 1000.
+	500 to: 550.
+	1 to: 1000
+} asRHTableQuery asInMemory
+	prepareTableQuery:
+	[ :statement :rows |
+		statement
+			select:
+			[
+				(rows first = rows second)
+					& (rows second = rows last).
+			]
+			collect:
+			[
+				{ rows first. rows last }.
+			].
+	].
+
+preparedQuery valueWithArguments: #().
+```
+
 Use `inquireTableQuery:` when the query has no runtime parameters and should be evaluated immediately:
 
 ```smalltalk
@@ -132,7 +158,7 @@ matchedRows :=
 	1 to: 1000
 } asRHTableQuery asInMemory
 	inquireTableQuery:
-	[ :statement :rows :parameters |
+	[ :statement :rows |
 		statement
 			select:
 			[
@@ -193,7 +219,7 @@ SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (
 
 ## Usage Constraints
 
-- Query capture blocks use exactly three arguments: `:statement :rows :parameters`.
+- Query capture blocks accept `:statement :rows :parameters`. If the query does not use runtime parameters, omit the third argument and write `:statement :rows`.
 - `inquireTableQuery:` prepares and evaluates immediately with no runtime arguments. Use `prepareTableQuery:` when the query reads from `parameters`.
 - `statement select:collect:` records one predicate expression and one projection expression. Calling it more than once in the same capture block overwrites the previously captured expressions.
 - `statement collect:` is the no-filter form. It records a constant true predicate and one projection expression.
