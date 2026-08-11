@@ -227,13 +227,13 @@ preparedQuery sqlString.
 preparedQuery value: 100.
 ```
 
-`sqlString` returns:
+`#sqlString` returns:
 
 ```text
 SELECT t1.name, t2.total FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))
 ```
 
-`value:` returns:
+`#value:` returns:
 
 ```text
 #(#('Alice' 150) #('Bob' 300))
