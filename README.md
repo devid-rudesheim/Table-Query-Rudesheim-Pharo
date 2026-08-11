@@ -57,30 +57,10 @@ Metacello new
 	load: #(sqlite3)
 ```
 
-Core tests:
-
-```smalltalk
-Metacello new
-	baseline: 'RudesheimTableQuery';
-	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
-	load: #(tests)
-```
-
-SQLite3 tests:
-
-```smalltalk
-Metacello new
-	baseline: 'RudesheimTableQuery';
-	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
-	load: #(sqlite3 sqlite3Tests)
-```
-
 ## Groups
 
 - `core`: table query, in-memory backend, and SQL backend packages.
 - `sqlite3`: SQLite3 SQL backend adapter.
-- `tests`: SUnit tests for the core backends.
-- `sqlite3Tests`: SUnit tests for the SQLite3 adapter.
 - `default`: aliases `core`.
 
 ## Basic Use
@@ -231,15 +211,3 @@ SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (
 - The `EqualityIntersection` optimizer applies to connected equality predicates over all source collections, optionally including equality with a runtime parameter. The equality predicates must be expressed with `=` and connected with `&`.
 - Equality keys can be whole rows or supported accessor chains such as `rows first key` or nested value access. Conditions outside this equality shape do not use the intersection plan.
 - Result ordering follows the selected plan and source collections; do not rely on SQL-style ordering unless an explicit backend adds ordering support.
-
-## Run Tests
-
-After loading the test groups, run:
-
-```smalltalk
-TestSuite new
-	addTest: (RPackageOrganizer default packageNamed: 'Rudesheim-Table-Query-Tests') asTestSuite;
-	addTest: (RPackageOrganizer default packageNamed: 'Rudesheim-Table-Query-InMemory-Tests') asTestSuite;
-	addTest: (RPackageOrganizer default packageNamed: 'Rudesheim-Table-Query-SQL-Tests') asTestSuite;
-	run
-```
