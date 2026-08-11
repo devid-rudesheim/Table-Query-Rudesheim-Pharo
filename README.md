@@ -164,33 +164,32 @@ The result size is `51`, and the first row is `#( 500 500 )`.
 The same expression-capturing interface can target SQL:
 
 ```smalltalk
-connection := SQLite3Connection memory open.
+connection :=
+	SQLite3Connection memory open
+		execute:	'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);';
+		execute:	'CREATE TABLE orders (customerId INTEGER, total INTEGER);';
 
-connection
-	execute:	'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);';
-	execute:	'CREATE TABLE orders (customerId INTEGER, total INTEGER);';
+		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
+		value:	1
+		value:	'Alice';
 
-	execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
-	value:	1
-	value:	'Alice';
+		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
+		value:	2
+		value:	'Bob';
 
-	execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
-	value:	2
-	value:	'Bob';
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	1
+		value:	150;
 
-	execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
-	value:	1
-	value:	150;
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	1
+		value:	50;
 
-	execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
-	value:	1
-	value:	50;
+		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
+		value:	2
+		value:	300;
 
-	execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
-	value:	2
-	value:	300;
-
-	yourself.
+		yourself.
 
 backend := Rudesheim TableQuery Backend SQL.
 table := backend Table.
