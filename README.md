@@ -84,13 +84,14 @@ preparedQuery :=
 			statement
 				select:
 				[
-					(rows first key = rows second key)
-						& (rows first key = rows last key)
-						& (rows first key = parameters first).
+					(rows first key = rows second key) & (rows first key = rows last key) & (rows first key = parameters first).
 				]
 				collect:
 				[
-					{ rows first value. rows last value }.
+					{
+						rows first.
+						rows last
+					}.
 				].
 		].
 
@@ -115,12 +116,14 @@ preparedQuery :=
 		statement
 			select:
 			[
-				(rows first = rows second)
-					& (rows second = rows last).
+				(rows first = rows second) & (rows second = rows last).
 			]
 			collect:
 			[
-				{ rows first. rows last }.
+				{
+					rows first.
+					rows last
+				}.
 			].
 	].
 
@@ -141,12 +144,14 @@ matchedRows :=
 		statement
 			select:
 			[
-				(rows first = rows second)
-					& (rows second = rows last).
+				(rows first = rows second) & (rows second = rows last).
 			]
 			collect:
 			[
-				{ rows first. rows last }.
+				{
+					rows first.
+					rows last
+				}.
 			].
 	].
 
