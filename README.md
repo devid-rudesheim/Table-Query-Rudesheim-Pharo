@@ -2,6 +2,7 @@
 
 Rudesheim Table Query is a query layer for Pharo collections and relational backends.
 It lets a query be written once as a Smalltalk expression tree and prepared against an in-memory backend or an SQL backend.
+The in-memory backend has an optimizer: for supported equality conditions it uses an `EqualityIntersection` plan, avoiding a fully multiplied nested iteration over all source collections.
 
 ## Installation
 
@@ -38,24 +39,72 @@ Metacello new
 ## Basic Use
 
 ```smalltalk
-query :=
+preparedQuery :=
 	{
-		(1 to: 5).
-		(1 to: 10)
-	}
-		asRHTableQuery
-		asInMemory.
+		((1 to: 200) collect: [ :eachInteger | eachInteger -> eachInteger ]).
+		((50 to: 60) collect: [ :eachInteger | eachInteger -> eachInteger ]).
+		((1 to: 200) collect: [ :eachInteger | eachInteger -> eachInteger ])
+	} asRHTableQuery asInMemory
+		prepareTableQuery:
+		[ :statement :rows :parameters |
+			statement
+				select:
+				[
+					(rows first key = rows second key)
+						& (rows first key = rows last key)
+						& (rows first key = parameters first).
+				]
+				collect:
+				[
+					{ rows first value. rows last value }.
+				].
+		].
 
-query
-	inquireTableQuery:
-	[ :statement :rows |
-		statement
-			select: [ rows first asNumber = rows second asNumber ];
-			collect: [ rows first copy ].
-	]
+preparedQuery planFor: preparedQuery optimizationContext.
+preparedQuery value: 50.
 ```
 
-The result is the values that satisfy the expression over the selected backend.
+The selected plan is `Rudesheim TableQuery Backend InMemory Plan EqualityIntersection`.
+The result is `#( #( 50 50 ) )`.
+For this equality shape, the in-memory backend intersects candidate values instead of evaluating every combination from the three input collections.
+
+The same expression-capturing interface can target SQL:
+
+```smalltalk
+driver := Rudesheim TableQuery Backend SQL FakeRelationalDatabaseDriver tables: sourceTables.
+
+query :=
+	{
+		(Rudesheim TableQuery Backend SQL Table name: #customers).
+		(Rudesheim TableQuery Backend SQL Table name: #orders)
+	} asRHTableQuery
+		asInSQLUsing: driver.
+
+preparedQuery :=
+	query
+		prepareTableQuery:
+		[ :statement :rows :parameters |
+			statement
+				select:
+				[
+					(rows first id = rows second customerId)
+						& (rows second total > parameters first).
+				]
+				collect:
+				[
+					rows first name.
+				].
+		].
+
+preparedQuery sqlString.
+preparedQuery value: 100.
+```
+
+`sqlString` returns:
+
+```text
+SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))
+```
 
 ## Run Tests
 
