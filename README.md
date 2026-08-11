@@ -94,7 +94,6 @@ preparedQuery :=
 				].
 		].
 
-preparedQuery planFor: preparedQuery optimizationContext.
 preparedQuery value: 50.
 ```
 
