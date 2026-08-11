@@ -20,7 +20,7 @@ This also loads the required `RudesheimKernel`, `RudesheimUtility`, and `DMirror
 ## Requirements
 
 - Pharo with Metacello.
-- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer.
+- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer. DMirror uses OSSubprocess, so the supported environment is a POSIX-like operating system.
 - SQLite3 use needs the `sqlite3` group. The group loads the `Core` part of Pharo-SQLite3 through the baseline.
 
 ## Dependencies
@@ -35,7 +35,7 @@ The `sqlite3` group also loads `SQLite3Core` from Pharo-SQLite3:
 
 - `SQLite3`: `github://pharo-rdbms/Pharo-SQLite3/src`, loaded with `#( 'Core' )`
 
-DMirror declares its own OSSubprocess dependency in its baseline.
+DMirror declares its own OSSubprocess dependency in its baseline. Because the in-memory optimizer uses DMirror, run it on a POSIX-like operating system.
 
 ## Load Options
 
@@ -220,7 +220,9 @@ SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (
 ## Usage Constraints
 
 - Query capture blocks accept `:statement :rows :parameters`. If the query does not use runtime parameters, omit the third argument and write `:statement :rows`.
-- `inquireTableQuery:` prepares and evaluates immediately with no runtime arguments. Use `prepareTableQuery:` when the query reads from `parameters`.
+- `inquireTableQuery:` is a one-shot convenience API. It calls `prepareTableQuery:` internally and immediately evaluates the prepared query with no runtime arguments.
+- `prepareTableQuery:` captures the expression tree before execution. For a single execution it is not inherently faster than `inquireTableQuery:`, but repeated executions can reuse the captured query and avoid rebuilding the expression tree each time.
+- A prepared query is tied to the source collections or tables supplied when it is prepared. In-memory optimized plans can derive candidate or index-like data from those sources during execution. If the source tables are replaced, or if changed contents must be reflected in a fresh optimization basis, run `prepareTableQuery:` again.
 - `statement select:collect:` records one predicate expression and one projection expression. Calling it more than once in the same capture block overwrites the previously captured expressions.
 - `statement collect:` is the no-filter form. It records a constant true predicate and one projection expression.
 - The blocks are evaluated once against symbolic row and parameter objects. They should build expressions from `rows` and `parameters`; arbitrary side effects are not part of the query model.
