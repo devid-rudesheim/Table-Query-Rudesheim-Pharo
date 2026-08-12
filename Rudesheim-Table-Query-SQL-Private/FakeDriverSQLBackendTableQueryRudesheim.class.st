@@ -2,7 +2,7 @@
 FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim is a verification-only concrete RDB driver. It does not talk to a real database; it interprets the captured expression tree directly against its own toy in-memory tables, to prove the block -> expression-tree capture -> driver compile -> driver execute path works before a real DB driver exists.
 "
 Class {
-	#name : 'FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim',
+	#name : 'FakeDriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
 	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewRudesheim',
 	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
@@ -15,28 +15,28 @@ Class {
 }
 
 { #category : 'namespace' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> CompiledStatement [
-	^ CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim.
+FakeDriverSQLBackendTableQueryRudesheim class >> CompiledStatement [
+	^ CompiledStatementFakeDriverSQLBackendTableQueryRudesheim.
 ]
 
 { #category : 'instance creation' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfAssociations [
+FakeDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfAssociations [
 	^ super new
 		setTables:	aCollectionOfAssociations.
 ]
 
 { #category : 'compiling' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> compileSelectFrom: aCollectionOfTables
+FakeDriverSQLBackendTableQueryRudesheim >> compileSelectFrom: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
-	^ CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim
+	^ self class CompiledStatement
 		tables:	aCollectionOfTables
 		where:	aWhereExpressionTableQueryRudesheim
 		select:	aSelectExpressionTableQueryRudesheim.
 ]
 
 { #category : 'evaluating' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> execute: aCompiledStatement
+FakeDriverSQLBackendTableQueryRudesheim >> execute: aCompiledStatement
 with: aCollectionOfParameterValues [
 	|
 		resolvedTables
@@ -92,7 +92,7 @@ with: aCollectionOfParameterValues [
 ]
 
 { #category : 'initialization' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfAssociations [
+FakeDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfAssociations [
 	tablesByName := Dictionary new.
 
 	aCollectionOfAssociations
@@ -105,7 +105,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> setTables: aCollect
 ]
 
 { #category : 'private' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
+FakeDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
 	^ anExpressionTableQueryRudesheim
 		class
 		== ConstantExpressionTableQueryRudesheim
@@ -118,7 +118,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClau
 ]
 
 { #category : 'printing' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim [
+FakeDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim [
 	|
 		expressionRenderer
 	|
@@ -162,7 +162,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aComp
 ]
 
 { #category : 'private' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfTables [
+FakeDriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfTables [
 	^ String
 		streamContents:
 		[ :aStream |

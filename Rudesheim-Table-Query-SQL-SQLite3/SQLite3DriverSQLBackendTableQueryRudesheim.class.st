@@ -2,7 +2,7 @@
 SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim executes SQLBackendTableQueryRudesheim compiled select statements through a Pharo-SQLite3 connection.
 "
 Class {
-	#name : 'SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim',
+	#name : 'SQLite3DriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
 	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewRudesheim',
 	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
@@ -15,21 +15,21 @@ Class {
 }
 
 { #category : 'namespace' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> CompiledStatement [
-	^ CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim.
+SQLite3DriverSQLBackendTableQueryRudesheim class >> CompiledStatement [
+	^ CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim.
 ]
 
 { #category : 'instance creation' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> connection: anObject [
+SQLite3DriverSQLBackendTableQueryRudesheim class >> connection: anObject [
 	^ super new
 		setConnection:	anObject.
 ]
 
 { #category : 'compiling' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> compileSelectFrom: aCollectionOfTables
+SQLite3DriverSQLBackendTableQueryRudesheim >> compileSelectFrom: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
-	^ CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim
+	^ self class CompiledStatement
 		tables:	aCollectionOfTables
 		where:	aWhereExpressionTableQueryRudesheim
 		select:	aSelectExpressionTableQueryRudesheim
@@ -43,7 +43,7 @@ select: aSelectExpressionTableQueryRudesheim [
 ]
 
 { #category : 'evaluating' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> execute: aCompiledStatement
+SQLite3DriverSQLBackendTableQueryRudesheim >> execute: aCompiledStatement
 with: aCollectionOfParameterValues [
 	|
 		cursor
@@ -64,7 +64,7 @@ with: aCollectionOfParameterValues [
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> resultForRow: aSQLite3Row
+SQLite3DriverSQLBackendTableQueryRudesheim >> resultForRow: aSQLite3Row
 compiledStatement: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim [
 	|
 		rowValues
@@ -84,12 +84,12 @@ compiledStatement: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBacken
 ]
 
 { #category : 'initialization' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> setConnection: anObject [
+SQLite3DriverSQLBackendTableQueryRudesheim >> setConnection: anObject [
 	connection := anObject.
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
+SQLite3DriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
 	^ anExpressionTableQueryRudesheim
 		class
 		== ConstantExpressionTableQueryRudesheim
@@ -102,13 +102,13 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereC
 ]
 
 { #category : 'printing' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim [
+SQLite3DriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim [
 	^ aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim
 		sqlString.
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> sqlStringForTables: aCollectionOfTables
+SQLite3DriverSQLBackendTableQueryRudesheim >> sqlStringForTables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
 	|
@@ -154,7 +154,7 @@ select: aSelectExpressionTableQueryRudesheim [
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfTables [
+SQLite3DriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfTables [
 	^ String
 		streamContents:
 		[ :aStream |

@@ -1,5 +1,5 @@
 Class {
-	#name : 'SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest',
+	#name : 'SQLite3DriverSQLBackendTableQueryRudesheimTest',
 	#superclass : 'BackendTableQueryRudesheimTest',
 	#instVars : [
 		'connection'
@@ -10,15 +10,12 @@ Class {
 }
 
 { #category : 'accessing' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL.
+SQLite3DriverSQLBackendTableQueryRudesheimTest class >> targetClass [
+	^ Rudesheim TableQuery Backend SQL.
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> createConnection [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> createConnection [
 	|
 		sqlite3ConnectionClass
 	|
@@ -38,7 +35,7 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> createConnec
 ]
 
 { #category : 'accessing' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 	^ self targetClass
 		driver:
 		(
@@ -48,16 +45,12 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> defaultBasic
 ]
 
 { #category : 'accessing' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> driverClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL
-		SQLite3RelationalDatabaseDriver.
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> driverClass [
+	^ Rudesheim TableQuery Backend SQL Driver SQLite3.
 ]
 
 { #category : 'private' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> insertFixtureRows [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> insertFixtureRows [
 	connection
 		execute:	'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);'.
 	connection
@@ -85,7 +78,7 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> insertFixtur
 ]
 
 { #category : 'accessing' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> querySources [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> querySources [
 	^
 	{
 		(
@@ -108,14 +101,14 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> querySources
 ]
 
 { #category : 'running' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> setUp [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> setUp [
 	super setUp.
 	connection := self createConnection.
 	self insertFixtureRows.
 ]
 
 { #category : 'running' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> tearDown [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> tearDown [
 	connection
 		ifNotNil:
 		[
@@ -126,7 +119,7 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> tearDown [
 ]
 
 { #category : 'tests' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlString [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlString [
 	self
 		assert:
 		self
@@ -136,7 +129,7 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testPrepared
 ]
 
 { #category : 'tests' }
-SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithoutWhere [
+SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithoutWhere [
 	|
 		query
 	|

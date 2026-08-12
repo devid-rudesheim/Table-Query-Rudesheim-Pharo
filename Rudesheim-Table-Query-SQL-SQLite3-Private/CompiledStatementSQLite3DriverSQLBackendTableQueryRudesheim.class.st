@@ -2,7 +2,7 @@
 CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim stores the SQL text and select shape used by SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim.
 "
 Class {
-	#name : 'CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim',
+	#name : 'CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
 	#instVars : [
 		'tables',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfTables
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim
 sqlString: aString [
@@ -28,19 +28,19 @@ sqlString: aString [
 ]
 
 { #category : 'testing' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> returnsProjection [
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> returnsProjection [
 	^ selectExpression
 		class
 		== ProjectionExpressionTableQueryRudesheim.
 ]
 
 { #category : 'accessing' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> selectExpression [
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> selectExpression [
 	^ selectExpression.
 ]
 
 { #category : 'initialization' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfTables
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim
 sqlString: aString [
@@ -51,16 +51,16 @@ sqlString: aString [
 ]
 
 { #category : 'accessing' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> sqlString [
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> sqlString [
 	^ sqlString.
 ]
 
 { #category : 'accessing' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> tables [
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> tables [
 	^ tables.
 ]
 
 { #category : 'accessing' }
-CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim >> whereExpression [
+CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> whereExpression [
 	^ whereExpression.
 ]
