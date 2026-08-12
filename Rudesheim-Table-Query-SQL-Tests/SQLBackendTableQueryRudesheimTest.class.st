@@ -66,11 +66,7 @@ SQLBackendTableQueryRudesheimTest >> testAsRHTableQueryAsInSQLUsing [
 				asRHTableQuery
 				asInSQLUsing:
 				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						FakeRelationalDatabaseDriver
+					Rudesheim TableQuery Backend SQL Driver Fake
 						tables:	self sourceTables
 				)
 		)

@@ -12,13 +12,9 @@ Class {
 }
 
 { #category : 'namespace' }
-SQLBackendTableQueryRudesheim class >> CompiledStatementForFakeRelationalDatabaseDriver [
-	^ CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim.
-]
+SQLBackendTableQueryRudesheim class >> Driver [
 
-{ #category : 'namespace' }
-SQLBackendTableQueryRudesheim class >> FakeRelationalDatabaseDriver [
-	^ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim.
+	^ DriverSQLBackendTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }

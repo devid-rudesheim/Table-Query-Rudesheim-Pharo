@@ -2,7 +2,7 @@
 A tiny holder record returned by FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim>>compileSelectFrom:where:select:. It packages the three arguments verbatim; no real compilation happens (this driver is verification-only).
 "
 Class {
-	#name : 'CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim',
+	#name : 'CompiledStatementFakeDriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
 	#instVars : [
 		'tables',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfTables
+CompiledStatementFakeDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
 	^ self new
@@ -25,12 +25,12 @@ select: aSelectExpressionTableQueryRudesheim [
 ]
 
 { #category : 'accessing' }
-CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> selectExpression [
+CompiledStatementFakeDriverSQLBackendTableQueryRudesheim >> selectExpression [
 	^ selectExpression.
 ]
 
 { #category : 'initialization' }
-CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfTables
+CompiledStatementFakeDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
 	tables := aCollectionOfTables.
@@ -39,11 +39,11 @@ select: aSelectExpressionTableQueryRudesheim [
 ]
 
 { #category : 'accessing' }
-CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> tables [
+CompiledStatementFakeDriverSQLBackendTableQueryRudesheim >> tables [
 	^ tables.
 ]
 
 { #category : 'accessing' }
-CompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim >> whereExpression [
+CompiledStatementFakeDriverSQLBackendTableQueryRudesheim >> whereExpression [
 	^ whereExpression.
 ]

@@ -20,23 +20,21 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest class >> targetClass [
 
 { #category : 'accessing' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
+	|
+		table
+	|
+
+	table := 	Rudesheim TableQuery Backend SQL Table.
+
 	^ self targetClass
 		tables:
 		{
 			(
-				Rudesheim
-					TableQuery
-					Backend
-					SQL
-					Table
+				table
 					name:	#customers
 			).
 			(
-				Rudesheim
-					TableQuery
-					Backend
-					SQL
-					Table
+				table
 					name:	#orders
 			)
 		}.
@@ -46,9 +44,11 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitBinaryExpressionRudesheim [
 	|
 		expression
+		tableQuery
 	|
 
-	expression := (Rudesheim TableQuery FieldExpression table: 1 field: #id) = (Rudesheim TableQuery FieldExpression table: 2 field: #customerId) & ((Rudesheim TableQuery FieldExpression table: 2 field: #total) > (Rudesheim TableQuery ParameterExpression index: 1)).
+	tableQuery := Rudesheim TableQuery.
+	expression := (tableQuery FieldExpression table: 1 field: #id) = (tableQuery FieldExpression table: 2 field: #customerId) & ((tableQuery FieldExpression table: 2 field: #total) > (tableQuery ParameterExpression index: 1)).
 
 	self
 		assert:
@@ -62,14 +62,12 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitBinaryExpres
 { #category : 'tests' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitFieldExpressionRudesheim [
 	self
-		assert:
+		assert:	
 		(
 			self basicTarget
-				visit:
+				visit:	
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					Rudesheim TableQuery FieldExpression
 						table:	1
 						field:	#name
 				)
@@ -80,13 +78,12 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitFieldExpress
 { #category : 'tests' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitParameterExpressionRudesheim [
 	self
-		assert:
+		assert:	
 		(
 			self basicTarget
-				visit:
+				visit:	
 				(
-					Rudesheim
-						TableQuery
+					Rudesheim TableQuery
 						ParameterExpression
 						index:	1
 				)
@@ -98,25 +95,21 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitParameterExp
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheim [
 	|
 		expression
+		tableQuery
 	|
 
+	tableQuery := Rudesheim TableQuery.
 	expression :=
-		Rudesheim
-			TableQuery
-			ProjectionExpression
+		tableQuery ProjectionExpression
 			expressions:
 			{
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	1
 						field:	#id
 				).
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	1
 						field:	#name
 				)
@@ -135,18 +128,17 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheimWithOneColumn [
 	|
 		expression
+		tableQuery
 	|
 
+	tableQuery := Rudesheim TableQuery.
+
 	expression :=
-		Rudesheim
-			TableQuery
-			ProjectionExpression
+		tableQuery ProjectionExpression
 			expressions:
 			{
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	1
 						field:	#id
 				)
@@ -165,39 +157,34 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheimWithThreeColumns [
 	|
 		expression
+		tableQuery
 	|
 
+	tableQuery := Rudesheim TableQuery.
+
 	expression :=
-		Rudesheim
-			TableQuery
-			ProjectionExpression
-			expressions:
+		tableQuery ProjectionExpression
+			expressions:	
 			{
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	1
 						field:	#id
 				).
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	1
 						field:	#name
 				).
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					tableQuery FieldExpression
 						table:	2
 						field:	#total
 				)
 			}.
 
 	self
-		assert:
+		assert:	
 		(
 			self basicTarget
 				visit:	expression

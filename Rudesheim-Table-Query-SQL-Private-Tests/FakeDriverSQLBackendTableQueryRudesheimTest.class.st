@@ -1,5 +1,5 @@
 Class {
-	#name : 'FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest',
+	#name : 'FakeDriverSQLBackendTableQueryRudesheimTest',
 	#superclass : 'BasicRudesheimTest',
 	#category : 'Rudesheim-Table-Query-SQL-Private-Tests-Driver',
 	#package : 'Rudesheim-Table-Query-SQL-Private-Tests',
@@ -7,22 +7,18 @@ Class {
 }
 
 { #category : 'accessing' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL
-		FakeRelationalDatabaseDriver.
+FakeDriverSQLBackendTableQueryRudesheimTest class >> targetClass [
+	^ Rudesheim TableQuery Backend SQL Driver Fake.
 ]
 
 { #category : 'accessing' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
+FakeDriverSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 	^ self targetClass
 		tables:	{(#numbers -> #(1 2 3 4 5))}.
 ]
 
 { #category : 'tests' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectPackagesArgumentsVerbatim [
+FakeDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectPackagesArgumentsVerbatim [
 	|
 		numbersTable
 		whereExpression
@@ -81,7 +77,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testCompileSele
 ]
 
 { #category : 'tests' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndCollectsSelect [
+FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndCollectsSelect [
 	|
 		compiledStatement
 		result
@@ -129,7 +125,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testExecuteWith
 ]
 
 { #category : 'tests' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement [
+FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement [
 	|
 		compiledStatement
 	|
@@ -177,7 +173,7 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testSqlStringFo
 ]
 
 { #category : 'tests' }
-FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatementWithoutWhere [
+FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatementWithoutWhere [
 	|
 		compiledStatement
 	|
