@@ -201,7 +201,7 @@ query :=
 } asRHTableQuery
 	asInSQLUsing:
 	(
-		backend SQLite3RelationalDatabaseDriver
+		backend Driver SQLite3
 			connection: connection
 	).
 
