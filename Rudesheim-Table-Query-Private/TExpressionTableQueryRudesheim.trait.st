@@ -7,7 +7,7 @@ Trait {
 
 { #category : 'comparing' }
 TExpressionTableQueryRudesheim >> = anObject [
-	^ BinaryExpressionTableQueryRudesheim
+	^ Rudesheim TableQuery Expression Binary
 		receiver:	self
 		selector:	#=
 		argument:
@@ -21,7 +21,10 @@ TExpressionTableQueryRudesheim >> = anObject [
 TExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 	|
 		wrappedArguments
+		expression
 	|
+	
+	expression := Rudesheim TableQuery Expression.
 
 	wrappedArguments :=
 		aMessage arguments
@@ -33,30 +36,26 @@ TExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 
 	^
 	(
-		aMessage
-			selector
-			isBinary
-			and:
+		(
+			aMessage	selector isBinary
+				and:
+				[
+					1 = wrappedArguments size.
+				]
+		)
+			ifTrue:
 			[
-				wrappedArguments
-					size
-					= 1.
+				expression Binary
+			]
+			ifFalse:
+			[
+				expression Message
 			]
 	)
-		ifTrue:
-		[
-			BinaryExpressionTableQueryRudesheim
-				receiver:	self
-				selector:	aMessage selector
-				argument:	wrappedArguments first.
-		]
-		ifFalse:
-		[
-			MessageExpressionTableQueryRudesheim
-				receiver:	self
-				selector:	aMessage selector
-				arguments:	wrappedArguments.
-		].
+		receiver:		self
+		selector:		aMessage selector
+		arguments:	wrappedArguments.
+
 ]
 
 { #category : 'comparing' }

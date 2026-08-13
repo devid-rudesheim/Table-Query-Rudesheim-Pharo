@@ -78,16 +78,22 @@ FieldExpressionTableQueryRudesheim >> tableIndex [
 
 { #category : 'proxy' }
 FieldExpressionTableQueryRudesheim >> value [
+	|
+		expression
+	|
+	
+	expression := Rudesheim TableQuery Expression.
+
 	^ fieldSelector
 		ifNil:
 		[
-			FieldExpressionTableQueryRudesheim
+			expression Field
 				table:	tableIndex
 				field:	#value.
 		]
 		ifNotNil:
 		[
-			MessageExpressionTableQueryRudesheim
+			expression Message
 				receiver:	self
 				selector:	#value
 				arguments:	#().

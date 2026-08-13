@@ -9,6 +9,16 @@ Class {
 }
 
 { #category : 'namespace' }
+InMemoryBackendTableQueryRudesheim class >> DMirrorSupport [
+	^ DMirrorSupportInMemoryBackendTableQueryRudesheim
+]
+
+{ #category : 'namespace' }
+InMemoryBackendTableQueryRudesheim class >> OptimizationContext [
+	^ OptimizationContextInMemoryBackendTableQueryRudesheim
+]
+
+{ #category : 'namespace' }
 InMemoryBackendTableQueryRudesheim class >> Plan [
 	^ PlanInMemoryBackendTableQueryRudesheim.
 ]
@@ -37,29 +47,32 @@ from: aCollection [
 		statement
 		rows
 		parameters
+		tableQuery
 	|
+	
+	tableQuery := Rudesheim TableQuery.
 
-	statement := ExpressionCapturingStatementTableQueryRudesheim new.
+	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=
-		(
-			1
-				to:	aCollection size
-		)
-			collect:
-			[ :eachCollectionIndex |
-				FieldExpressionTableQueryRudesheim
-					table:	eachCollectionIndex.
-			].
+	(
+		1
+			to:	aCollection size
+	)
+		collect:
+		[ :eachCollectionIndex |
+			tableQuery Expression Field
+				table:	eachCollectionIndex.
+		].
 
-	parameters := ParameterCaptureTableQueryRudesheim new.
+	parameters := tableQuery ParameterCapture new.
 
 	aBlockClosure
 		cull:	statement
 		cull:	rows asArray
 		cull:	parameters.
 
-	^ PreparedQueryInMemoryBackendTableQueryRudesheim
+	^ tableQuery Backend InMemory PreparedQuery
 		fromCollections:	aCollection
 		where:	statement whereExpression
 		select:	statement selectExpression.

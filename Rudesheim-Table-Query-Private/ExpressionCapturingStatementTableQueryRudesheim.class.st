@@ -22,16 +22,16 @@ ExpressionCapturingStatementTableQueryRudesheim >> collect: aCollectBlock [
 	selectExpression := aCollectBlock value asTableQueryProjectionExpressionRudesheim.
 ]
 
-{ #category : 'accessing' }
-ExpressionCapturingStatementTableQueryRudesheim >> selectExpression [
-	^ selectExpression.
-]
-
 { #category : 'evaluating' }
 ExpressionCapturingStatementTableQueryRudesheim >> select: aWhereBlock
 collect: aCollectBlock [
 	whereExpression := aWhereBlock value.
 	selectExpression := aCollectBlock value asTableQueryProjectionExpressionRudesheim.
+]
+
+{ #category : 'accessing' }
+ExpressionCapturingStatementTableQueryRudesheim >> selectExpression [
+	^ selectExpression.
 ]
 
 { #category : 'accessing' }

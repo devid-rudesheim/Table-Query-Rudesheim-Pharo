@@ -12,3 +12,33 @@ Class {
 	#package : 'Rudesheim-Table-Query-Private',
 	#tag : 'Expression'
 }
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Binary [
+	^ BinaryExpressionTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Constant [
+	^ ConstantExpressionTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Field [
+	^ FieldExpressionTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Message [
+	^ MessageExpressionTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Parameter [
+	^ ParameterExpressionTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
+ExpressionTableQueryRudesheim class >> Projection [
+	^ ProjectionExpressionTableQueryRudesheim.
+]

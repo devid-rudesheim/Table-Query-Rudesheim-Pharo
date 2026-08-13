@@ -105,43 +105,6 @@ QueryTableQueryRudesheimTest >> sourceCollections: anObject [
 ]
 
 { #category : 'test' }
-QueryTableQueryRudesheimTest >> testInquire [
-	self
-		testInquire0_0;
-		tearDown;
-		setUp;
-		testInquire0_1.
-]
-
-{ #category : 'test' }
-QueryTableQueryRudesheimTest >> testInquire0_0 [
-	self runInquire0.
-]
-
-{ #category : 'test' }
-QueryTableQueryRudesheimTest >> testInquire0_1 [
-	|
-		array
-	|
-
-	array :=
-		3
-			to:	5.
-
-	self
-		expectValues:	array;
-		sourceCollections:
-		{
-			array.
-			(
-				1
-					to:	10
-			)
-		};
-		runInquire0.
-]
-
-{ #category : 'test' }
 QueryTableQueryRudesheimTest >> testAsRHTableQuery [
 	|
 		preparedQuery
@@ -201,6 +164,43 @@ QueryTableQueryRudesheimTest >> testBackendMustBeProvidedAtCreation [
 ]
 
 { #category : 'test' }
+QueryTableQueryRudesheimTest >> testInquire [
+	self
+		testInquire0_0;
+		tearDown;
+		setUp;
+		testInquire0_1.
+]
+
+{ #category : 'test' }
+QueryTableQueryRudesheimTest >> testInquire0_0 [
+	self runInquire0.
+]
+
+{ #category : 'test' }
+QueryTableQueryRudesheimTest >> testInquire0_1 [
+	|
+		array
+	|
+
+	array :=
+		3
+			to:	5.
+
+	self
+		expectValues:	array;
+		sourceCollections:
+		{
+			array.
+			(
+				1
+					to:	10
+			)
+		};
+		runInquire0.
+]
+
+{ #category : 'test' }
 QueryTableQueryRudesheimTest >> testPrepareTableQuery [
 	|
 		preparedQuery
@@ -213,16 +213,11 @@ QueryTableQueryRudesheimTest >> testPrepareTableQuery [
 				statement
 					select:
 					[
-						rows
-							first
-							asNumber
-							= rows second asNumber.
+						rows first asNumber = rows second asNumber.
 					]
 					collect:
 					[
-						rows
-							first
-							copy.
+						rows first copy.
 					].
 			].
 
@@ -231,7 +226,6 @@ QueryTableQueryRudesheimTest >> testPrepareTableQuery [
 		(
 			preparedQuery
 				valueWithArguments:	#()
-		)
-			asArray
+		) asArray
 		equals:	self expectValues.
 ]

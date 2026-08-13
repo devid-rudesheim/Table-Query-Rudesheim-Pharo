@@ -166,16 +166,12 @@ to: anOrderedCollection [
 
 { #category : 'private' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> addWholeRowEqualitiesFrom: anExpressionTableQueryRudesheim
-to: anOrderedCollection [
+to: anOrderedCollection [ 
 	(
-		anExpressionTableQueryRudesheim
-			class
-			== BinaryExpressionTableQueryRudesheim
+		anExpressionTableQueryRudesheim class == Rudesheim TableQuery Expression Binary
 			and:
 			[
-				anExpressionTableQueryRudesheim
-					selector
-					= #&.
+				anExpressionTableQueryRudesheim selector = #&.
 			]
 	)
 		ifTrue:
@@ -194,117 +190,6 @@ to: anOrderedCollection [
 	self
 		addEqualityFrom:	anExpressionTableQueryRudesheim
 		to:	anOrderedCollection.
-]
-
-{ #category : 'executing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aCollection [
-	parameterEqualities isEmpty
-		ifFalse:
-		[
-			^ self
-				executeParameterCandidateValuesWithArguments:	aCollection.
-		].
-
-	^ self
-		executeCandidateValues:	candidateValues
-		withArguments:	aCollection.
-]
-
-{ #category : 'executing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeCandidateValues: aCandidateCollection
-withArguments: aCollection [
-	|
-		results
-		rowBindings
-		rowProxies
-	|
-
-	results := OrderedCollection new.
-
-	rowProxies :=
-		(
-			1
-				to:	sourceCollections size
-		)
-			collect:
-			[ :eachIndex |
-				NewValueHolder new.
-			].
-
-	rowBindings :=
-		rowProxies
-			collect:
-			[ :eachRowProxy |
-				DelegatorForAccessingRudesheim
-					targetFrom:	#value
-					of:	eachRowProxy.
-			].
-
-	aCandidateCollection
-		do:
-		[ :eachCandidateRows |
-			|
-				evaluator
-			|
-
-			(
-				self
-					candidateRows:	eachCandidateRows
-					matchParameters:	aCollection
-			)
-				ifTrue:
-				[
-					tableIndexes
-						with:	eachCandidateRows
-						do:
-						[ :eachTableIndex :eachRow |
-							(
-								rowProxies
-									at:	eachTableIndex
-							)
-								value:	eachRow.
-						].
-
-					evaluator :=
-						EvaluatorForExpressionTableQueryRudesheim
-							rows:	rowBindings
-							parameters:	aCollection.
-
-					results
-						add:
-						(
-							evaluator
-								visit:	selectExpression
-						).
-				].
-		].
-
-	^ results.
-]
-
-{ #category : 'executing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeParameterCandidateValuesWithArguments: aCollection [
-	|
-		candidateRows
-	|
-
-	candidateRows :=
-		self
-			parameterCandidateRowsWithArguments:	aCollection.
-
-	candidateRows
-		ifNil:
-		[
-			^ OrderedCollection new.
-		].
-
-	^ self
-		executeCandidateValues:
-		(
-			OrderedCollection
-				with:	candidateRows
-		)
-		withArguments:	aCollection.
 ]
 
 { #category : 'private' }
@@ -347,34 +232,6 @@ matchParameters: aParameterCollection [
 		].
 
 	^ true.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFromParameterEqualitiesWithArguments: aCollection [
-	|
-		key
-	|
-
-	key :=
-		aCollection
-			at:	parameterEqualities first second index.
-
-	parameterEqualities
-		do:
-		[ :eachEquality |
-			key
-				=
-				(
-					aCollection
-						at:	eachEquality second index
-				)
-				ifFalse:
-				[
-					^ nil.
-				].
-		].
-
-	^ key.
 ]
 
 { #category : 'private' }
@@ -457,6 +314,146 @@ using: aTableKeySelectorDictionary [
 	^ candidateRows.
 ]
 
+{ #category : 'executing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeCandidateValues: aCandidateCollection
+withArguments: aCollection [
+	|
+		results
+		rowBindings
+		rowProxies
+	|
+
+	results := OrderedCollection new.
+
+	rowProxies :=
+		(
+			1
+				to:	sourceCollections size
+		)
+			collect:
+			[ :eachIndex |
+				NewValueHolder new.
+			].
+
+	rowBindings :=
+		rowProxies
+			collect:
+			[ :eachRowProxy |
+				Rudesheim Utility Delegator ForAccessing
+					targetFrom:	#value
+					of:	eachRowProxy.
+			].
+
+	aCandidateCollection
+		do:
+		[ :eachCandidateRows |
+			|
+				evaluator
+			|
+
+			(
+				self
+					candidateRows:	eachCandidateRows
+					matchParameters:	aCollection
+			)
+				ifTrue:
+				[
+					tableIndexes
+						with:	eachCandidateRows
+						do:
+						[ :eachTableIndex :eachRow |
+							(
+								rowProxies
+									at:	eachTableIndex
+							)
+								value:	eachRow.
+						].
+
+					evaluator :=
+						EvaluatorForExpressionTableQueryRudesheim
+							rows:	rowBindings
+							parameters:	aCollection.
+
+					results
+						add:
+						(
+							evaluator
+								visit:	selectExpression
+						).
+				].
+		].
+
+	^ results.
+]
+
+{ #category : 'executing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeParameterCandidateValuesWithArguments: aCollection [
+	|
+		candidateRows
+	|
+
+	candidateRows :=
+		self
+			parameterCandidateRowsWithArguments:	aCollection.
+
+	candidateRows
+		ifNil:
+		[
+			^ OrderedCollection new.
+		].
+
+	^ self
+		executeCandidateValues:
+		(
+			OrderedCollection
+				with:	candidateRows
+		)
+		withArguments:	aCollection.
+]
+
+{ #category : 'executing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aCollection [
+	parameterEqualities isEmpty
+		ifFalse:
+		[
+			^ self
+				executeParameterCandidateValuesWithArguments:	aCollection.
+		].
+
+	^ self
+		executeCandidateValues:	candidateValues
+		withArguments:	aCollection.
+]
+
+{ #category : 'testing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> hasParameterEqualities [
+	^ parameterEqualities notEmpty.
+]
+
+{ #category : 'testing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isParameterOperand: anObject [
+	^ anObject class == ParameterExpressionTableQueryRudesheim.
+]
+
+{ #category : 'testing' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isTableKeyOperand: anObject [
+	^ anObject class == Array.
+]
+
+{ #category : 'private' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyAccessorFromFieldExpression: aFieldExpressionTableQueryRudesheim [
+	^ aFieldExpressionTableQueryRudesheim fieldSelector
+		ifNil:
+		[
+			#().
+		]
+		ifNotNil:
+		[ :aFieldSelector |
+			Array
+				with:	aFieldSelector.
+		].
+]
+
 { #category : 'private' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFor: anObject
 accessor: aCollection [
@@ -472,6 +469,34 @@ accessor: aCollection [
 			key :=
 				key
 					perform:	eachSelector.
+		].
+
+	^ key.
+]
+
+{ #category : 'private' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFromParameterEqualitiesWithArguments: aCollection [
+	|
+		key
+	|
+
+	key :=
+		aCollection
+			at:	parameterEqualities first second index.
+
+	parameterEqualities
+		do:
+		[ :eachEquality |
+			key
+				=
+				(
+					aCollection
+						at:	eachEquality second index
+				)
+				ifFalse:
+				[
+					^ nil.
+				].
 		].
 
 	^ key.
@@ -540,35 +565,6 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyOperandFrom: an
 
 	self
 		error:	'unsupported predicate'.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyAccessorFromFieldExpression: aFieldExpressionTableQueryRudesheim [
-	^ aFieldExpressionTableQueryRudesheim fieldSelector
-		ifNil:
-		[
-			#().
-		]
-		ifNotNil:
-		[ :aFieldSelector |
-			Array
-				with:	aFieldSelector.
-		].
-]
-
-{ #category : 'testing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isParameterOperand: anObject [
-	^ anObject class == ParameterExpressionTableQueryRudesheim.
-]
-
-{ #category : 'testing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> hasParameterEqualities [
-	^ parameterEqualities notEmpty.
-]
-
-{ #category : 'testing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isTableKeyOperand: anObject [
-	^ anObject class == Array.
 ]
 
 { #category : 'private' }
@@ -652,85 +648,6 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> parameterCandidate
 		].
 
 	^ candidateRows.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> rowMatchingParameterKey: anObject
-inTable: anInteger
-using: aTableKeySelectorDictionary [
-	|
-		accessor
-	|
-
-	accessor :=
-		aTableKeySelectorDictionary
-			at:	anInteger.
-
-	^
-	(
-		sourceCollections
-			at:	anInteger
-	)
-		detect:
-		[ :eachRow |
-			(
-				self
-					keyFor:	eachRow
-					accessor:	accessor
-			)
-				= anObject.
-		]
-		ifNone:
-		[
-			nil.
-		].
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> rowIndexForTable: anInteger
-using: aTableKeySelectorDictionary [
-	|
-		accessor
-		index
-	|
-
-	rowIndexesByTable
-		at:	anInteger
-		ifPresent:
-		[ :existingIndex |
-			^ existingIndex.
-		].
-
-	accessor :=
-		aTableKeySelectorDictionary
-			at:	anInteger.
-
-	index := Dictionary new.
-
-	(
-		sourceCollections
-			at:	anInteger
-	)
-		do:
-		[ :eachRow |
-			index
-				at:
-				(
-					self
-						keyFor:	eachRow
-						accessor:	accessor
-				)
-				ifAbsentPut:
-				[
-					eachRow.
-				].
-		].
-
-	rowIndexesByTable
-		at:	anInteger
-		put:	index.
-
-	^ index.
 ]
 
 { #category : 'initialization' }
@@ -843,6 +760,53 @@ by: anEqualityCollection [
 ]
 
 { #category : 'private' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> rowIndexForTable: anInteger
+using: aTableKeySelectorDictionary [
+	|
+		accessor
+		index
+	|
+
+	rowIndexesByTable
+		at:	anInteger
+		ifPresent:
+		[ :existingIndex |
+			^ existingIndex.
+		].
+
+	accessor :=
+		aTableKeySelectorDictionary
+			at:	anInteger.
+
+	index := Dictionary new.
+
+	(
+		sourceCollections
+			at:	anInteger
+	)
+		do:
+		[ :eachRow |
+			index
+				at:
+				(
+					self
+						keyFor:	eachRow
+						accessor:	accessor
+				)
+				ifAbsentPut:
+				[
+					eachRow.
+				].
+		].
+
+	rowIndexesByTable
+		at:	anInteger
+		put:	index.
+
+	^ index.
+]
+
+{ #category : 'private' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> rowMatchingKey: anObject
 inTable: anInteger
 using: aTableKeySelectorDictionary [
@@ -854,6 +818,38 @@ using: aTableKeySelectorDictionary [
 	)
 		at:	anObject
 		ifAbsent:
+		[
+			nil.
+		].
+]
+
+{ #category : 'private' }
+EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> rowMatchingParameterKey: anObject
+inTable: anInteger
+using: aTableKeySelectorDictionary [
+	|
+		accessor
+	|
+
+	accessor :=
+		aTableKeySelectorDictionary
+			at:	anInteger.
+
+	^
+	(
+		sourceCollections
+			at:	anInteger
+	)
+		detect:
+		[ :eachRow |
+			(
+				self
+					keyFor:	eachRow
+					accessor:	accessor
+			)
+				= anObject.
+		]
+		ifNone:
 		[
 			nil.
 		].

@@ -43,7 +43,10 @@ with: aCollectionOfParameterValues [
 		iterator
 		results
 		block
+		tableQuery
 	|
+	
+	tableQuery := TableQueryRudesheim.
 
 	resolvedTables :=
 		aCompiledStatement tables
@@ -54,7 +57,7 @@ with: aCollectionOfParameterValues [
 			].
 
 	iterator :=
-		IteratorTableQueryRudesheim
+		tableQuery Iterator
 			fromCollections:	resolvedTables.
 
 	results := OrderedCollection new.
@@ -66,7 +69,7 @@ with: aCollectionOfParameterValues [
 			|
 
 			evaluator :=
-				EvaluatorForExpressionTableQueryRudesheim
+				tableQuery EvaluatorForExpression 
 					rows:	iterator rows
 					parameters:	aCollectionOfParameterValues.
 

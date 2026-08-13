@@ -44,11 +44,13 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitBinaryExpressionRudesheim [
 	|
 		expression
-		tableQuery
+		expressionSpace
+		field
 	|
 
-	tableQuery := Rudesheim TableQuery.
-	expression := (tableQuery FieldExpression table: 1 field: #id) = (tableQuery FieldExpression table: 2 field: #customerId) & ((tableQuery FieldExpression table: 2 field: #total) > (tableQuery ParameterExpression index: 1)).
+	expressionSpace := Rudesheim TableQuery Expression.
+	field := expressionSpace Field.
+	expression := (field table: 1 field: #id) = (field table: 2 field: #customerId) & ((field table: 2 field: #total) > (expressionSpace Parameter index: 1)).
 
 	self
 		assert:
@@ -67,7 +69,7 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitFieldExpress
 			self basicTarget
 				visit:	
 				(
-					Rudesheim TableQuery FieldExpression
+					Rudesheim TableQuery Expression Field
 						table:	1
 						field:	#name
 				)
@@ -83,8 +85,7 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitParameterExp
 			self basicTarget
 				visit:	
 				(
-					Rudesheim TableQuery
-						ParameterExpression
+					Rudesheim TableQuery Expression Parameter
 						index:	1
 				)
 		)
@@ -95,21 +96,24 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitParameterExp
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheim [
 	|
 		expression
-		tableQuery
+		expressionSpace
+		field
 	|
 
-	tableQuery := Rudesheim TableQuery.
+	expressionSpace := Rudesheim TableQuery Expression.
+	field := expressionSpace Field.
+
 	expression :=
-		tableQuery ProjectionExpression
+		expressionSpace Projection
 			expressions:
 			{
 				(
-					tableQuery FieldExpression
+					field
 						table:	1
 						field:	#id
 				).
 				(
-					tableQuery FieldExpression
+					field
 						table:	1
 						field:	#name
 				)
@@ -128,17 +132,17 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheimWithOneColumn [
 	|
 		expression
-		tableQuery
+		expressionSpace
 	|
 
-	tableQuery := Rudesheim TableQuery.
+	expressionSpace := Rudesheim TableQuery Expression.
 
 	expression :=
-		tableQuery ProjectionExpression
+		expressionSpace Projection
 			expressions:
 			{
 				(
-					tableQuery FieldExpression
+					expressionSpace Field
 						table:	1
 						field:	#id
 				)
@@ -157,27 +161,29 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionExpressionRudesheimWithThreeColumns [
 	|
 		expression
-		tableQuery
+		expressionSpace
+		field
 	|
 
-	tableQuery := Rudesheim TableQuery.
+	expressionSpace := Rudesheim TableQuery Expression.
+	field := expressionSpace Field.
 
 	expression :=
-		tableQuery ProjectionExpression
-			expressions:	
+		expressionSpace Projection
+			expressions:
 			{
 				(
-					tableQuery FieldExpression
+					field
 						table:	1
 						field:	#id
 				).
 				(
-					tableQuery FieldExpression
+					field
 						table:	1
 						field:	#name
 				).
 				(
-					tableQuery FieldExpression
+					field
 						table:	2
 						field:	#total
 				)

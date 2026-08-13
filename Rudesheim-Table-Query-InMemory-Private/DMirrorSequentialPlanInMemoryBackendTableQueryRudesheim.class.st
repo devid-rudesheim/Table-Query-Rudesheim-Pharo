@@ -10,7 +10,7 @@ Class {
 DMirrorSequentialPlanInMemoryBackendTableQueryRudesheim class >> canOptimize: anOptimizationContextInMemoryBackendTableQueryRudesheim [
 	^
 	(
-		DMirrorSupportInMemoryBackendTableQueryRudesheim
+		Rudesheim TableQuery Backend InMemory DMirrorSupport
 			combinationSizeOf:	anOptimizationContextInMemoryBackendTableQueryRudesheim sourceCollections
 	)
 		>= self minimumCombinationSize.
@@ -38,8 +38,13 @@ DMirrorSequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments:
 
 { #category : 'executing' }
 DMirrorSequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithDMirrorWithArguments: aCollection [
-	DMirrorSupportInMemoryBackendTableQueryRudesheim
-		ensurePlayCacheDirectory.
+	|
+		inMemory
+	|
+	
+	inMemory := 	Rudesheim TableQuery Backend InMemory.
+	
+	inMemory DMirrorSupport ensurePlayCacheDirectory.
 
 	^
 	(
@@ -56,7 +61,7 @@ DMirrorSequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithDMirrorWit
 					put:	eachSourceChunk.
 
 				(
-					SequentialPlanInMemoryBackendTableQueryRudesheim
+					inMemory Plan Sequential
 						sources:	workerSourceCollections
 						where:	whereExpression
 						select:	selectExpression

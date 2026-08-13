@@ -47,19 +47,10 @@ PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
 
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim >> optimizationContext [
-	^ OptimizationContextInMemoryBackendTableQueryRudesheim
+	^ Rudesheim TableQuery Backend InMemory OptimizationContext
 		sources:	sourceCollections
 		where:	whereExpression
 		select:	selectExpression.
-]
-
-{ #category : 'initialization' }
-PreparedQueryInMemoryBackendTableQueryRudesheim >> setSourceCollections: aCollection
-where: aWhereExpressionTableQueryRudesheim
-select: aSelectExpressionTableQueryRudesheim [
-	sourceCollections := aCollection.
-	whereExpression := aWhereExpressionTableQueryRudesheim.
-	selectExpression := aSelectExpressionTableQueryRudesheim.
 ]
 
 { #category : 'optimization' }
@@ -89,6 +80,15 @@ PreparedQueryInMemoryBackendTableQueryRudesheim >> planFor: anOptimizationContex
 			]
 	)
 		for:	anOptimizationContextInMemoryBackendTableQueryRudesheim.
+]
+
+{ #category : 'initialization' }
+PreparedQueryInMemoryBackendTableQueryRudesheim >> setSourceCollections: aCollection
+where: aWhereExpressionTableQueryRudesheim
+select: aSelectExpressionTableQueryRudesheim [
+	sourceCollections := aCollection.
+	whereExpression := aWhereExpressionTableQueryRudesheim.
+	selectExpression := aSelectExpressionTableQueryRudesheim.
 ]
 
 { #category : 'evaluating' }
