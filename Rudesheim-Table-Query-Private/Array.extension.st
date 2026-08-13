@@ -2,6 +2,6 @@ Extension { #name : 'Array' }
 
 { #category : '*Rudesheim-Table-Query-Private' }
 Array >> asTableQueryProjectionExpressionRudesheim [
-	^ ProjectionExpressionTableQueryRudesheim
+	^ Rudesheim TableQuery Expression Projection
 		expressions:	self.
 ]

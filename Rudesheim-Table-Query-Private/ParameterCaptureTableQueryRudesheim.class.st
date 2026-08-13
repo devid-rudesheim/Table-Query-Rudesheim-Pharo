@@ -18,7 +18,7 @@ ParameterCaptureTableQueryRudesheim >> at: anIndex [
 		at:	anIndex
 		ifAbsentPut:
 		[
-			ParameterExpressionTableQueryRudesheim
+			Rudesheim TableQuery Expression Parameter
 				index:	anIndex.
 		].
 ]

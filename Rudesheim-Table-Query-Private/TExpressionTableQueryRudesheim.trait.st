@@ -77,7 +77,7 @@ TExpressionTableQueryRudesheim >> wrap: anObject [
 		]
 		ifFalse:
 		[
-			ConstantExpressionTableQueryRudesheim
+			Rudesheim TableQuery Expression Constant
 				value:	anObject.
 		].
 ]

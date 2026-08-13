@@ -432,7 +432,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> hasParameterEquali
 
 { #category : 'testing' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isParameterOperand: anObject [
-	^ anObject class == ParameterExpressionTableQueryRudesheim.
+	^ anObject class == Rudesheim TableQuery Expression Parameter.
 ]
 
 { #category : 'testing' }

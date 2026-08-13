@@ -90,9 +90,7 @@ SQLite3DriverSQLBackendTableQueryRudesheim >> setConnection: anObject [
 
 { #category : 'private' }
 SQLite3DriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
-	^ anExpressionTableQueryRudesheim
-		class
-		== ConstantExpressionTableQueryRudesheim
+	^ anExpressionTableQueryRudesheim class == Rudesheim TableQuery Expression Constant
 		and:
 		[
 			anExpressionTableQueryRudesheim

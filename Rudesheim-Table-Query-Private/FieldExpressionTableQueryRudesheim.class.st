@@ -48,7 +48,7 @@ FieldExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 	)
 		ifTrue:
 		[
-			FieldExpressionTableQueryRudesheim
+			self class
 				table:	tableIndex
 				field:	aMessage selector.
 		]

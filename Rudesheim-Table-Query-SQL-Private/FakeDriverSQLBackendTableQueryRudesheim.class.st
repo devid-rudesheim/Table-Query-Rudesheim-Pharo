@@ -109,9 +109,7 @@ FakeDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfAssociations 
 
 { #category : 'private' }
 FakeDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
-	^ anExpressionTableQueryRudesheim
-		class
-		== ConstantExpressionTableQueryRudesheim
+	^ anExpressionTableQueryRudesheim class == Rudesheim TableQuery Expression Constant
 		and:
 		[
 			anExpressionTableQueryRudesheim

@@ -58,22 +58,25 @@ from: aCollection [
 		rows
 		parameters
 		compiledStatement
+		tableQuery
 	|
 
-	statement := ExpressionCapturingStatementTableQueryRudesheim new.
+	tableQuery := Rudesheim TableQuery.
+
+	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=
-		(
-			1
-				to:	aCollection size
-		)
-			collect:
-			[ :eachTableIndex |
-				FieldExpressionTableQueryRudesheim
-					table:	eachTableIndex.
-			].
+	(
+		1
+			to:	aCollection size
+	)
+		collect:
+		[ :eachTableIndex |
+			tableQuery Expression Field 
+				table:	eachTableIndex.
+		].
 
-	parameters := ParameterCaptureTableQueryRudesheim new.
+	parameters := tableQuery ParameterCapture new.
 
 	aBlockClosure
 		cull:	statement
@@ -86,7 +89,7 @@ from: aCollection [
 			where:	statement whereExpression
 			select:	statement selectExpression.
 
-	^ PreparedQuerySQLBackendTableQueryRudesheim
+	^ tableQuery Backend SQL PreparedQuery
 		driver:	driver
 		compiledStatement:	compiledStatement.
 ]

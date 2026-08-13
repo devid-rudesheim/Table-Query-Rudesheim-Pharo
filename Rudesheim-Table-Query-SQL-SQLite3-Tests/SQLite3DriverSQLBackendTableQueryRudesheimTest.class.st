@@ -121,10 +121,7 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> tearDown [
 { #category : 'tests' }
 SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlString [
 	self
-		assert:
-		self
-			preparedQuery
-			sqlString
+		assert: self preparedQuery sqlString
 		equals:	'SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))'.
 ]
 
@@ -149,11 +146,7 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWith
 			from:
 			{
 				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
+					Rudesheim TableQuery Backend SQL Table
 						name:	#customers
 				)
 			}.

@@ -16,7 +16,7 @@ Class {
 { #category : 'evaluating' }
 ExpressionCapturingStatementTableQueryRudesheim >> collect: aCollectBlock [
 	whereExpression :=
-		ConstantExpressionTableQueryRudesheim
+		Rudesheim TableQuery Expression Constant
 			value:	true.
 
 	selectExpression := aCollectBlock value asTableQueryProjectionExpressionRudesheim.
