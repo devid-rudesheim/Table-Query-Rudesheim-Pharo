@@ -29,12 +29,7 @@ PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
 		plan
 	|
 
-	plan :=
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan.
+	plan := Rudesheim TableQuery Backend InMemory Plan.
 
 	^
 	{
@@ -55,17 +50,6 @@ PreparedQueryInMemoryBackendTableQueryRudesheim >> optimizationContext [
 
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim >> planFor: anOptimizationContextInMemoryBackendTableQueryRudesheim [
-	|
-		plan
-	|
-
-	plan :=
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan.
-
 	^
 	(
 		self class optimizers
@@ -76,7 +60,7 @@ PreparedQueryInMemoryBackendTableQueryRudesheim >> planFor: anOptimizationContex
 			]
 			ifNone:
 			[
-				plan Sequential.
+				Rudesheim TableQuery Backend InMemory Plan Sequential.
 			]
 	)
 		for:	anOptimizationContextInMemoryBackendTableQueryRudesheim.

@@ -370,7 +370,7 @@ withArguments: aCollection [
 						].
 
 					evaluator :=
-						EvaluatorForExpressionTableQueryRudesheim
+						Rudesheim TableQuery EvaluatorForExpression
 							rows:	rowBindings
 							parameters:	aCollection.
 

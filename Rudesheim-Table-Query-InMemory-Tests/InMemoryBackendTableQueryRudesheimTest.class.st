@@ -8,10 +8,7 @@ Class {
 
 { #category : 'accessing' }
 InMemoryBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		InMemory.
+	^ Rudesheim TableQuery Backend InMemory.
 ]
 
 { #category : 'accessing' }
@@ -268,8 +265,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 				statement
 					select:
 					[
-						rows first
-							> 0.
+						rows first > 0.
 					]
 					collect:
 					[
@@ -294,14 +290,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals:
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan
-			DMirror
-			Sequential.
+		equals: Rudesheim 	TableQuery Backend InMemory Plan DMirror Sequential.
 ]
 
 { #category : 'tests' }
@@ -317,10 +306,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionBel
 				statement
 					select:
 					[
-						rows
-							first
-							= rows second
-							& (rows second = rows last).
+						rows first = rows second & (rows second = rows last).
 					]
 					collect:
 					[
@@ -365,10 +351,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 				statement
 					select:
 					[
-						rows
-							first
-							= rows second
-							& (rows second = rows last).
+						rows first = rows second & (rows second = rows last).
 					]
 					collect:
 					[
@@ -397,13 +380,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals:
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan
-			EqualityIntersection.
+		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -420,18 +397,15 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWit
 					select:
 					[
 						(
-							rows first key
-								= rows second key
+							rows first key = rows second key
 						)
 							&
 							(
-								rows first key
-									= rows last key
+								rows first key = rows last key
 							)
 							&
 							(
-								rows first key
-									= parameters first
+								rows first key = parameters first
 							).
 					]
 					collect:
@@ -513,13 +487,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals:
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan
-			SmallInputSequential.
+		equals: Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
 ]
 
 { #category : 'tests' }
@@ -618,13 +586,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals:
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan
-			EqualityIntersection.
+		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 
 	matchingResult :=
 		preparedQuery
