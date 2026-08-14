@@ -3,7 +3,7 @@ An ExpressionCaptureDelegatorTableQueryRudesheim wraps a captured ExpressionTabl
 "
 Class {
 	#name : 'ExpressionCaptureDelegatorTableQueryRudesheim',
-	#superclass : 'MessageForwardingDelegatorRudesheim',
+	#superclass : 'MessageForwardingDelegatorUtilityRudesheim',
 	#category : 'Rudesheim-Table-Query-Private-Expression',
 	#package : 'Rudesheim-Table-Query-Private',
 	#tag : 'Expression'
