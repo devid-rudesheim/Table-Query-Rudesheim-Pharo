@@ -23,6 +23,12 @@ DMirrorSupportInMemoryBackendTableQueryRudesheim class >> combinationSizeOf: aCo
 	^ combinationSize.
 ]
 
+{ #category : 'actions' }
+DMirrorSupportInMemoryBackendTableQueryRudesheim class >> ensurePlayCacheDirectory [
+	( FileLocator workingDirectory / 'pharo-local' / 'play-cache' )
+		ensureCreateDirectory.
+]
+
 { #category : 'private' }
 DMirrorSupportInMemoryBackendTableQueryRudesheim class >> minimumCollectionSizeOf: aCollection [
 	^
@@ -33,14 +39,4 @@ DMirrorSupportInMemoryBackendTableQueryRudesheim class >> minimumCollectionSizeO
 				eachCollection size.
 			]
 	) size.
-]
-
-{ #category : 'actions' }
-DMirrorSupportInMemoryBackendTableQueryRudesheim class >> ensurePlayCacheDirectory [
-	(
-		FileLocator workingDirectory
-			/ 'pharo-local'
-			/ 'play-cache'
-	)
-		ensureCreateDirectory.
 ]

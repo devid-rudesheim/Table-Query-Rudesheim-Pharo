@@ -43,7 +43,10 @@ with: aCollectionOfParameterValues [
 		iterator
 		results
 		block
+		tableQuery
 	|
+	
+	tableQuery := TableQueryRudesheim.
 
 	resolvedTables :=
 		aCompiledStatement tables
@@ -54,7 +57,7 @@ with: aCollectionOfParameterValues [
 			].
 
 	iterator :=
-		IteratorTableQueryRudesheim
+		tableQuery Iterator
 			fromCollections:	resolvedTables.
 
 	results := OrderedCollection new.
@@ -66,7 +69,7 @@ with: aCollectionOfParameterValues [
 			|
 
 			evaluator :=
-				EvaluatorForExpressionTableQueryRudesheim
+				tableQuery EvaluatorForExpression 
 					rows:	iterator rows
 					parameters:	aCollectionOfParameterValues.
 
@@ -104,19 +107,6 @@ FakeDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfAssociations 
 		].
 ]
 
-{ #category : 'private' }
-FakeDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
-	^ anExpressionTableQueryRudesheim
-		class
-		== ConstantExpressionTableQueryRudesheim
-		and:
-		[
-			anExpressionTableQueryRudesheim
-				value
-				== true.
-		].
-]
-
 { #category : 'printing' }
 FakeDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim [
 	|
@@ -144,20 +134,9 @@ FakeDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFa
 						tablesSqlStringFor:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim tables
 				).
 
-			(
-				self
-					shouldOmitWhereClauseFor:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
-			)
-				ifFalse:
-				[
-					aStream
-						nextPutAll:	' WHERE ';
-						nextPutAll:
-						(
-							expressionRenderer
-								visit:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
-						).
-				].
+			aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
+				appendSqlWhereClauseRudesheim:	aStream
+				renderer:	expressionRenderer.
 		].
 ]
 

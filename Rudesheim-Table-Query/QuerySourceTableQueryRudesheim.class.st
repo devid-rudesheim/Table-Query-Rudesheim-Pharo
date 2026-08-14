@@ -20,12 +20,15 @@ QuerySourceTableQueryRudesheim class >> fromCollections: aCollection [
 
 { #category : 'converting' }
 QuerySourceTableQueryRudesheim >> asInMemory [
+	|
+		tableQuery
+	|
+	
+	tableQuery := Rudesheim	TableQuery.
 
-	^ Rudesheim
-		TableQuery
-		Query
+	^ tableQuery Query
 		fromCollections:	sourceCollections
-		backend:	Rudesheim TableQuery Backend InMemory.
+		backend:	tableQuery Backend InMemory.
 ]
 
 { #category : 'converting' }

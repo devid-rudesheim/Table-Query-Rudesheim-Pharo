@@ -24,9 +24,6 @@ TableSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 { #category : 'tests' }
 TableSQLBackendTableQueryRudesheimTest >> testName [
 	self
-		assert:
-		self
-			basicTarget
-			name
+		assert:	self basicTarget name
 		equals:	#numbers.
 ]

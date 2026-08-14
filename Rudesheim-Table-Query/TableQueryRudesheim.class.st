@@ -12,16 +12,6 @@ TableQueryRudesheim class >> Backend [
 ]
 
 { #category : 'namespace' }
-TableQueryRudesheim class >> BinaryExpression [
-	^ BinaryExpressionTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
-TableQueryRudesheim class >> ConstantExpression [
-	^ ConstantExpressionTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
 TableQueryRudesheim class >> EvaluatorForExpression [
 	^ EvaluatorForExpressionTableQueryRudesheim.
 ]
@@ -32,13 +22,13 @@ TableQueryRudesheim class >> Expression [
 ]
 
 { #category : 'namespace' }
-TableQueryRudesheim class >> ExpressionCapturingStatement [
-	^ ExpressionCapturingStatementTableQueryRudesheim.
+TableQueryRudesheim class >> ExpressionCaptureDelegator [
+	^ ExpressionCaptureDelegatorTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }
-TableQueryRudesheim class >> FieldExpression [
-	^ FieldExpressionTableQueryRudesheim.
+TableQueryRudesheim class >> ExpressionCapturingStatement [
+	^ ExpressionCapturingStatementTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }
@@ -47,23 +37,8 @@ TableQueryRudesheim class >> Iterator [
 ]
 
 { #category : 'namespace' }
-TableQueryRudesheim class >> MessageExpression [
-	^ MessageExpressionTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
 TableQueryRudesheim class >> ParameterCapture [
 	^ ParameterCaptureTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
-TableQueryRudesheim class >> ParameterExpression [
-	^ ParameterExpressionTableQueryRudesheim.
-]
-
-{ #category : 'namespace' }
-TableQueryRudesheim class >> ProjectionExpression [
-	^ ProjectionExpressionTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }

@@ -16,10 +16,9 @@ DMirrorEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim class >> canOp
 		|
 
 		(
-			DMirrorSupportInMemoryBackendTableQueryRudesheim
+			Rudesheim TableQuery Backend InMemory DMirrorSupport
 				minimumCollectionSizeOf:	anOptimizationContextInMemoryBackendTableQueryRudesheim sourceCollections
-		)
-			< self minimumDriverSize
+		) < self minimumDriverSize
 			ifTrue:
 			[
 				^ false.
@@ -72,8 +71,8 @@ DMirrorEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWith
 
 { #category : 'executing' }
 DMirrorEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWithDMirrorWithArguments: aCollection [
-	DMirrorSupportInMemoryBackendTableQueryRudesheim
-		ensurePlayCacheDirectory.
+	
+	Rudesheim TableQuery Backend InMemory DMirrorSupport ensurePlayCacheDirectory.
 
 	^
 	(

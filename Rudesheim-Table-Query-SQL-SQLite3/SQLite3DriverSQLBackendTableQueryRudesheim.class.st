@@ -66,39 +66,13 @@ with: aCollectionOfParameterValues [
 { #category : 'private' }
 SQLite3DriverSQLBackendTableQueryRudesheim >> resultForRow: aSQLite3Row
 compiledStatement: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim [
-	|
-		rowValues
-	|
-
-	rowValues := aSQLite3Row asArray.
-
-	^ aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim returnsProjection
-		ifTrue:
-		[
-			rowValues.
-		]
-		ifFalse:
-		[
-			rowValues first.
-		].
+	^ aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim selectExpression
+		shapeResultRudesheim:	aSQLite3Row asArray.
 ]
 
 { #category : 'initialization' }
 SQLite3DriverSQLBackendTableQueryRudesheim >> setConnection: anObject [
 	connection := anObject.
-]
-
-{ #category : 'private' }
-SQLite3DriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
-	^ anExpressionTableQueryRudesheim
-		class
-		== ConstantExpressionTableQueryRudesheim
-		and:
-		[
-			anExpressionTableQueryRudesheim
-				value
-				== true.
-		].
 ]
 
 { #category : 'printing' }
@@ -136,20 +110,9 @@ select: aSelectExpressionTableQueryRudesheim [
 						tablesSqlStringFor:	aCollectionOfTables
 				).
 
-			(
-				self
-					shouldOmitWhereClauseFor:	aWhereExpressionTableQueryRudesheim
-			)
-				ifFalse:
-				[
-					aStream
-						nextPutAll:	' WHERE ';
-						nextPutAll:
-						(
-							expressionRenderer
-								visit:	aWhereExpressionTableQueryRudesheim
-						).
-				].
+			aWhereExpressionTableQueryRudesheim
+				appendSqlWhereClauseRudesheim:	aStream
+				renderer:	expressionRenderer.
 		].
 ]
 

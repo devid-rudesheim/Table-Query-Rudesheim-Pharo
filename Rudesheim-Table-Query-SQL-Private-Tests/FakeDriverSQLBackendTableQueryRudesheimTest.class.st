@@ -24,26 +24,23 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectP
 		whereExpression
 		selectExpression
 		compiledStatement
+		tableQuery
+		constant
 	|
+	
+	tableQuery := Rudesheim TableQuery.
+	constant := tableQuery Expression Constant.
 
 	numbersTable :=
-		Rudesheim
-			TableQuery
-			Backend
-			SQL
-			Table
+		tableQuery Backend SQL Table
 			name:	#numbers.
 
 	whereExpression :=
-		Rudesheim
-			TableQuery
-			ConstantExpression
+		constant
 			value:	true.
 
 	selectExpression :=
-		Rudesheim
-			TableQuery
-			ConstantExpression
+		constant
 			value:	1.
 
 	compiledStatement :=
@@ -57,23 +54,13 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectP
 			select:	selectExpression.
 
 	self
-		assert:
-		compiledStatement
-			tables
-			asArray
-			= (Array with: numbersTable).
+		assert: compiledStatement tables asArray = (Array with: numbersTable).
 
 	self
-		assert:
-		compiledStatement
-			whereExpression
-			== whereExpression.
+		assert: compiledStatement whereExpression == whereExpression.
 
 	self
-		assert:
-		compiledStatement
-			selectExpression
-			== selectExpression.
+		assert: compiledStatement selectExpression	== selectExpression.
 ]
 
 { #category : 'tests' }
@@ -81,7 +68,14 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 	|
 		compiledStatement
 		result
+		tableQuery
+		expression
+		field
 	|
+	
+	tableQuery := Rudesheim TableQuery.
+	expression := tableQuery Expression.
+	field := expression Field.
 
 	compiledStatement :=
 		self basicTarget
@@ -90,27 +84,18 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 				Array
 					with:
 					(
-						Rudesheim
-							TableQuery
-							Backend
-							SQL
-							Table
+						tableQuery Backend SQL Table
 							name:	#numbers
 					)
 			)
 			where:
 			(
-				Rudesheim
-					TableQuery
-					FieldExpression
+				field
 					table:	1
-			)
-				> (Rudesheim TableQuery ParameterExpression index: 1)
+			) > (expression Parameter index: 1)
 			select:
 			(
-				Rudesheim
-					TableQuery
-					FieldExpression
+				field
 					table:	1
 			).
 
@@ -128,7 +113,14 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement [
 	|
 		compiledStatement
+		tableQuery
+		expression
+		field
 	|
+
+	tableQuery := Rudesheim TableQuery.
+	expression := tableQuery Expression.
+	field := expression Field.
 
 	compiledStatement :=
 		self basicTarget
@@ -137,28 +129,19 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement
 				Array
 					with:
 					(
-						Rudesheim
-							TableQuery
-							Backend
-							SQL
-							Table
+						tableQuery Backend SQL Table
 							name:	#numbers
 					)
 			)
 			where:
 			(
-				Rudesheim
-					TableQuery
-					FieldExpression
+				field
 					table:	1
 					field:	#id
-			)
-				> (Rudesheim TableQuery ParameterExpression index: 1)
+			) > (expression Parameter index: 1)
 			select:
 			(
-				Rudesheim
-					TableQuery
-					FieldExpression
+				field
 					table:	1
 					field:	#id
 			).
@@ -176,7 +159,12 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement
 FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatementWithoutWhere [
 	|
 		compiledStatement
+		tableQuery
+		expresion
 	|
+	
+	tableQuery := Rudesheim TableQuery.
+	expresion := tableQuery Expression.
 
 	compiledStatement :=
 		self basicTarget
@@ -185,26 +173,18 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement
 				Array
 					with:
 					(
-						Rudesheim
-							TableQuery
-							Backend
-							SQL
-							Table
+						tableQuery Backend SQL Table
 							name:	#numbers
 					)
 			)
 			where:
 			(
-				Rudesheim
-					TableQuery
-					ConstantExpression
+				expresion Constant
 					value:	true
 			)
 			select:
 			(
-				Rudesheim
-					TableQuery
-					FieldExpression
+				expresion Field
 					table:	1
 			).
 

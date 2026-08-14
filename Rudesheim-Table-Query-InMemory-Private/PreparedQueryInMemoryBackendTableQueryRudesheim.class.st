@@ -29,12 +29,7 @@ PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
 		plan
 	|
 
-	plan :=
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan.
+	plan := Rudesheim TableQuery Backend InMemory Plan.
 
 	^
 	{
@@ -47,34 +42,14 @@ PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
 
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim >> optimizationContext [
-	^ OptimizationContextInMemoryBackendTableQueryRudesheim
+	^ Rudesheim TableQuery Backend InMemory OptimizationContext
 		sources:	sourceCollections
 		where:	whereExpression
 		select:	selectExpression.
 ]
 
-{ #category : 'initialization' }
-PreparedQueryInMemoryBackendTableQueryRudesheim >> setSourceCollections: aCollection
-where: aWhereExpressionTableQueryRudesheim
-select: aSelectExpressionTableQueryRudesheim [
-	sourceCollections := aCollection.
-	whereExpression := aWhereExpressionTableQueryRudesheim.
-	selectExpression := aSelectExpressionTableQueryRudesheim.
-]
-
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim >> planFor: anOptimizationContextInMemoryBackendTableQueryRudesheim [
-	|
-		plan
-	|
-
-	plan :=
-		Rudesheim
-			TableQuery
-			Backend
-			InMemory
-			Plan.
-
 	^
 	(
 		self class optimizers
@@ -85,10 +60,19 @@ PreparedQueryInMemoryBackendTableQueryRudesheim >> planFor: anOptimizationContex
 			]
 			ifNone:
 			[
-				plan Sequential.
+				Rudesheim TableQuery Backend InMemory Plan Sequential.
 			]
 	)
 		for:	anOptimizationContextInMemoryBackendTableQueryRudesheim.
+]
+
+{ #category : 'initialization' }
+PreparedQueryInMemoryBackendTableQueryRudesheim >> setSourceCollections: aCollection
+where: aWhereExpressionTableQueryRudesheim
+select: aSelectExpressionTableQueryRudesheim [
+	sourceCollections := aCollection.
+	whereExpression := aWhereExpressionTableQueryRudesheim.
+	selectExpression := aSelectExpressionTableQueryRudesheim.
 ]
 
 { #category : 'evaluating' }

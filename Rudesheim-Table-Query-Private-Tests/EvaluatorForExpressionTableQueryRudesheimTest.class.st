@@ -8,9 +8,7 @@ Class {
 
 { #category : 'accessing' }
 EvaluatorForExpressionTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		EvaluatorForExpression.
+	^ Rudesheim TableQuery EvaluatorForExpression.
 ]
 
 { #category : 'accessing' }
@@ -26,7 +24,17 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitBinaryExpression [
 		expression
 	|
 
-	expression := (Rudesheim TableQuery FieldExpression table: 1 field: #key) = (Rudesheim TableQuery ConstantExpression value: 3).
+	expression :=
+	(
+		Rudesheim TableQuery Expression Field
+			table:	1
+			field:	#key
+	)
+		=
+		(
+			Rudesheim TableQuery Expression Constant
+				value:	3
+		).
 
 	self
 		assert:
@@ -45,9 +53,7 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitConstantExpression [
 			self basicTarget
 				visit:
 				(
-					Rudesheim
-						TableQuery
-						ConstantExpression
+					Rudesheim TableQuery Expression Constant
 						value:	42
 				)
 		)
@@ -56,15 +62,19 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitConstantExpression [
 
 { #category : 'tests' }
 EvaluatorForExpressionTableQueryRudesheimTest >> testVisitFieldExpression [
+	|
+		fieldExpression
+	|
+
+	fieldExpression := Rudesheim TableQuery Expression Field.
+
 	self
 		assert:
 		(
 			self basicTarget
 				visit:
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					fieldExpression
 						table:	1
 				)
 		)
@@ -76,9 +86,7 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitFieldExpression [
 			self basicTarget
 				visit:
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					fieldExpression
 						table:	2
 						field:	#key
 				)
@@ -89,25 +97,24 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitFieldExpression [
 { #category : 'tests' }
 EvaluatorForExpressionTableQueryRudesheimTest >> testVisitMessageExpression [
 	|
+		fieldExpression
 		expression
 	|
 
+	fieldExpression := Rudesheim TableQuery Expression Field.
+
 	expression :=
+	(
+		fieldExpression
+			table:	1
+			field:	#key
+	)
+		max:
 		(
-			Rudesheim
-				TableQuery
-				FieldExpression
-				table:	1
+			fieldExpression
+				table:	2
 				field:	#key
-		)
-			max:
-			(
-				Rudesheim
-					TableQuery
-					FieldExpression
-					table:	2
-					field:	#key
-			).
+		).
 
 	self
 		assert:
@@ -126,9 +133,7 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitParameterExpression [
 			self basicTarget
 				visit:
 				(
-					Rudesheim
-						TableQuery
-						ParameterExpression
+					Rudesheim TableQuery Expression Parameter
 						index:	1
 				)
 		)
@@ -138,25 +143,22 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitParameterExpression [
 { #category : 'tests' }
 EvaluatorForExpressionTableQueryRudesheimTest >> testVisitProjectionExpression [
 	|
+		fieldExpression
 		expression
 	|
 
+	fieldExpression := Rudesheim TableQuery Expression Field.
+
 	expression :=
-		Rudesheim
-			TableQuery
-			ProjectionExpression
+		Rudesheim TableQuery Expression Projection
 			expressions:
 			{
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					fieldExpression
 						table:	1
 				).
 				(
-					Rudesheim
-						TableQuery
-						FieldExpression
+					fieldExpression
 						table:	2
 						field:	#key
 				)

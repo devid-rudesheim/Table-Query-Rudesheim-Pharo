@@ -35,7 +35,7 @@ FieldExpressionTableQueryRudesheim >> acceptTVisitorRudesheim: aTVisitorRudeshei
 ]
 
 { #category : 'proxy' }
-FieldExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
+FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 	^
 	(
 		fieldSelector isNil
@@ -48,14 +48,14 @@ FieldExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 	)
 		ifTrue:
 		[
-			FieldExpressionTableQueryRudesheim
+			self class
 				table:	tableIndex
 				field:	aMessage selector.
 		]
 		ifFalse:
 		[
 			super
-				doesNotUnderstand:	aMessage.
+				processMessage:	aMessage.
 		].
 ]
 
@@ -78,16 +78,22 @@ FieldExpressionTableQueryRudesheim >> tableIndex [
 
 { #category : 'proxy' }
 FieldExpressionTableQueryRudesheim >> value [
+	|
+		expression
+	|
+	
+	expression := Rudesheim TableQuery Expression.
+
 	^ fieldSelector
 		ifNil:
 		[
-			FieldExpressionTableQueryRudesheim
+			expression Field
 				table:	tableIndex
 				field:	#value.
 		]
 		ifNotNil:
 		[
-			MessageExpressionTableQueryRudesheim
+			expression Message
 				receiver:	self
 				selector:	#value
 				arguments:	#().

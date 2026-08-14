@@ -7,56 +7,21 @@ Trait {
 
 { #category : 'comparing' }
 TExpressionTableQueryRudesheim >> = anObject [
-	^ BinaryExpressionTableQueryRudesheim
+	^ Rudesheim TableQuery Expression Binary
 		receiver:	self
 		selector:	#=
-		argument:
-		(
-			self
-				wrap:	anObject
-		).
+		argument:	anObject peekDelegateRudesheim asTableQueryExpressionRudesheim.
+]
+
+{ #category : 'converting' }
+TExpressionTableQueryRudesheim >> asTableQueryExpressionRudesheim [
+	^ self.
 ]
 
 { #category : 'proxy' }
 TExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
-	|
-		wrappedArguments
-	|
-
-	wrappedArguments :=
-		aMessage arguments
-			collect:
-			[ :eachArgument |
-				self
-					wrap:	eachArgument.
-			].
-
-	^
-	(
-		aMessage
-			selector
-			isBinary
-			and:
-			[
-				wrappedArguments
-					size
-					= 1.
-			]
-	)
-		ifTrue:
-		[
-			BinaryExpressionTableQueryRudesheim
-				receiver:	self
-				selector:	aMessage selector
-				argument:	wrappedArguments first.
-		]
-		ifFalse:
-		[
-			MessageExpressionTableQueryRudesheim
-				receiver:	self
-				selector:	aMessage selector
-				arguments:	wrappedArguments.
-		].
+	^ self
+		processMessage:	aMessage.
 ]
 
 { #category : 'comparing' }
@@ -64,21 +29,42 @@ TExpressionTableQueryRudesheim >> hash [
 	^ self identityHash.
 ]
 
-{ #category : 'testing' }
-TExpressionTableQueryRudesheim >> isExpressionRudesheim [
-	^ true.
-]
+{ #category : 'proxy' }
+TExpressionTableQueryRudesheim >> processMessage: aMessage [
+	|
+		wrappedArguments
+		expression
+	|
 
-{ #category : 'private' }
-TExpressionTableQueryRudesheim >> wrap: anObject [
-	^ anObject isExpressionRudesheim
-		ifTrue:
-		[
-			anObject.
-		]
-		ifFalse:
-		[
-			ConstantExpressionTableQueryRudesheim
-				value:	anObject.
-		].
+	expression := Rudesheim TableQuery Expression.
+
+	wrappedArguments :=
+		aMessage arguments
+			collect:
+			[ :eachArgument |
+				eachArgument peekDelegateRudesheim asTableQueryExpressionRudesheim.
+			].
+
+	^
+	(
+		(
+			aMessage	selector isBinary
+				and:
+				[
+					1 = wrappedArguments size.
+				]
+		)
+			ifTrue:
+			[
+				expression Binary
+			]
+			ifFalse:
+			[
+				expression Message
+			]
+	)
+		receiver:		self
+		selector:		aMessage selector
+		arguments:	wrappedArguments.
+
 ]

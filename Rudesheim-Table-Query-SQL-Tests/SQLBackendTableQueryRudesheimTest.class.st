@@ -11,10 +11,7 @@ Class {
 
 { #category : 'accessing' }
 SQLBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL.
+	^ Rudesheim TableQuery Backend SQL.
 ]
 
 { #category : 'accessing' }
@@ -22,29 +19,32 @@ SQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 	^ self targetClass
 		driver:
 		(
-			Rudesheim TableQuery Backend SQL Driver Fake
+			self driverClass
 				tables:	self sourceTables
 		).
 ]
 
 { #category : 'accessing' }
+SQLBackendTableQueryRudesheimTest >> driverClass [
+	^ Rudesheim TableQuery Backend SQL Driver Fake.
+]
+
+{ #category : 'accessing' }
 SQLBackendTableQueryRudesheimTest >> querySources [
+	|
+		table
+	|
+
+	table := Rudesheim TableQuery Backend SQL Table.
+
 	^
 	{
 		(
-			Rudesheim
-				TableQuery
-				Backend
-				SQL
-				Table
+			table
 				name:	#customers
 		).
 		(
-			Rudesheim
-				TableQuery
-				Backend
-				SQL
-				Table
+			table
 				name:	#orders
 		)
 	}.

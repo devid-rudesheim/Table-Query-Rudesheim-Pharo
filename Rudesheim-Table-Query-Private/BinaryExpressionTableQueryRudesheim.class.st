@@ -21,6 +21,16 @@ argument: anArgumentExpressionTableQueryRudesheim [
 		argument:	anArgumentExpressionTableQueryRudesheim.
 ]
 
+{ #category : 'instance creation' }
+BinaryExpressionTableQueryRudesheim class >> receiver: aReceiverExpressionTableQueryRudesheim
+selector: aSymbol
+arguments: anArgumentExpressionTableQueryRudesheim [
+	^ self
+		receiver:	aReceiverExpressionTableQueryRudesheim
+		selector:	aSymbol
+		argument:	anArgumentExpressionTableQueryRudesheim first.
+]
+
 { #category : 'visiting' }
 BinaryExpressionTableQueryRudesheim >> acceptTVisitorRudesheim: aTVisitorRudesheim [
 	^ aTVisitorRudesheim
