@@ -17,7 +17,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				baseline: 'RudesheimUtility'
 				with:
 				[
-					spec repository: 'github://devid-rudesheim/Utility-Rudesheim-Pharo:main'
+					spec repository: 'github://devid-rudesheim/Utility-Rudesheim-Pharo:develop'
 				];
 
 				project: 'RudesheimUtilityTests'

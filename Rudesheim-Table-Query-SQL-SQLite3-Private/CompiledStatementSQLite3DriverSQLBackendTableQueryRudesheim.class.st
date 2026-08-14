@@ -27,11 +27,6 @@ sqlString: aString [
 		sqlString:	aString.
 ]
 
-{ #category : 'testing' }
-CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> returnsProjection [
-	^ selectExpression	class == Rudesheim TableQuery Expression Projection.
-]
-
 { #category : 'accessing' }
 CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim >> selectExpression [
 	^ selectExpression.

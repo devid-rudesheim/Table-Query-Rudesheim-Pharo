@@ -66,15 +66,8 @@ from: aCollection [
 	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=
-	(
-		1
-			to:	aCollection size
-	)
-		collect:
-		[ :eachTableIndex |
-			tableQuery Expression Field 
-				table:	eachTableIndex.
-		].
+		self class
+			rowPlaceholdersFor:	aCollection.
 
 	parameters := tableQuery ParameterCapture new.
 

@@ -35,7 +35,7 @@ FieldExpressionTableQueryRudesheim >> acceptTVisitorRudesheim: aTVisitorRudeshei
 ]
 
 { #category : 'proxy' }
-FieldExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
+FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 	^
 	(
 		fieldSelector isNil
@@ -55,7 +55,7 @@ FieldExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 		ifFalse:
 		[
 			super
-				doesNotUnderstand:	aMessage.
+				processMessage:	aMessage.
 		].
 ]
 

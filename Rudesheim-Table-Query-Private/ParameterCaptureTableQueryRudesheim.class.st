@@ -14,12 +14,22 @@ Class {
 
 { #category : 'accessing' }
 ParameterCaptureTableQueryRudesheim >> at: anIndex [
+	|
+		tableQuery
+	|
+
+	tableQuery := Rudesheim TableQuery.
+
 	^ cache
 		at:	anIndex
 		ifAbsentPut:
 		[
-			Rudesheim TableQuery Expression Parameter
-				index:	anIndex.
+			tableQuery ExpressionCaptureDelegator
+				delegateTo:
+				(
+					tableQuery Expression Parameter
+						index:	anIndex
+				).
 		].
 ]
 

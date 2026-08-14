@@ -15,6 +15,11 @@ ProjectionExpressionTableQueryRudesheim class >> expressions: aCollection [
 		setExpressions:	aCollection.
 ]
 
+{ #category : 'converting' }
+ProjectionExpressionTableQueryRudesheim class >> shapeResultRudesheim: aRowValueCollection [
+	^ aRowValueCollection.
+]
+
 { #category : 'visiting' }
 ProjectionExpressionTableQueryRudesheim >> acceptTVisitorRudesheim: aTVisitorRudesheim [
 	^ aTVisitorRudesheim

@@ -42,3 +42,14 @@ ExpressionTableQueryRudesheim class >> Parameter [
 ExpressionTableQueryRudesheim class >> Projection [
 	^ ProjectionExpressionTableQueryRudesheim.
 ]
+
+{ #category : 'converting' }
+ExpressionTableQueryRudesheim class >> shapeResultRudesheim: aRowValueCollection [
+	^ aRowValueCollection first.
+]
+
+{ #category : 'converting' }
+ExpressionTableQueryRudesheim >> shapeResultRudesheim: aRowValueCollection [
+	^ self class
+		shapeResultRudesheim:	aRowValueCollection.
+]

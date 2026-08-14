@@ -10,28 +10,39 @@ TExpressionTableQueryRudesheim >> = anObject [
 	^ Rudesheim TableQuery Expression Binary
 		receiver:	self
 		selector:	#=
-		argument:
-		(
-			self
-				wrap:	anObject
-		).
+		argument:	anObject peekDelegateRudesheim asTableQueryExpressionRudesheim.
+]
+
+{ #category : 'converting' }
+TExpressionTableQueryRudesheim >> asTableQueryExpressionRudesheim [
+	^ self.
 ]
 
 { #category : 'proxy' }
 TExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
+	^ self
+		processMessage:	aMessage.
+]
+
+{ #category : 'comparing' }
+TExpressionTableQueryRudesheim >> hash [
+	^ self identityHash.
+]
+
+{ #category : 'proxy' }
+TExpressionTableQueryRudesheim >> processMessage: aMessage [
 	|
 		wrappedArguments
 		expression
 	|
-	
+
 	expression := Rudesheim TableQuery Expression.
 
 	wrappedArguments :=
 		aMessage arguments
 			collect:
 			[ :eachArgument |
-				self
-					wrap:	eachArgument.
+				eachArgument peekDelegateRudesheim asTableQueryExpressionRudesheim.
 			].
 
 	^
@@ -56,28 +67,4 @@ TExpressionTableQueryRudesheim >> doesNotUnderstand: aMessage [
 		selector:		aMessage selector
 		arguments:	wrappedArguments.
 
-]
-
-{ #category : 'comparing' }
-TExpressionTableQueryRudesheim >> hash [
-	^ self identityHash.
-]
-
-{ #category : 'testing' }
-TExpressionTableQueryRudesheim >> isExpressionRudesheim [
-	^ true.
-]
-
-{ #category : 'private' }
-TExpressionTableQueryRudesheim >> wrap: anObject [
-	^ anObject isExpressionRudesheim
-		ifTrue:
-		[
-			anObject.
-		]
-		ifFalse:
-		[
-			Rudesheim TableQuery Expression Constant
-				value:	anObject.
-		].
 ]
