@@ -1,5 +1,5 @@
 "
-End-to-end reproduction of the customers/orders equi-join + parameter example from note/table-query-redesign.md, via Rudesheim TableQuery Backend SQL FakeRelationalDatabaseDriver.
+End-to-end reproduction of the customers/orders equi-join + parameter example from note/table-query-redesign.md, via Rudesheim TableQuery Backend SQL Driver Fake.
 "
 Class {
 	#name : 'SQLBackendTableQueryRudesheimTest',
