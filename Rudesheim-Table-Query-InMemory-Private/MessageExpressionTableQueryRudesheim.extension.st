@@ -9,8 +9,8 @@ MessageExpressionTableQueryRudesheim >> equalityKeyOperandRudesheim [
 				error:	'unsupported predicate'.
 		].
 
-	self arguments isEmpty
-		ifFalse:
+	self arguments
+		ifNotEmpty:
 		[
 			^ self
 				error:	'unsupported predicate'.
