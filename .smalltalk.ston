@@ -2,7 +2,7 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'RudesheimTableQuery',
-      #groups : [ 'tests' ]
+      #load : [ 'tests' ]
     }
   ],
   #testing : {
