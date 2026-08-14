@@ -6,6 +6,9 @@ Array >> asTableQueryProjectionExpressionRudesheim [
 		expressions:
 		(
 			self
-				collect:	#peekDelegateRudesheim
+				collect:
+				[ :each |
+					each peekDelegateRudesheim.
+				]
 		).
 ]
