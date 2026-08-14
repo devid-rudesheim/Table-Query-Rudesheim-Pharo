@@ -195,10 +195,7 @@ using: aTableKeySelectorDictionary [
 
 					(
 						matchedRows
-							allSatisfy:
-							[ :eachRow |
-								eachRow notNil.
-							]
+							allSatisfy:	#notNil
 					)
 						ifTrue:
 						[
@@ -384,10 +381,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> normalizeKeyAccess
 	nonWholeRowAccessors :=
 		(
 			aDictionary values
-				reject:
-				[ :eachAccessor |
-					eachAccessor isEmpty.
-				]
+				reject:	#isEmpty
 		) asSet.
 
 	nonWholeRowAccessors size = 1
@@ -749,10 +743,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> tableKeyAccessorsF
 				collect:
 				[ :eachEquality |
 					eachEquality
-						collect:
-						[ :eachOperand |
-							eachOperand tableIndex.
-						].
+						collect:	#tableIndex.
 				]
 		).
 
