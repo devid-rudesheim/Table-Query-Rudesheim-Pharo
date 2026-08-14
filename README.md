@@ -20,13 +20,14 @@ Metacello new
 	load
 ```
 
-This also loads the required `RudesheimKernel`, `RudesheimUtility`, and `DMirror` dependencies from GitHub.
+This also loads the required `RudesheimKernel` and `RudesheimUtility` dependencies from GitHub. It does not load `DMirror`; see the `dmirror` group below.
 
 ## Requirements
 
 - Pharo with Metacello.
-- Windows is not supported: the default group loads `DMirror` for the in-memory optimizer, and DMirror declares its own OSSubprocess dependency, which is POSIX-only. The supported environment is a POSIX-like operating system. See [TODO.md](TODO.md) for the tracked follow-up work this implies.
-- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer.
+- Windows is supported. The in-memory optimizer picks its plan per OS: on Windows it uses `SmallInputSequential`/`EqualityIntersection` only; on a POSIX-like OS (including macOS) it additionally uses the `DMirror`-backed plans when the `dmirror` group is loaded. Selection happens at plan-build time via `Smalltalk os rudesheim tableQuery optimizers` — no platform check is needed by callers.
+- Plain in-memory use needs only the default group.
+- The optional `dmirror` group adds `DMirror`-accelerated in-memory plans for large inputs. It loads `DMirror`, which declares its own `OSSubprocess` dependency and is POSIX-only — do not load this group on Windows. Without it, the in-memory backend still works, just without the DMirror-accelerated plans (falls back to `EqualityIntersection`/sequential iteration).
 - SQLite3 use needs the `sqlite3` group. The group loads the `Core` part of Pharo-SQLite3 through the baseline.
 
 ## Dependencies
@@ -35,13 +36,13 @@ The baseline loads these repositories:
 
 - `RudesheimKernel`: `github://devid-rudesheim/Kernel-Rudesheim-Pharo:main`
 - `RudesheimUtility`: `github://devid-rudesheim/Utility-Rudesheim-Pharo:main`
-- `DMirror`: `github://ObjectProfile/DMirror/src`
+- `DMirror`: `github://ObjectProfile/DMirror/src` — only loaded by the optional `dmirror` group, not by `default`/`core`.
 
 The `sqlite3` group also loads `SQLite3Core` from Pharo-SQLite3:
 
 - `SQLite3`: `github://pharo-rdbms/Pharo-SQLite3/src`, loaded with `#( 'Core' )`
 
-DMirror declares its own OSSubprocess dependency in its baseline. Because the in-memory optimizer uses DMirror, run it on a POSIX-like operating system.
+DMirror declares its own OSSubprocess dependency in its baseline, which is POSIX-only. Because loading it is opt-in via the `dmirror` group, the default group loads and runs on any OS Pharo supports, including Windows.
 
 ## Load Options
 
@@ -63,10 +64,20 @@ Metacello new
 	load: #(sqlite3)
 ```
 
+DMirror-accelerated in-memory plans (POSIX-like OS only):
+
+```smalltalk
+Metacello new
+	baseline: 'RudesheimTableQuery';
+	repository: 'github://devid-rudesheim/Table-Query-Rudesheim-Pharo:main';
+	load: #(dmirror)
+```
+
 ## Groups
 
 - `core`: table query, in-memory backend, and SQL backend packages.
 - `sqlite3`: SQLite3 SQL backend adapter.
+- `dmirror`: DMirror-accelerated in-memory optimizer plans. POSIX-only (loads `DMirror`, which requires `OSSubprocess`); do not load on Windows.
 - `default`: aliases `core`.
 
 ## Basic Use

@@ -1,8 +1,8 @@
 Class {
 	#name : 'DMirrorSequentialPlanInMemoryBackendTableQueryRudesheim',
 	#superclass : 'SequentialPlanInMemoryBackendTableQueryRudesheim',
-	#category : 'Rudesheim-Table-Query-InMemory-Private-Optimization',
-	#package : 'Rudesheim-Table-Query-InMemory-Private',
+	#category : 'Rudesheim-Table-Query-InMemory-DMirror-Private-Optimization',
+	#package : 'Rudesheim-Table-Query-InMemory-DMirror-Private',
 	#tag : 'Optimization'
 }
 
