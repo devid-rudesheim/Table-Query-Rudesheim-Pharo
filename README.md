@@ -20,13 +20,14 @@ Metacello new
 	load
 ```
 
-This also loads the required `RudesheimKernel`, `RudesheimUtility`, and `DMirror` dependencies from GitHub.
+This also loads the required `RudesheimKernel` and `RudesheimUtility` dependencies from GitHub. `DMirror` is only loaded by the optional `dmirror` group (see Groups below).
 
 ## Requirements
 
 - Pharo with Metacello.
-- Windows is not supported: the default group loads `DMirror` for the in-memory optimizer, and DMirror declares its own OSSubprocess dependency, which is POSIX-only. The supported environment is a POSIX-like operating system. See [TODO.md](TODO.md) for the tracked follow-up work this implies.
-- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer.
+- Windows is supported: the in-memory backend picks its optimizer table per OS (`Smalltalk os rudesheim tableQuery`, the same dispatch style `Rudesheim-OpenCL` uses). On Windows the `DMirror`-backed plans are dropped automatically, since `DMirror` declares its own `OSSubprocess` dependency, which is POSIX-only.
+- Plain in-memory use needs only the default group. The default group does not load DMirror.
+- The optional `dmirror` group adds the `DMirror`-backed plans (large-input parallel execution) for POSIX-like systems. It is not part of `default` and is unavailable/unused on Windows.
 - SQLite3 use needs the `sqlite3` group. The group loads the `Core` part of Pharo-SQLite3 through the baseline.
 
 ## Dependencies
@@ -41,7 +42,7 @@ The `sqlite3` group also loads `SQLite3Core` from Pharo-SQLite3:
 
 - `SQLite3`: `github://pharo-rdbms/Pharo-SQLite3/src`, loaded with `#( 'Core' )`
 
-DMirror declares its own OSSubprocess dependency in its baseline. Because the in-memory optimizer uses DMirror, run it on a POSIX-like operating system.
+DMirror declares its own OSSubprocess dependency in its baseline. Because the `dmirror` group's plans use DMirror, load that group only on a POSIX-like operating system.
 
 ## Load Options
 
@@ -67,6 +68,7 @@ Metacello new
 
 - `core`: table query, in-memory backend, and SQL backend packages.
 - `sqlite3`: SQLite3 SQL backend adapter.
+- `dmirror`: adds the `DMirror`-backed in-memory plans (large-input parallel execution). Loads `DMirror`, which is POSIX-only; not part of `default` and not usable on Windows.
 - `default`: aliases `core`.
 
 ## Basic Use
