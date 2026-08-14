@@ -310,8 +310,8 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeParameterCa
 
 { #category : 'executing' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aCollection [
-	parameterEqualities isEmpty
-		ifFalse:
+	parameterEqualities
+		ifNotEmpty:
 		[
 			^ self
 				executeParameterCandidateValuesWithArguments:	aCollection.
@@ -400,8 +400,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> normalizeKeyAccess
 						aDictionary
 							at:	eachTableIndex
 					)
-						isEmpty
-						ifTrue:
+						ifEmpty:
 						[
 							aDictionary
 								at:	eachTableIndex
@@ -473,8 +472,8 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> prepare [
 			asSortedCollection.
 	tableKeyAccessorsByTable := keyAccessorsByTable.
 
-	parameterEqualities isEmpty
-		ifTrue:
+	parameterEqualities
+		ifEmpty:
 		[
 			candidateValues :=
 				self
@@ -493,8 +492,8 @@ by: anEqualityCollection [
 		changed
 	|
 
-	anIndexCollection isEmpty
-		ifTrue:
+	anIndexCollection
+		ifEmpty:
 		[
 			self
 				error:	'unsupported predicate'.
@@ -725,8 +724,8 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> tableKeyAccessorsF
 										error:	'unsupported predicate'.
 								].
 
-							existingAccessor isEmpty
-								ifTrue:
+							existingAccessor
+								ifEmpty:
 								[
 									keyAccessorsByTable
 										at:	tableIndex
