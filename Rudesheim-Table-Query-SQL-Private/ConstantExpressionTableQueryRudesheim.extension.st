@@ -4,7 +4,10 @@ Extension { #name : 'ConstantExpressionTableQueryRudesheim' }
 ConstantExpressionTableQueryRudesheim >> appendSqlWhereClauseRudesheim: aStream
 renderer: aRenderer [
 	self value
-		ifTrue: [ ^ self ].
+		ifTrue:
+		[
+			^ self.
+		].
 
 	super
 		appendSqlWhereClauseRudesheim:	aStream

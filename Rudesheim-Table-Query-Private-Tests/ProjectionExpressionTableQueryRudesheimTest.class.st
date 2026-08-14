@@ -11,34 +11,28 @@ Class {
 
 { #category : 'accessing' }
 ProjectionExpressionTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Expression
-		Projection.
+	^ Rudesheim TableQuery Expression Projection.
 ]
 
 { #category : 'tests' }
 ProjectionExpressionTableQueryRudesheimTest >> testExpressionWrapping [
 	|
+		fieldExpression
 		expressions
 		projectionExpression
 	|
 
+	fieldExpression := Rudesheim TableQuery Expression Field.
+
 	expressions :=
 	{
 		(
-			Rudesheim
-				TableQuery
-				Expression
-				Field
+			fieldExpression
 				table:	1
 				field:	#id
 		).
 		(
-			Rudesheim
-				TableQuery
-				Expression
-				Field
+			fieldExpression
 				table:	1
 				field:	#name
 		)
@@ -58,32 +52,29 @@ ProjectionExpressionTableQueryRudesheimTest >> testExpressionWrapping [
 		do:
 		[ :eachActual :eachExpected |
 			self
-				assert:	(eachActual == eachExpected).
+				assert:	eachActual == eachExpected.
 		].
 ]
 
 { #category : 'tests' }
 ProjectionExpressionTableQueryRudesheimTest >> testExpressions [
 	|
+		fieldExpression
 		expressions
 		projectionExpression
 	|
 
+	fieldExpression := Rudesheim TableQuery Expression Field.
+
 	expressions :=
 	{
 		(
-			Rudesheim
-				TableQuery
-				Expression
-				Field
+			fieldExpression
 				table:	1
 				field:	#id
 		).
 		(
-			Rudesheim
-				TableQuery
-				Expression
-				Field
+			fieldExpression
 				table:	1
 				field:	#name
 		)
@@ -94,11 +85,5 @@ ProjectionExpressionTableQueryRudesheimTest >> testExpressions [
 			expressions:	expressions.
 
 	self
-		assert:
-		(
-			projectionExpression
-				expressions
-				asArray
-				== expressions
-		).
+		assert:	projectionExpression expressions == expressions.
 ]

@@ -10,6 +10,13 @@ FieldExpressionTableQueryRudesheim >> equalityKeyOperandRudesheim [
 { #category : '*Rudesheim-Table-Query-InMemory-Private' }
 FieldExpressionTableQueryRudesheim >> keyAccessorPathRudesheim [
 	^ self fieldSelector
-		ifNil:	[ #() ]
-		ifNotNil:	[ :aFieldSelector | Array with: aFieldSelector ].
+		ifNil:
+		[
+			#().
+		]
+		ifNotNil:
+		[ :aFieldSelector |
+			Array
+				with:	aFieldSelector.
+		].
 ]

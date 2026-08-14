@@ -10,12 +10,7 @@ TExpressionTableQueryRudesheim >> = anObject [
 	^ Rudesheim TableQuery Expression Binary
 		receiver:	self
 		selector:	#=
-		argument:
-		(
-			anObject
-				peekDelegateRudesheim
-				asTableQueryExpressionRudesheim
-		).
+		argument:	anObject peekDelegateRudesheim asTableQueryExpressionRudesheim.
 ]
 
 { #category : 'converting' }
@@ -47,9 +42,7 @@ TExpressionTableQueryRudesheim >> processMessage: aMessage [
 		aMessage arguments
 			collect:
 			[ :eachArgument |
-				eachArgument
-					peekDelegateRudesheim
-					asTableQueryExpressionRudesheim.
+				eachArgument peekDelegateRudesheim asTableQueryExpressionRudesheim.
 			].
 
 	^

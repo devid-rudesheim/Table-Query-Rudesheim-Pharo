@@ -8,8 +8,7 @@ Array >> asTableQueryProjectionExpressionRudesheim [
 			self
 				collect:
 				[ :each |
-					each
-						peekDelegateRudesheim.
+					each peekDelegateRudesheim.
 				]
 		).
 ]
