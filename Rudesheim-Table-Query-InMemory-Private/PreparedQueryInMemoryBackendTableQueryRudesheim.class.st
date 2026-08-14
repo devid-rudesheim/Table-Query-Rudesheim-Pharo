@@ -25,19 +25,7 @@ select: aSelectExpressionTableQueryRudesheim [
 
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
-	|
-		plan
-	|
-
-	plan := Rudesheim TableQuery Backend InMemory Plan.
-
-	^
-	{
-		plan SmallInputSequential.
-		plan DMirror EqualityIntersection.
-		plan EqualityIntersection.
-		plan DMirror Sequential
-	}.
+	^ Smalltalk os rudesheim tableQuery optimizers.
 ]
 
 { #category : 'optimization' }

@@ -70,7 +70,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-Private' 'DMirror' )
+						requires: #( 'Rudesheim-Table-Query-Private' )
 				];
 
 				package: 'Rudesheim-Table-Query-InMemory'
@@ -78,6 +78,20 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				[
 					spec
 						requires: #( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory-Private' )
+				];
+
+				package: 'Rudesheim-Table-Query-InMemory-DMirror-Private'
+				with:
+				[
+					spec
+						requires: #( 'Rudesheim-Table-Query-InMemory-Private' 'DMirror' )
+				];
+
+				package: 'Rudesheim-Table-Query-InMemory-DMirror'
+				with:
+				[
+					spec
+						requires: #( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror-Private' )
 				];
 
 				package: 'Rudesheim-Table-Query-Private-Tests'
@@ -98,7 +112,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-Tests' )
+						requires: #( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror' 'Rudesheim-Table-Query-Tests' )
 				];
 
 				package: 'Rudesheim-Table-Query-SQL-Private'
@@ -155,6 +169,9 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 
 				group:		#sqlite3
 				with:		#( 'Rudesheim-Table-Query-SQL-SQLite3' );
+
+				group:		#dmirror
+				with:		#( 'Rudesheim-Table-Query-InMemory-DMirror' );
 
 				group:		#tests
 				with:		#( 'Rudesheim-Table-Query-Tests' 'Rudesheim-Table-Query-InMemory-Tests' 'Rudesheim-Table-Query-SQL-Tests' );
