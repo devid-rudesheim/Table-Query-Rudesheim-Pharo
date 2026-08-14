@@ -10,7 +10,8 @@ Class {
 ExpressionTableQueryRudesheimTest class >> targetClass [
 	^ Rudesheim
 		TableQuery
-		FieldExpression.
+		Expression
+		Field.
 ]
 
 { #category : 'accessing' }
@@ -30,14 +31,16 @@ ExpressionTableQueryRudesheimTest >> testBinaryMessageCapture [
 	left :=
 		Rudesheim
 			TableQuery
-			FieldExpression
+			Expression
+			Field
 			table:	1
 			field:	#id.
 
 	right :=
 		Rudesheim
 			TableQuery
-			FieldExpression
+			Expression
+			Field
 			table:	2
 			field:	#customerId.
 
@@ -48,7 +51,8 @@ ExpressionTableQueryRudesheimTest >> testBinaryMessageCapture [
 		equals:
 		Rudesheim
 			TableQuery
-			BinaryExpression.
+			Expression
+			Binary.
 
 	self
 		assert:
@@ -73,7 +77,16 @@ ExpressionTableQueryRudesheimTest >> testConstantWrapping [
 		result
 	|
 
-	result := (Rudesheim TableQuery FieldExpression table: 1 field: #total) > 100.
+	result :=
+		(
+			Rudesheim
+				TableQuery
+				Expression
+				Field
+				table:	1
+				field:	#total
+		)
+			> 100.
 
 	self
 		assert:
@@ -83,7 +96,8 @@ ExpressionTableQueryRudesheimTest >> testConstantWrapping [
 		equals:
 		Rudesheim
 			TableQuery
-			ConstantExpression.
+			Expression
+			Constant.
 
 	self
 		assert:
@@ -106,7 +120,8 @@ ExpressionTableQueryRudesheimTest >> testFieldResolution [
 		equals:
 		Rudesheim
 			TableQuery
-			FieldExpression.
+			Expression
+			Field.
 
 	self
 		assert:	result tableIndex
@@ -127,7 +142,8 @@ ExpressionTableQueryRudesheimTest >> testKeywordMessageCapture [
 		(
 			Rudesheim
 				TableQuery
-				FieldExpression
+				Expression
+				Field
 				table:	1
 				field:	#total
 		)
@@ -135,7 +151,8 @@ ExpressionTableQueryRudesheimTest >> testKeywordMessageCapture [
 			(
 				Rudesheim
 					TableQuery
-					FieldExpression
+					Expression
+					Field
 					table:	2
 					field:	#total
 			).
@@ -145,7 +162,8 @@ ExpressionTableQueryRudesheimTest >> testKeywordMessageCapture [
 		equals:
 		Rudesheim
 			TableQuery
-			MessageExpression.
+			Expression
+			Message.
 
 	self
 		assert:	result selector
@@ -174,7 +192,8 @@ ExpressionTableQueryRudesheimTest >> testResolvedFieldFallsThroughToBinaryWrappi
 		equals:
 		Rudesheim
 			TableQuery
-			BinaryExpression.
+			Expression
+			Binary.
 
 	self
 		assert:

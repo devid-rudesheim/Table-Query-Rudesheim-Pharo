@@ -26,7 +26,23 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitBinaryExpression [
 		expression
 	|
 
-	expression := (Rudesheim TableQuery FieldExpression table: 1 field: #key) = (Rudesheim TableQuery ConstantExpression value: 3).
+	expression :=
+		(
+			Rudesheim
+				TableQuery
+				Expression
+				Field
+				table:	1
+				field:	#key
+		)
+			=
+			(
+				Rudesheim
+					TableQuery
+					Expression
+					Constant
+					value:	3
+			).
 
 	self
 		assert:
@@ -47,7 +63,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitConstantExpression [
 				(
 					Rudesheim
 						TableQuery
-						ConstantExpression
+						Expression
+						Constant
 						value:	42
 				)
 		)
@@ -64,7 +81,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitFieldExpression [
 				(
 					Rudesheim
 						TableQuery
-						FieldExpression
+						Expression
+						Field
 						table:	1
 				)
 		)
@@ -78,7 +96,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitFieldExpression [
 				(
 					Rudesheim
 						TableQuery
-						FieldExpression
+						Expression
+						Field
 						table:	2
 						field:	#key
 				)
@@ -96,7 +115,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitMessageExpression [
 		(
 			Rudesheim
 				TableQuery
-				FieldExpression
+				Expression
+				Field
 				table:	1
 				field:	#key
 		)
@@ -104,7 +124,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitMessageExpression [
 			(
 				Rudesheim
 					TableQuery
-					FieldExpression
+					Expression
+					Field
 					table:	2
 					field:	#key
 			).
@@ -128,7 +149,8 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitParameterExpression [
 				(
 					Rudesheim
 						TableQuery
-						ParameterExpression
+						Expression
+						Parameter
 						index:	1
 				)
 		)
@@ -144,19 +166,22 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitProjectionExpression [
 	expression :=
 		Rudesheim
 			TableQuery
-			ProjectionExpression
+			Expression
+			Projection
 			expressions:
 			{
 				(
 					Rudesheim
 						TableQuery
-						FieldExpression
+						Expression
+						Field
 						table:	1
 				).
 				(
 					Rudesheim
 						TableQuery
-						FieldExpression
+						Expression
+						Field
 						table:	2
 						field:	#key
 				)
