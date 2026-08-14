@@ -25,7 +25,8 @@ This also loads the required `RudesheimKernel`, `RudesheimUtility`, and `DMirror
 ## Requirements
 
 - Pharo with Metacello.
-- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer. DMirror uses OSSubprocess, so the supported environment is a POSIX-like operating system.
+- Windows is not supported: the default group loads `DMirror` for the in-memory optimizer, and DMirror declares its own OSSubprocess dependency, which is POSIX-only. The supported environment is a POSIX-like operating system. See [TODO.md](TODO.md) for the tracked follow-up work this implies.
+- Plain in-memory use needs only the default group. The default group loads DMirror for the in-memory optimizer.
 - SQLite3 use needs the `sqlite3` group. The group loads the `Core` part of Pharo-SQLite3 through the baseline.
 
 ## Dependencies
