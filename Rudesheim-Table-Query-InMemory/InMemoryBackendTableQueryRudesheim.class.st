@@ -28,6 +28,11 @@ InMemoryBackendTableQueryRudesheim class >> PreparedQuery [
 	^ PreparedQueryInMemoryBackendTableQueryRudesheim.
 ]
 
+{ #category : 'namespace' }
+InMemoryBackendTableQueryRudesheim class >> TableKeyOperand [
+	^ TableKeyOperandInMemoryBackendTableQueryRudesheim.
+]
+
 { #category : 'evaluating' }
 InMemoryBackendTableQueryRudesheim class >> inquireTableQuery: aBlockClosure
 from: aCollection [
@@ -55,15 +60,8 @@ from: aCollection [
 	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=
-	(
-		1
-			to:	aCollection size
-	)
-		collect:
-		[ :eachCollectionIndex |
-			tableQuery Expression Field
-				table:	eachCollectionIndex.
-		].
+		self
+			rowPlaceholdersFor:	aCollection.
 
 	parameters := tableQuery ParameterCapture new.
 

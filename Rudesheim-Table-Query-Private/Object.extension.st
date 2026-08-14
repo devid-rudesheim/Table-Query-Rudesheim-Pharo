@@ -1,11 +1,12 @@
 Extension { #name : 'Object' }
 
 { #category : '*Rudesheim-Table-Query-Private' }
-Object >> asTableQueryProjectionExpressionRudesheim [
-	^ self.
+Object >> asTableQueryExpressionRudesheim [
+	^ Rudesheim TableQuery Expression Constant
+		value:	self.
 ]
 
 { #category : '*Rudesheim-Table-Query-Private' }
-Object >> isExpressionRudesheim [
-	^ false.
+Object >> asTableQueryProjectionExpressionRudesheim [
+	^ self.
 ]

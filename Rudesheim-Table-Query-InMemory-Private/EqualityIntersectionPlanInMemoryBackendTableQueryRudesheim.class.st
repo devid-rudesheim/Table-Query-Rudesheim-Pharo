@@ -71,125 +71,22 @@ select: aSelectExpressionTableQueryRudesheim [
 { #category : 'private' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> addEqualityFrom: aBinaryExpressionTableQueryRudesheim
 to: anOrderedCollection [
-	|
-		leftOperand
-		rightOperand
-	|
-
-	aBinaryExpressionTableQueryRudesheim selector = #=
+	#= = aBinaryExpressionTableQueryRudesheim selector
 		ifFalse:
 		[
 			self
 				error:	'unsupported predicate'.
 		].
 
-	leftOperand :=
-		self
-			keyOperandFrom:	aBinaryExpressionTableQueryRudesheim receiver.
-
-	rightOperand :=
-		self
-			keyOperandFrom:	aBinaryExpressionTableQueryRudesheim argument.
-
 	(
+		aBinaryExpressionTableQueryRudesheim receiver equalityKeyOperandRudesheim
+	)
+		fileEqualityWith:
 		(
-			self
-				isTableKeyOperand:	leftOperand
+			aBinaryExpressionTableQueryRudesheim argument equalityKeyOperandRudesheim
 		)
-			and:
-			[
-				self
-					isTableKeyOperand:	rightOperand.
-			]
-	)
-		ifTrue:
-		[
-			anOrderedCollection
-				add:
-				{
-					leftOperand.
-					rightOperand
-				}.
-
-			^ self.
-		].
-
-	(
-		(
-			self
-				isTableKeyOperand:	leftOperand
-		)
-			and:
-			[
-				self
-					isParameterOperand:	rightOperand.
-			]
-	)
-		ifTrue:
-		[
-			parameterEqualities
-				add:
-				{
-					leftOperand.
-					rightOperand
-				}.
-
-			^ self.
-		].
-
-	(
-		(
-			self
-				isParameterOperand:	leftOperand
-		)
-			and:
-			[
-				self
-					isTableKeyOperand:	rightOperand.
-			]
-	)
-		ifTrue:
-		[
-			parameterEqualities
-				add:
-				{
-					rightOperand.
-					leftOperand
-				}.
-
-			^ self.
-		].
-
-	self
-		error:	'unsupported predicate'.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> addWholeRowEqualitiesFrom: anExpressionTableQueryRudesheim
-to: anOrderedCollection [ 
-	(
-		anExpressionTableQueryRudesheim class == Rudesheim TableQuery Expression Binary
-			and:
-			[
-				anExpressionTableQueryRudesheim selector = #&.
-			]
-	)
-		ifTrue:
-		[
-			self
-				addWholeRowEqualitiesFrom:	anExpressionTableQueryRudesheim receiver
-				to:	anOrderedCollection.
-
-			self
-				addWholeRowEqualitiesFrom:	anExpressionTableQueryRudesheim argument
-				to:	anOrderedCollection.
-
-			^ self.
-		].
-
-	self
-		addEqualityFrom:	anExpressionTableQueryRudesheim
-		to:	anOrderedCollection.
+		wholeRow:	anOrderedCollection
+		parameters:	parameterEqualities.
 ]
 
 { #category : 'private' }
@@ -210,14 +107,14 @@ matchParameters: aParameterCollection [
 			parameterOperand := eachEquality second.
 			tablePosition :=
 				tableIndexes
-					indexOf:	tableOperand first.
+					indexOf:	tableOperand tableIndex.
 			row :=
 				aCandidateRowCollection
 					at:	tablePosition.
 			key :=
 				self
 					keyFor:	row
-					accessor:	tableOperand second.
+					accessor:	tableOperand keyAccessorPath.
 
 			key
 				=
@@ -430,30 +327,6 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> hasParameterEquali
 	^ parameterEqualities notEmpty.
 ]
 
-{ #category : 'testing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isParameterOperand: anObject [
-	^ anObject class == Rudesheim TableQuery Expression Parameter.
-]
-
-{ #category : 'testing' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> isTableKeyOperand: anObject [
-	^ anObject class == Array.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyAccessorFromFieldExpression: aFieldExpressionTableQueryRudesheim [
-	^ aFieldExpressionTableQueryRudesheim fieldSelector
-		ifNil:
-		[
-			#().
-		]
-		ifNotNil:
-		[ :aFieldSelector |
-			Array
-				with:	aFieldSelector.
-		].
-]
-
 { #category : 'private' }
 EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFor: anObject
 accessor: aCollection [
@@ -500,71 +373,6 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFromParameterEq
 		].
 
 	^ key.
-]
-
-{ #category : 'private' }
-EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyOperandFrom: anExpressionTableQueryRudesheim [
-	anExpressionTableQueryRudesheim class == FieldExpressionTableQueryRudesheim
-		ifTrue:
-		[
-			^
-			{
-				anExpressionTableQueryRudesheim tableIndex.
-				self
-					keyAccessorFromFieldExpression:	anExpressionTableQueryRudesheim
-			}.
-		].
-
-	anExpressionTableQueryRudesheim class == MessageExpressionTableQueryRudesheim
-		ifTrue:
-		[
-			|
-				receiverOperand
-			|
-
-			(
-				anExpressionTableQueryRudesheim selector isUnary
-					and:
-					[
-						anExpressionTableQueryRudesheim arguments isEmpty.
-					]
-			)
-				ifFalse:
-				[
-					self
-						error:	'unsupported predicate'.
-				].
-
-			receiverOperand :=
-				self
-					keyOperandFrom:	anExpressionTableQueryRudesheim receiver.
-
-			(
-				self
-					isTableKeyOperand:	receiverOperand
-			)
-				ifFalse:
-				[
-					self
-						error:	'unsupported predicate'.
-				].
-
-			^
-			{
-				receiverOperand first.
-				receiverOperand second
-					copyWith:	anExpressionTableQueryRudesheim selector
-			}.
-		].
-
-	anExpressionTableQueryRudesheim class == ParameterExpressionTableQueryRudesheim
-		ifTrue:
-		[
-			^ anExpressionTableQueryRudesheim.
-		].
-
-	self
-		error:	'unsupported predicate'.
 ]
 
 { #category : 'private' }
@@ -876,9 +684,9 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> tableKeyAccessorsF
 
 	equalities := OrderedCollection new.
 
-	self
-		addWholeRowEqualitiesFrom:	anExpressionTableQueryRudesheim
-		to:	equalities.
+	anExpressionTableQueryRudesheim
+		collectWholeRowEqualitiesRudesheim:	equalities
+		forPlan:	self.
 
 	keyAccessorsByTable := Dictionary new.
 
@@ -893,8 +701,8 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> tableKeyAccessorsF
 						keyAccessor
 					|
 
-					tableIndex := eachOperand first.
-					keyAccessor := eachOperand second.
+					tableIndex := eachOperand tableIndex.
+					keyAccessor := eachOperand keyAccessorPath.
 
 					keyAccessorsByTable
 						at:	tableIndex
@@ -944,7 +752,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> tableKeyAccessorsF
 					eachEquality
 						collect:
 						[ :eachOperand |
-							eachOperand first.
+							eachOperand tableIndex.
 						].
 				]
 		).

@@ -107,17 +107,6 @@ FakeDriverSQLBackendTableQueryRudesheim >> setTables: aCollectionOfAssociations 
 		].
 ]
 
-{ #category : 'private' }
-FakeDriverSQLBackendTableQueryRudesheim >> shouldOmitWhereClauseFor: anExpressionTableQueryRudesheim [
-	^ anExpressionTableQueryRudesheim class == Rudesheim TableQuery Expression Constant
-		and:
-		[
-			anExpressionTableQueryRudesheim
-				value
-				== true.
-		].
-]
-
 { #category : 'printing' }
 FakeDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim [
 	|
@@ -145,20 +134,9 @@ FakeDriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForFa
 						tablesSqlStringFor:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim tables
 				).
 
-			(
-				self
-					shouldOmitWhereClauseFor:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
-			)
-				ifFalse:
-				[
-					aStream
-						nextPutAll:	' WHERE ';
-						nextPutAll:
-						(
-							expressionRenderer
-								visit:	aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
-						).
-				].
+			aCompiledStatementForFakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim whereExpression
+				appendSqlWhereClauseRudesheim:	aStream
+				renderer:	expressionRenderer.
 		].
 ]
 

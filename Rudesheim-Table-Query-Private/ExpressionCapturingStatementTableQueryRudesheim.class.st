@@ -19,14 +19,23 @@ ExpressionCapturingStatementTableQueryRudesheim >> collect: aCollectBlock [
 		Rudesheim TableQuery Expression Constant
 			value:	true.
 
-	selectExpression := aCollectBlock value asTableQueryProjectionExpressionRudesheim.
+	selectExpression :=
+		aCollectBlock value
+			peekDelegateRudesheim
+			asTableQueryProjectionExpressionRudesheim.
 ]
 
 { #category : 'evaluating' }
 ExpressionCapturingStatementTableQueryRudesheim >> select: aWhereBlock
 collect: aCollectBlock [
-	whereExpression := aWhereBlock value.
-	selectExpression := aCollectBlock value asTableQueryProjectionExpressionRudesheim.
+	whereExpression :=
+		aWhereBlock value
+			peekDelegateRudesheim.
+
+	selectExpression :=
+		aCollectBlock value
+			peekDelegateRudesheim
+			asTableQueryProjectionExpressionRudesheim.
 ]
 
 { #category : 'accessing' }

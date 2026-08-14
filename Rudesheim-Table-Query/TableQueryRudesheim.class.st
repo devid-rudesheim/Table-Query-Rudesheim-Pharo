@@ -22,6 +22,11 @@ TableQueryRudesheim class >> Expression [
 ]
 
 { #category : 'namespace' }
+TableQueryRudesheim class >> ExpressionCaptureDelegator [
+	^ ExpressionCaptureDelegatorTableQueryRudesheim.
+]
+
+{ #category : 'namespace' }
 TableQueryRudesheim class >> ExpressionCapturingStatement [
 	^ ExpressionCapturingStatementTableQueryRudesheim.
 ]
