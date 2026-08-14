@@ -1,0 +1,13 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'RudesheimTableQuery',
+      #groups : [ 'tests' ]
+    }
+  ],
+  #testing : {
+    #include : {
+      #packages : [ 'Rudesheim-Table-Query-Tests', 'Rudesheim-Table-Query-InMemory-Tests', 'Rudesheim-Table-Query-SQL-Tests' ]
+    }
+  }
+}

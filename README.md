@@ -1,5 +1,10 @@
 # Rudesheim Table Query for Pharo
 
+[![GitHub release](https://img.shields.io/github/release/devid-rudesheim/Table-Query-Rudesheim-Pharo.svg)](https://github.com/devid-rudesheim/Table-Query-Rudesheim-Pharo/releases/latest)
+[![Unit Tests](https://github.com/devid-rudesheim/Table-Query-Rudesheim-Pharo/actions/workflows/tests.yml/badge.svg)](https://github.com/devid-rudesheim/Table-Query-Rudesheim-Pharo/actions/workflows/tests.yml)
+
+[![Pharo 13](https://img.shields.io/badge/Pharo-13-informational)](https://pharo.org)
+
 Rudesheim Table Query is a query layer for Pharo collections and relational backends.
 It lets a query be written once as a Smalltalk expression tree and prepared against an in-memory backend or an SQL backend.
 The in-memory backend has an optimizer: for supported equality conditions it uses an `EqualityIntersection` plan, avoiding a fully multiplied nested iteration over all source collections.
