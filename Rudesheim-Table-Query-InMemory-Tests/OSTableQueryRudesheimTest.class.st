@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 OSTableQueryRudesheimTest >> testDelegatesThroughRudesheimOSDispatch [
 	self
-		assert:	PreparedQueryInMemoryBackendTableQueryRudesheim optimizers
+		assert:	Rudesheim TableQuery Backend InMemory PreparedQuery optimizers
 		equals:	Smalltalk os rudesheim tableQuery optimizers.
 ]
 
