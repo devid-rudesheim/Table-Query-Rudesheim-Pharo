@@ -1,8 +1,8 @@
 Class {
 	#name : 'SQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TBackendTableQueryRudesheim + TShouldntNewRudesheim',
-	#classTraits : 'TBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
+	#traits : 'TBackendTableQueryRudesheim + TShouldntNewUtilityRudesheim',
+	#classTraits : 'TBackendTableQueryRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'driver'
 	],

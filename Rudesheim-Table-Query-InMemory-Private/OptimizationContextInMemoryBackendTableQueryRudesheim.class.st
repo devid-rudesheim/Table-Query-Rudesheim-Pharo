@@ -1,8 +1,8 @@
 Class {
 	#name : 'OptimizationContextInMemoryBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TShouldntNewRudesheim',
-	#classTraits : 'TShouldntNewRudesheim classTrait',
+	#traits : 'TShouldntNewUtilityRudesheim',
+	#classTraits : 'TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'sourceCollections',
 		'whereExpression',

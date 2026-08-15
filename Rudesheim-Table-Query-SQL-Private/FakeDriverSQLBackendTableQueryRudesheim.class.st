@@ -4,8 +4,8 @@ FakeRelationalDatabaseDriverSQLBackendTableQueryRudesheim is a verification-only
 Class {
 	#name : 'FakeDriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewRudesheim',
-	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
+	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewUtilityRudesheim',
+	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'tablesByName'
 	],

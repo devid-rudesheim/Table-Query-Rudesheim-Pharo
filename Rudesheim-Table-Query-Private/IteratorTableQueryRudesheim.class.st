@@ -1,8 +1,8 @@
 Class {
 	#name : 'IteratorTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TShouldntNewRudesheim',
-	#classTraits : 'TShouldntNewRudesheim classTrait',
+	#traits : 'TShouldntNewUtilityRudesheim',
+	#classTraits : 'TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'rows',
 		'loop'
