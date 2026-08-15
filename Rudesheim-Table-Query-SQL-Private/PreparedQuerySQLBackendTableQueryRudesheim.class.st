@@ -1,8 +1,8 @@
 Class {
 	#name : 'PreparedQuerySQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TCallableRudesheim + TShouldntNewRudesheim',
-	#classTraits : 'TCallableRudesheim classTrait + TShouldntNewRudesheim classTrait',
+	#traits : 'TCallableUtilityRudesheim + TShouldntNewUtilityRudesheim',
+	#classTraits : 'TCallableUtilityRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'driver',
 		'compiledStatement'

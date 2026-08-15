@@ -4,8 +4,8 @@ A TableSQLBackendTableQueryRudesheim identifies a table by name for a SQL-style 
 Class {
 	#name : 'TableSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TTableSQLBackendTableQueryRudesheim + TShouldntNewRudesheim',
-	#classTraits : 'TTableSQLBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
+	#traits : 'TTableSQLBackendTableQueryRudesheim + TShouldntNewUtilityRudesheim',
+	#classTraits : 'TTableSQLBackendTableQueryRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
 	#instVars : [
 		'name'
 	],
