@@ -1,11 +1,11 @@
 "
-Test-support double: a TCallableRudesheim implementation that records the arguments it was invoked with.
+Test-support double: a TCallableUtilityRudesheim implementation that records the arguments it was invoked with.
 "
 Class {
 	#name : 'CannedPreparedQueryForTestTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TCallableRudesheim',
-	#classTraits : 'TCallableRudesheim classTrait',
+	#traits : 'TCallableUtilityRudesheim',
+	#classTraits : 'TCallableUtilityRudesheim classTrait',
 	#instVars : [
 		'lastArguments'
 	],
