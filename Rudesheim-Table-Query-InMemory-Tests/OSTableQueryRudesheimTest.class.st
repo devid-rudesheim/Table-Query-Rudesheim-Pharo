@@ -15,15 +15,21 @@ OSTableQueryRudesheimTest >> testDelegatesThroughRudesheimOSDispatch [
 
 { #category : 'tests' }
 OSTableQueryRudesheimTest >> testOSTableQueryRudesheimOptimizersIncludeDMirrorPlans [
+	|
+		plan
+	|
+
+	plan := Rudesheim TableQuery Backend InMemory Plan.
+
 	self
 		assert:
 		OSTableQueryRudesheim optimizers
 		equals:
 		{
-			Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
-			Rudesheim TableQuery Backend InMemory Plan DMirror EqualityIntersection.
-			Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
-			Rudesheim TableQuery Backend InMemory Plan DMirror Sequential
+			plan SmallInputSequential.
+			plan DMirror EqualityIntersection.
+			plan EqualityIntersection.
+			plan DMirror Sequential
 		}.
 ]
 
@@ -38,12 +44,18 @@ OSTableQueryRudesheimTest >> testWinOverridesOSTableQueryRudesheim [
 
 { #category : 'tests' }
 OSTableQueryRudesheimTest >> testWinOptimizersExcludeSmallInputAndEqualityIntersectionOnly [
+	|
+		plan
+	|
+
+	plan := Rudesheim TableQuery Backend InMemory Plan.
+
 	self
 		assert:
 		WinOSTableQueryRudesheim optimizers
 		equals:
 		{
-			Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
-			Rudesheim TableQuery Backend InMemory Plan EqualityIntersection
+			plan SmallInputSequential.
+			plan EqualityIntersection
 		}.
 ]
