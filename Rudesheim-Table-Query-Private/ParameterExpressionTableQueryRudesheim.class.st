@@ -1,6 +1,8 @@
 Class {
 	#name : 'ParameterExpressionTableQueryRudesheim',
 	#superclass : 'ExpressionTableQueryRudesheim',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'index'
 	],
@@ -11,7 +13,7 @@ Class {
 
 { #category : 'instance creation' }
 ParameterExpressionTableQueryRudesheim class >> index: anInteger [
-	^ self new
+	^ super new
 		setIndex:	anInteger.
 ]
 

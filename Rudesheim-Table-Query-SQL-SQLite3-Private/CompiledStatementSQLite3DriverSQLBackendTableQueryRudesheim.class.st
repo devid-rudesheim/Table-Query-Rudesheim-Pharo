@@ -4,6 +4,8 @@ CompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim
 Class {
 	#name : 'CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'tables',
 		'whereExpression',
@@ -20,7 +22,7 @@ CompiledStatementSQLite3DriverSQLBackendTableQueryRudesheim class >> tables: aCo
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim
 sqlString: aString [
-	^ self new
+	^ super new
 		setTables:	aCollectionOfTables
 		where:	aWhereExpressionTableQueryRudesheim
 		select:	aSelectExpressionTableQueryRudesheim

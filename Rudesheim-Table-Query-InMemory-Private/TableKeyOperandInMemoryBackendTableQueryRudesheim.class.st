@@ -4,6 +4,8 @@ A TableKeyOperandInMemoryBackendTableQueryRudesheim identifies a table (by table
 Class {
 	#name : 'TableKeyOperandInMemoryBackendTableQueryRudesheim',
 	#superclass : 'Object',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'tableIndex',
 		'keyAccessorPath'
@@ -16,7 +18,7 @@ Class {
 { #category : 'instance creation' }
 TableKeyOperandInMemoryBackendTableQueryRudesheim class >> tableIndex: anInteger
 keyAccessorPath: aCollection [
-	^ self new
+	^ super new
 		setTableIndex:	anInteger
 		keyAccessorPath:	aCollection.
 ]
