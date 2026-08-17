@@ -1,8 +1,8 @@
 Class {
 	#name : 'InMemoryBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TShouldntNewUtilityRudesheim',
-	#classTraits : 'TBackendTableQueryRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
 	#category : 'Rudesheim-Table-Query-InMemory-Backend',
 	#package : 'Rudesheim-Table-Query-InMemory',
 	#tag : 'Backend'

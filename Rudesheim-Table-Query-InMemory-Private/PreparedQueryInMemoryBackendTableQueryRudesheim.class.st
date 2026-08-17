@@ -1,8 +1,8 @@
 Class {
 	#name : 'PreparedQueryInMemoryBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TCallableUtilityRudesheim + TShouldntNewUtilityRudesheim',
-	#classTraits : 'TCallableUtilityRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
+	#traits : 'TCallableUtilityRudesheim + TShouldntNewRudesheim',
+	#classTraits : 'TCallableUtilityRudesheim classTrait + TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'sourceCollections',
 		'whereExpression',
