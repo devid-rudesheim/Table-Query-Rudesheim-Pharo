@@ -4,6 +4,8 @@ A tiny holder record returned by FakeRelationalDatabaseDriverSQLBackendTableQuer
 Class {
 	#name : 'CompiledStatementFakeDriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'tables',
 		'whereExpression',
@@ -18,7 +20,7 @@ Class {
 CompiledStatementFakeDriverSQLBackendTableQueryRudesheim class >> tables: aCollectionOfTables
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
-	^ self new
+	^ super new
 		setTables:	aCollectionOfTables
 		where:	aWhereExpressionTableQueryRudesheim
 		select:	aSelectExpressionTableQueryRudesheim.

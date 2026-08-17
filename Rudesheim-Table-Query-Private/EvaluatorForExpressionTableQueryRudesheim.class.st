@@ -4,8 +4,8 @@ An EvaluatorForExpressionTableQueryRudesheim walks an ExpressionTableQueryRudesh
 Class {
 	#name : 'EvaluatorForExpressionTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TVisitorRudesheim',
-	#classTraits : 'TVisitorRudesheim classTrait',
+	#traits : 'TVisitorRudesheim + TShouldntNewRudesheim',
+	#classTraits : 'TVisitorRudesheim classTrait + TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'rowBindings',
 		'parameterBindings'
@@ -18,7 +18,7 @@ Class {
 { #category : 'instance creation' }
 EvaluatorForExpressionTableQueryRudesheim class >> rows: aRowCollection
 parameters: aParameterCollection [
-	^ self new
+	^ super new
 		setRows:	aRowCollection
 		parameters:	aParameterCollection.
 ]

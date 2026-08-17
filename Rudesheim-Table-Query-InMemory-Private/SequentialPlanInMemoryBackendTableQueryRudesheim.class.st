@@ -1,6 +1,8 @@
 Class {
 	#name : 'SequentialPlanInMemoryBackendTableQueryRudesheim',
 	#superclass : 'Object',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'sourceCollections',
 		'whereExpression',
@@ -23,7 +25,7 @@ SequentialPlanInMemoryBackendTableQueryRudesheim class >> for: anOptimizationCon
 SequentialPlanInMemoryBackendTableQueryRudesheim class >> sources: aSourceCollection
 where: aWhereExpressionTableQueryRudesheim
 select: aSelectExpressionTableQueryRudesheim [
-	^ self new
+	^ super new
 		setSources:	aSourceCollection
 		where:	aWhereExpressionTableQueryRudesheim
 		select:	aSelectExpressionTableQueryRudesheim.
