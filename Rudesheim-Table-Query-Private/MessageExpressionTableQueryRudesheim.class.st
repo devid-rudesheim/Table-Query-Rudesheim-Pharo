@@ -1,6 +1,8 @@
 Class {
 	#name : 'MessageExpressionTableQueryRudesheim',
 	#superclass : 'ExpressionTableQueryRudesheim',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'messageSend'
 	],
@@ -13,7 +15,7 @@ Class {
 MessageExpressionTableQueryRudesheim class >> receiver: aReceiverExpressionTableQueryRudesheim
 selector: aSymbol
 arguments: aCollection [
-	^ self new
+	^ super new
 		setMessageSend:
 		(
 			MessageSend

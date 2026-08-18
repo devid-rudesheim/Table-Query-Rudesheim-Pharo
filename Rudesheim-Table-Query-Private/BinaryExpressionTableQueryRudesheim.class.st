@@ -1,6 +1,8 @@
 Class {
 	#name : 'BinaryExpressionTableQueryRudesheim',
 	#superclass : 'ExpressionTableQueryRudesheim',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'receiver',
 		'selector',
@@ -15,7 +17,7 @@ Class {
 BinaryExpressionTableQueryRudesheim class >> receiver: aReceiverExpressionTableQueryRudesheim
 selector: aSymbol
 argument: anArgumentExpressionTableQueryRudesheim [
-	^ self new
+	^ super new
 		setReceiver:	aReceiverExpressionTableQueryRudesheim
 		selector:	aSymbol
 		argument:	anArgumentExpressionTableQueryRudesheim.

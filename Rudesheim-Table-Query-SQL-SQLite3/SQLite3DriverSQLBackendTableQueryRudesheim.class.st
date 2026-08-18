@@ -4,8 +4,8 @@ SQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim executes SQLBackend
 Class {
 	#name : 'SQLite3DriverSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewUtilityRudesheim',
-	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
+	#traits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim + TShouldntNewRudesheim',
+	#classTraits : 'TRelationalDatabaseDriverSQLBackendTableQueryRudesheim classTrait + TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'connection'
 	],

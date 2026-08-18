@@ -4,8 +4,8 @@ SQLStringForExpressionSQLBackendTableQueryRudesheim renders a captured table-que
 Class {
 	#name : 'SQLStringForExpressionSQLBackendTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TVisitorRudesheim + TShouldntNewUtilityRudesheim',
-	#classTraits : 'TVisitorRudesheim classTrait + TShouldntNewUtilityRudesheim classTrait',
+	#traits : 'TVisitorRudesheim + TShouldntNewRudesheim',
+	#classTraits : 'TVisitorRudesheim classTrait + TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'tables'
 	],

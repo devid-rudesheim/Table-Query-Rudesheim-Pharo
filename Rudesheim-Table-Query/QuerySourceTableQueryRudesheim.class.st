@@ -1,8 +1,8 @@
 Class {
 	#name : 'QuerySourceTableQueryRudesheim',
 	#superclass : 'Object',
-	#traits : 'TShouldntNewUtilityRudesheim',
-	#classTraits : 'TShouldntNewUtilityRudesheim classTrait',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'sourceCollections'
 	],

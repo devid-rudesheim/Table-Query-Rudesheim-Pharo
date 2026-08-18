@@ -4,6 +4,8 @@ A FieldExpressionTableQueryRudesheim represents either a whole-row placeholder f
 Class {
 	#name : 'FieldExpressionTableQueryRudesheim',
 	#superclass : 'ExpressionTableQueryRudesheim',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'tableIndex',
 		'fieldSelector'
@@ -23,7 +25,7 @@ FieldExpressionTableQueryRudesheim class >> table: anInteger [
 { #category : 'instance creation' }
 FieldExpressionTableQueryRudesheim class >> table: anInteger
 field: aSymbol [
-	^ self new
+	^ super new
 		setTable:	anInteger
 		field:	aSymbol.
 ]

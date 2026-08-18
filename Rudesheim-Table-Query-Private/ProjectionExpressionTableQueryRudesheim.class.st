@@ -1,6 +1,8 @@
 Class {
 	#name : 'ProjectionExpressionTableQueryRudesheim',
 	#superclass : 'ExpressionTableQueryRudesheim',
+	#traits : 'TShouldntNewRudesheim',
+	#classTraits : 'TShouldntNewRudesheim classTrait',
 	#instVars : [
 		'expressions'
 	],
@@ -11,7 +13,7 @@ Class {
 
 { #category : 'instance creation' }
 ProjectionExpressionTableQueryRudesheim class >> expressions: aCollection [
-	^ self new
+	^ super new
 		setExpressions:	aCollection.
 ]
 
