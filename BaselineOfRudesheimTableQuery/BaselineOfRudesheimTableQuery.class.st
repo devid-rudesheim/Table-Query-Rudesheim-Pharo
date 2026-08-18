@@ -36,13 +36,13 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				baseline: 'DMirror'
 				with:
 				[
-					spec repository: 'github://ObjectProfile/DMirror/src'
+					spec repository: 'github://ObjectProfile/DMirror:master/src'
 				];
 
 				baseline: 'SQLite3'
 				with:
 				[
-					spec repository: 'github://pharo-rdbms/Pharo-SQLite3/src'
+					spec repository: 'github://pharo-rdbms/Pharo-SQLite3:master/src'
 				];
 
 				project: 'SQLite3Core'
