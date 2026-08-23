@@ -207,30 +207,24 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesWholeRowEqual
 				statement
 					select:
 					[
-						rows
-							first
-							= rows second
-							& (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	1000
-				).
-				(
-					500
-						to:	550
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1000.
+				500
+					to:	550.
+				1
+					to:	1000
 			}.
 
 	self
@@ -239,17 +233,13 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesWholeRowEqual
 
 	self
 		assert:
-		result
-			first
-			asArray
-		equals:	#(500 500).
+			result first asArray
+		equals:	#( 500 500 ).
 
 	self
 		assert:
-		result
-			last
-			asArray
-		equals:	#(550 550).
+			result last asArray
+		equals:	#( 550 550 ).
 ]
 
 { #category : 'tests' }
@@ -274,14 +264,10 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 			]
 			from:
 			{
-				(
-					1
-						to:	1001
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1001.
+				1
+					to:	1000
 			}.
 
 	self
@@ -290,7 +276,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim 	TableQuery Backend InMemory Plan DMirror Sequential.
+		equals:	Rudesheim TableQuery Backend InMemory Plan DMirror Sequential.
 ]
 
 { #category : 'tests' }
@@ -306,27 +292,24 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionBel
 				statement
 					select:
 					[
-						rows first = rows second & (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	200
-				).
-				(
-					50
-						to:	60
-				).
-				(
-					1
-						to:	200
-				)
+				1
+					to:	200.
+				50
+					to:	60.
+				1
+					to:	200
 			}.
 
 	self
@@ -335,7 +318,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionBel
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -351,27 +334,24 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 				statement
 					select:
 					[
-						rows first = rows second & (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	1000
-				).
-				(
-					500
-						to:	550
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1000.
+				500
+					to:	550.
+				1
+					to:	1000
 			}.
 
 	self
@@ -380,7 +360,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -461,8 +441,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 				statement
 					select:
 					[
-						rows first
-							= rows second.
+						rows first = rows second.
 					]
 					collect:
 					[
@@ -471,14 +450,10 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 			]
 			from:
 			{
-				(
-					1
-						to:	5
-				).
-				(
-					3
-						to:	4
-				)
+				1
+					to:	5.
+				3
+					to:	4
 			}.
 
 	self
@@ -487,7 +462,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
+		equals:	Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
 ]
 
 { #category : 'tests' }

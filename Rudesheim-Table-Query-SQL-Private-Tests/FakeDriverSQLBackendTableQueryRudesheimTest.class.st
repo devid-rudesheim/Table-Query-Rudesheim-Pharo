@@ -14,7 +14,10 @@ FakeDriverSQLBackendTableQueryRudesheimTest class >> targetClass [
 { #category : 'accessing' }
 FakeDriverSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 	^ self targetClass
-		tables:	{(#numbers -> #(1 2 3 4 5))}.
+		tables:
+		{
+			( #numbers -> #( 1 2 3 4 5 ) )
+		}.
 ]
 
 { #category : 'tests' }
@@ -27,7 +30,7 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectP
 		tableQuery
 		constant
 	|
-	
+
 	tableQuery := Rudesheim TableQuery.
 	constant := tableQuery Expression Constant.
 
@@ -54,13 +57,18 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testCompileSelectFromWhereSelectP
 			select:	selectExpression.
 
 	self
-		assert: compiledStatement tables asArray = (Array with: numbersTable).
+		assert:
+			compiledStatement tables asArray =
+			(
+				Array
+					with:	numbersTable
+			).
 
 	self
-		assert: compiledStatement whereExpression == whereExpression.
+		assert:	compiledStatement whereExpression == whereExpression.
 
 	self
-		assert: compiledStatement selectExpression	== selectExpression.
+		assert:	compiledStatement selectExpression == selectExpression.
 ]
 
 { #category : 'tests' }
@@ -72,7 +80,7 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 		expression
 		field
 	|
-	
+
 	tableQuery := Rudesheim TableQuery.
 	expression := tableQuery Expression.
 	field := expression Field.
@@ -92,7 +100,11 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 			(
 				field
 					table:	1
-			) > (expression Parameter index: 1)
+			) >
+			(
+				expression Parameter
+					index:	1
+			)
 			select:
 			(
 				field
@@ -102,11 +114,14 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testExecuteWithEvaluatesWhereAndC
 	result :=
 		self basicTarget
 			execute:	compiledStatement
-			with:	{2}.
+			with:
+			{
+				2
+			}.
 
 	self
 		assertCollection:	result asArray
-		hasSameElements:	#(3 4 5).
+		hasSameElements:	#( 3 4 5 ).
 ]
 
 { #category : 'tests' }
@@ -138,7 +153,11 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement
 				field
 					table:	1
 					field:	#id
-			) > (expression Parameter index: 1)
+			) >
+			(
+				expression Parameter
+					index:	1
+			)
 			select:
 			(
 				field
@@ -162,7 +181,7 @@ FakeDriverSQLBackendTableQueryRudesheimTest >> testSqlStringForCompiledStatement
 		tableQuery
 		expresion
 	|
-	
+
 	tableQuery := Rudesheim TableQuery.
 	expresion := tableQuery Expression.
 

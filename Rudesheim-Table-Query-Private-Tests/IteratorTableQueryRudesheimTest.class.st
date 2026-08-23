@@ -15,9 +15,7 @@ Class {
 
 { #category : 'accessing' }
 IteratorTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Iterator.
+	^ Rudesheim TableQuery Iterator.
 ]
 
 { #category : 'accessing' }
@@ -33,7 +31,17 @@ IteratorTableQueryRudesheimTest >> defaultExpectCount [
 
 { #category : 'accessing' }
 IteratorTableQueryRudesheimTest >> defaultSourceCollections [
-	^ {{} .  {{}} .  {{} .  {}}}.
+	^
+	{
+		{}.
+		{
+			{}
+		}.
+		{
+			{}.
+			{}
+		}
+	}.
 ]
 
 { #category : 'accessing' }
@@ -55,10 +63,7 @@ IteratorTableQueryRudesheimTest >> runRows0 [
 	self
 		assert:	self expectCount
 		equals:
-		self
-			basicTarget
-			rows
-			size.
+			self basicTarget rows size.
 ]
 
 { #category : 'tests' }
@@ -71,9 +76,9 @@ IteratorTableQueryRudesheimTest >> runTimesRepeat0 [
 	count := 0.
 
 	block :=
-		[
-			count := 1 + count.
-		].
+	[
+		count := 1 + count.
+	].
 
 	self basicTarget
 		timesRepeat:	block.
@@ -130,7 +135,7 @@ IteratorTableQueryRudesheimTest >> testRows [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_0 [
 	self
-		sourceCollections:	#();
+		sourceCollections:	#(  );
 		expectCount:	0;
 		runRows0.
 ]
@@ -138,7 +143,7 @@ IteratorTableQueryRudesheimTest >> testRows0_0 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_1 [
 	self
-		sourceCollections:	#(#(1));
+		sourceCollections:	#( #(1) );
 		expectCount:	1;
 		runRows0.
 ]
@@ -146,7 +151,7 @@ IteratorTableQueryRudesheimTest >> testRows0_1 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_2 [
 	self
-		sourceCollections:	#(#(1 2));
+		sourceCollections:	#( #(1 2) );
 		expectCount:	1;
 		runRows0.
 ]
@@ -154,7 +159,7 @@ IteratorTableQueryRudesheimTest >> testRows0_2 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_3 [
 	self
-		sourceCollections:	#(#() #());
+		sourceCollections:	#( #() #() );
 		expectCount:	2;
 		runRows0.
 ]
@@ -162,7 +167,7 @@ IteratorTableQueryRudesheimTest >> testRows0_3 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_4 [
 	self
-		sourceCollections:	#(#(1) #(1));
+		sourceCollections:	#( #(1) #(1) );
 		expectCount:	2;
 		runRows0.
 ]
@@ -170,7 +175,7 @@ IteratorTableQueryRudesheimTest >> testRows0_4 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testRows0_5 [
 	self
-		sourceCollections:	#(#(1 2) #(1 2));
+		sourceCollections:	#( #(1 2) #(1 2) );
 		expectCount:	2;
 		runRows0.
 ]
@@ -202,7 +207,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_0 [
 	self
-		sourceCollections:	#();
+		sourceCollections:	#(  );
 		expectCount:	0;
 		runTimesRepeat0.
 ]
@@ -210,7 +215,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_0 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_1 [
 	self
-		sourceCollections:	#(#());
+		sourceCollections:	#( #() );
 		expectCount:	0;
 		runTimesRepeat0.
 ]
@@ -218,7 +223,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_1 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_2 [
 	self
-		sourceCollections:	#(#(1));
+		sourceCollections:	#( #(1) );
 		expectCount:	1;
 		runTimesRepeat0.
 ]
@@ -226,7 +231,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_2 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_3 [
 	self
-		sourceCollections:	#(#(1 2));
+		sourceCollections:	#( #(1 2) );
 		expectCount:	2;
 		runTimesRepeat0.
 ]
@@ -234,7 +239,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_3 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_4 [
 	self
-		sourceCollections:	#(#() #());
+		sourceCollections:	#( #() #() );
 		expectCount:	0;
 		runTimesRepeat0.
 ]
@@ -242,7 +247,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_4 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_5 [
 	self
-		sourceCollections:	#(#(1) #(1));
+		sourceCollections:	#( #(1) #(1) );
 		expectCount:	1;
 		runTimesRepeat0.
 ]
@@ -250,7 +255,7 @@ IteratorTableQueryRudesheimTest >> testTimesRepeat0_5 [
 { #category : 'tests' }
 IteratorTableQueryRudesheimTest >> testTimesRepeat0_6 [
 	self
-		sourceCollections:	#(#(1 2) #(1 2));
+		sourceCollections:	#( #(1 2) #(1 2) );
 		expectCount:	4;
 		runTimesRepeat0.
 ]

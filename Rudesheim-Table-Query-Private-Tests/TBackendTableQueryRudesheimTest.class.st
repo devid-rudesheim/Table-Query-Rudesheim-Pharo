@@ -20,10 +20,14 @@ TBackendTableQueryRudesheimTest >> testInquireTableQueryFromDelegatesToPrepareWi
 	|
 
 	aBlockClosure :=
-		[ :statement :rows :parameters |
-		].
+	[ :statement :rows :parameters |
+	].
 
-	aCollection := {1 .  2}.
+	aCollection :=
+	{
+		1.
+		2
+	}.
 
 	result :=
 		self basicTarget
@@ -32,29 +36,20 @@ TBackendTableQueryRudesheimTest >> testInquireTableQueryFromDelegatesToPrepareWi
 
 	self
 		assert:
-		self
-			basicTarget
-			lastBlockClosure
-			== aBlockClosure.
+			self basicTarget lastBlockClosure == aBlockClosure.
 
 	self
 		assert:
-		self
-			basicTarget
-			lastCollection
-			== aCollection.
+			self basicTarget lastCollection == aCollection.
 
 	self
 		assert:
-		self
-			basicTarget
-			preparedQuery
-			lastArguments
-		equals:	#().
+			self basicTarget preparedQuery lastArguments
+		equals:	#(  ).
 
 	self
 		assert:	result
-		equals:	#().
+		equals:	#(  ).
 ]
 
 { #category : 'tests' }
@@ -66,7 +61,7 @@ TBackendTableQueryRudesheimTest >> testPrepareTableQueryFromIsSubclassResponsibi
 				prepareTableQuery:
 				[
 				]
-				from:	#().
+				from:	#(  ).
 		]
 		raise:	Error.
 ]

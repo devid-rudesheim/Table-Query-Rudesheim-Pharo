@@ -25,8 +25,9 @@ DMirrorSupportInMemoryBackendTableQueryRudesheim class >> combinationSizeOf: aCo
 
 { #category : 'actions' }
 DMirrorSupportInMemoryBackendTableQueryRudesheim class >> ensurePlayCacheDirectory [
-	( FileLocator workingDirectory / 'pharo-local' / 'play-cache' )
-		ensureCreateDirectory.
+	(
+		( FileLocator workingDirectory / 'pharo-local' / 'play-cache' )
+	) ensureCreateDirectory.
 ]
 
 { #category : 'private' }

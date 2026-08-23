@@ -36,6 +36,11 @@ FieldExpressionTableQueryRudesheim >> acceptTVisitorRudesheim: aTVisitorRudeshei
 		visitFieldExpressionRudesheim:	self.
 ]
 
+{ #category : 'accessing' }
+FieldExpressionTableQueryRudesheim >> fieldSelector [
+	^ fieldSelector.
+]
+
 { #category : 'proxy' }
 FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 	^
@@ -43,9 +48,7 @@ FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 		fieldSelector isNil
 			and:
 			[
-				aMessage
-					selector
-					isUnary.
+				aMessage selector isUnary.
 			]
 	)
 		ifTrue:
@@ -59,11 +62,6 @@ FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 			super
 				processMessage:	aMessage.
 		].
-]
-
-{ #category : 'accessing' }
-FieldExpressionTableQueryRudesheim >> fieldSelector [
-	^ fieldSelector.
 ]
 
 { #category : 'initialization' }
@@ -83,7 +81,7 @@ FieldExpressionTableQueryRudesheim >> value [
 	|
 		expression
 	|
-	
+
 	expression := Rudesheim TableQuery Expression.
 
 	^ fieldSelector
@@ -98,6 +96,6 @@ FieldExpressionTableQueryRudesheim >> value [
 			expression Message
 				receiver:	self
 				selector:	#value
-				arguments:	#().
+				arguments:	#(  ).
 		].
 ]

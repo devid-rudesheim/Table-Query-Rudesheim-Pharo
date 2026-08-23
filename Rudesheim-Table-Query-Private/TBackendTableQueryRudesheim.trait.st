@@ -5,26 +5,8 @@ Trait {
 	#tag : 'Backend'
 }
 
-{ #category : 'evaluating' }
-TBackendTableQueryRudesheim >> inquireTableQuery: aBlockClosure
-from: aCollection [
-	^
-	(
-		self
-			prepareTableQuery:	aBlockClosure
-			from:	aCollection
-	)
-		valueWithArguments:	#().
-]
-
 { #category : 'preparing' }
-TBackendTableQueryRudesheim >> prepareTableQuery: aBlockClosure
-from: aCollection [
-	^ self subclassResponsibility.
-]
-
-{ #category : 'preparing' }
-TBackendTableQueryRudesheim class >> rowPlaceholdersFor: aCollection [
+TBackendTableQueryRudesheim classSide >> rowPlaceholdersFor: aCollection [
 	|
 		tableQuery
 	|
@@ -45,4 +27,22 @@ TBackendTableQueryRudesheim class >> rowPlaceholdersFor: aCollection [
 						table:	eachIndex
 				).
 		].
+]
+
+{ #category : 'evaluating' }
+TBackendTableQueryRudesheim >> inquireTableQuery: aBlockClosure
+from: aCollection [
+	^
+	(
+		self
+			prepareTableQuery:	aBlockClosure
+			from:	aCollection
+	)
+		valueWithArguments:	#(  ).
+]
+
+{ #category : 'preparing' }
+TBackendTableQueryRudesheim >> prepareTableQuery: aBlockClosure
+from: aCollection [
+	^ self subclassResponsibility.
 ]

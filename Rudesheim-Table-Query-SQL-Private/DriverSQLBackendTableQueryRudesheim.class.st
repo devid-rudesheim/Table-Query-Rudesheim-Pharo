@@ -8,6 +8,5 @@ Class {
 
 { #category : 'namespace' }
 DriverSQLBackendTableQueryRudesheim class >> Fake [
-
 	^ FakeDriverSQLBackendTableQueryRudesheim.
 ]

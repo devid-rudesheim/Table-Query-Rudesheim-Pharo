@@ -62,12 +62,11 @@ ExpressionTableQueryRudesheimTest >> testConstantWrapping [
 	|
 
 	result :=
-		(
-			Rudesheim TableQuery Expression Field
-				table:	1
-				field:	#total
-		)
-			> 100.
+	(
+		Rudesheim TableQuery Expression Field
+			table:	1
+			field:	#total
+	) > 100.
 
 	self
 		assert:	result argument class
@@ -109,17 +108,17 @@ ExpressionTableQueryRudesheimTest >> testKeywordMessageCapture [
 	fieldExpression := Rudesheim TableQuery Expression Field.
 
 	result :=
+	(
+		fieldExpression
+			table:	1
+			field:	#total
+	)
+		max:
 		(
 			fieldExpression
-				table:	1
+				table:	2
 				field:	#total
-		)
-			max:
-			(
-				fieldExpression
-					table:	2
-					field:	#total
-			).
+		).
 
 	self
 		assert:	result class

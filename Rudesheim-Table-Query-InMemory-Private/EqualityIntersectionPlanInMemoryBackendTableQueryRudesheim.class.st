@@ -54,8 +54,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim class >> for: anOptim
 			sources:	anOptimizationContextInMemoryBackendTableQueryRudesheim sourceCollections
 			where:	anOptimizationContextInMemoryBackendTableQueryRudesheim whereExpression
 			select:	anOptimizationContextInMemoryBackendTableQueryRudesheim selectExpression
-	)
-		prepare.
+	) prepare.
 ]
 
 { #category : 'instance creation' }
@@ -78,13 +77,9 @@ to: anOrderedCollection [
 				error:	'unsupported predicate'.
 		].
 
-	(
-		aBinaryExpressionTableQueryRudesheim receiver equalityKeyOperandRudesheim
-	)
+	aBinaryExpressionTableQueryRudesheim receiver equalityKeyOperandRudesheim
 		fileEqualityWith:
-		(
 			aBinaryExpressionTableQueryRudesheim argument equalityKeyOperandRudesheim
-		)
 		wholeRow:	anOrderedCollection
 		parameters:	parameterEqualities.
 ]
@@ -99,29 +94,31 @@ matchParameters: aParameterCollection [
 				tableOperand
 				parameterOperand
 				tablePosition
-			row
-			key
-		|
+				row
+				key
+			|
 
 			tableOperand := eachEquality first.
 			parameterOperand := eachEquality second.
+
 			tablePosition :=
 				tableIndexes
 					indexOf:	tableOperand tableIndex.
+
 			row :=
 				aCandidateRowCollection
 					at:	tablePosition.
+
 			key :=
 				self
 					keyFor:	row
 					accessor:	tableOperand keyAccessorPath.
 
-			key
-				=
-				(
-					aParameterCollection
-						at:	parameterOperand index
-				)
+			key =
+			(
+				aParameterCollection
+					at:	parameterOperand index
+			)
 				ifFalse:
 				[
 					^ false.
@@ -220,14 +217,14 @@ withArguments: aCollection [
 	results := OrderedCollection new.
 
 	rowProxies :=
-		(
-			1
-				to:	sourceCollections size
-		)
-			collect:
-			[ :eachIndex |
-				NewValueHolder new.
-			].
+	(
+		1
+			to:	sourceCollections size
+	)
+		collect:
+		[ :eachIndex |
+			NewValueHolder new.
+		].
 
 	rowBindings :=
 		rowProxies
@@ -357,12 +354,11 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> keyFromParameterEq
 	parameterEqualities
 		do:
 		[ :eachEquality |
-			key
-				=
-				(
-					aCollection
-						at:	eachEquality second index
-				)
+			key =
+			(
+				aCollection
+					at:	eachEquality second index
+			)
 				ifFalse:
 				[
 					^ nil.
@@ -379,10 +375,10 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> normalizeKeyAccess
 	|
 
 	nonWholeRowAccessors :=
-		(
-			aDictionary values
-				reject:	#isEmpty
-		) asSet.
+	(
+		aDictionary values
+			reject:	#isEmpty
+	) asSet.
 
 	nonWholeRowAccessors size = 1
 		ifTrue:
@@ -461,9 +457,7 @@ EqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> prepare [
 		self
 			tableKeyAccessorsFrom:	whereExpression.
 
-	tableIndexes :=
-		keyAccessorsByTable keys
-			asSortedCollection.
+	tableIndexes := keyAccessorsByTable keys asSortedCollection.
 	tableKeyAccessorsByTable := keyAccessorsByTable.
 
 	parameterEqualities
@@ -512,8 +506,7 @@ by: anEqualityCollection [
 							(
 								reachable
 									includes:	eachEquality second
-							)
-								not.
+							) not.
 						]
 				)
 					ifTrue:
@@ -534,8 +527,7 @@ by: anEqualityCollection [
 							(
 								reachable
 									includes:	eachEquality first
-							)
-								not.
+							) not.
 						]
 				)
 					ifTrue:
@@ -550,9 +542,7 @@ by: anEqualityCollection [
 		changed.
 	] whileTrue.
 
-	reachable
-		size
-		= anIndexCollection size
+	reachable size = anIndexCollection size
 		ifFalse:
 		[
 			self
@@ -647,8 +637,7 @@ using: aTableKeySelectorDictionary [
 				self
 					keyFor:	eachRow
 					accessor:	accessor
-			)
-				= anObject.
+			) = anObject.
 		]
 		ifNone:
 		[

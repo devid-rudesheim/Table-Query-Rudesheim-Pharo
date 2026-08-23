@@ -29,17 +29,11 @@ BackendTableQueryRudesheimTest >> preparedQuery [
 						statement
 							select:
 							[
-								rows
-									first
-									id
-									= rows second customerId
-									& (rows second total > parameters first).
+								rows first id = rows second customerId & ( rows second total > parameters first ).
 							]
 							collect:
 							[
-								rows
-									first
-									name.
+								rows first name.
 							].
 					]
 					from:	self querySources.
@@ -59,7 +53,49 @@ BackendTableQueryRudesheimTest >> setUp [
 
 { #category : 'accessing' }
 BackendTableQueryRudesheimTest >> sourceTables [
-	^ {(#customers -> (OrderedCollection new          add: (CustomerFixtureForTestTableQueryRudesheim id: 1 name: 'Alice');          add: (CustomerFixtureForTestTableQueryRudesheim id: 2 name: 'Bob');          yourself)) .  (#orders -> (OrderedCollection new          add: (OrderFixtureForTestTableQueryRudesheim customerId: 1 total: 150);          add: (OrderFixtureForTestTableQueryRudesheim customerId: 1 total: 50);          add: (OrderFixtureForTestTableQueryRudesheim customerId: 2 total: 300);          yourself))}.
+	^
+	{
+		#customers ->
+		(
+			OrderedCollection new
+				add:
+				(
+					CustomerFixtureForTestTableQueryRudesheim
+						id:	1
+						name:	'Alice'
+				);
+				add:
+				(
+					CustomerFixtureForTestTableQueryRudesheim
+						id:	2
+						name:	'Bob'
+				);
+				yourself
+		).
+		#orders ->
+		(
+			OrderedCollection new
+				add:
+				(
+					OrderFixtureForTestTableQueryRudesheim
+						customerId:	1
+						total:	150
+				);
+				add:
+				(
+					OrderFixtureForTestTableQueryRudesheim
+						customerId:	1
+						total:	50
+				);
+				add:
+				(
+					OrderFixtureForTestTableQueryRudesheim
+						customerId:	2
+						total:	300
+				);
+				yourself
+		)
+	}.
 ]
 
 { #category : 'tests' }
@@ -75,9 +111,7 @@ BackendTableQueryRudesheimTest >> testPrepareTableQueryCullsUnusedParameters [
 				statement
 					collect:
 					[
-						rows
-							first
-							name.
+						rows first name.
 					].
 			]
 			from:
@@ -91,10 +125,9 @@ BackendTableQueryRudesheimTest >> testPrepareTableQueryCullsUnusedParameters [
 		assert:
 		(
 			query
-				valueWithArguments:	#()
-		)
-			asArray
-		equals:	#('Alice' 'Bob').
+				valueWithArguments:	#(  )
+		) asArray
+		equals:	#( 'Alice' 'Bob' ).
 ]
 
 { #category : 'tests' }
@@ -103,9 +136,12 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsAboveThreshold [
 		assertCollection:
 		(
 			self preparedQuery
-				valueWithArguments:	{100}
+				valueWithArguments:
+				{
+					100
+				}
 		)
-		hasSameElements:	#('Alice' 'Bob').
+		hasSameElements:	#( 'Alice' 'Bob' ).
 ]
 
 { #category : 'tests' }
@@ -114,9 +150,11 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsNoneAboveThreshold [
 		assert:
 		(
 			self preparedQuery
-				valueWithArguments:	{500}
-		)
-			isEmpty.
+				valueWithArguments:
+				{
+					500
+				}
+		) isEmpty.
 ]
 
 { #category : 'tests' }
@@ -133,21 +171,13 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjection [
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= rows second customerId
-							& (rows second total > parameters first).
+						rows first id = rows second customerId & ( rows second total > parameters first ).
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id.
-							rows
-								first
-								name
+							rows first id.
+							rows first name
 						}.
 					].
 			]
@@ -155,7 +185,10 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjection [
 
 	result :=
 		query
-			valueWithArguments:	{100}.
+			valueWithArguments:
+			{
+				100
+			}.
 
 	self
 		assert:	result size
@@ -163,17 +196,13 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjection [
 
 	self
 		assert:
-		result
-			first
-			asArray
-		equals:	#(1 'Alice').
+			result first asArray
+		equals:	#( 1 'Alice' ).
 
 	self
 		assert:
-		result
-			second
-			asArray
-		equals:	#(2 'Bob').
+			result second asArray
+		equals:	#( 2 'Bob' ).
 ]
 
 { #category : 'tests' }
@@ -190,17 +219,12 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionOneColumn 
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= parameters first.
+						rows first id = parameters first.
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id
+							rows first id
 						}.
 					].
 			]
@@ -213,7 +237,10 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionOneColumn 
 
 	result :=
 		query
-			valueWithArguments:	{1}.
+			valueWithArguments:
+			{
+				1
+			}.
 
 	self
 		assert:	result size
@@ -221,10 +248,8 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionOneColumn 
 
 	self
 		assert:
-		result
-			first
-			asArray
-		equals:	#(1).
+			result first asArray
+		equals:	#( 1 ).
 ]
 
 { #category : 'tests' }
@@ -241,24 +266,14 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionThreeColum
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= rows second customerId
-							& (rows second total > parameters first).
+						rows first id = rows second customerId & ( rows second total > parameters first ).
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id.
-							rows
-								first
-								name.
-							rows
-								second
-								total
+							rows first id.
+							rows first name.
+							rows second total
 						}.
 					].
 			]
@@ -266,7 +281,10 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionThreeColum
 
 	result :=
 		query
-			valueWithArguments:	{100}.
+			valueWithArguments:
+			{
+				100
+			}.
 
 	self
 		assert:	result size
@@ -274,17 +292,13 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithProjectionThreeColum
 
 	self
 		assert:
-		result
-			first
-			asArray
-		equals:	#(1 'Alice' 150).
+			result first asArray
+		equals:	#( 1 'Alice' 150 ).
 
 	self
 		assert:
-		result
-			second
-			asArray
-		equals:	#(2 'Bob' 300).
+			result second asArray
+		equals:	#( 2 'Bob' 300 ).
 ]
 
 { #category : 'tests' }
@@ -300,9 +314,7 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithoutWhere [
 				statement
 					collect:
 					[
-						rows
-							first
-							name.
+						rows first name.
 					].
 			]
 			from:
@@ -316,8 +328,7 @@ BackendTableQueryRudesheimTest >> testValueWithArgumentsWithoutWhere [
 		assert:
 		(
 			query
-				valueWithArguments:	#()
-		)
-			asArray
-		equals:	#('Alice' 'Bob').
+				valueWithArguments:	#(  )
+		) asArray
+		equals:	#( 'Alice' 'Bob' ).
 ]

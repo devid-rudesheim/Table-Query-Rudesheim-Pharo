@@ -11,11 +11,7 @@ Class {
 
 { #category : 'accessing' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL
-		SQLStringForExpression.
+	^ Rudesheim TableQuery Backend SQL SQLStringForExpression.
 ]
 
 { #category : 'accessing' }
@@ -24,19 +20,15 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> defaultBasicTarget [
 		table
 	|
 
-	table := 	Rudesheim TableQuery Backend SQL Table.
+	table := Rudesheim TableQuery Backend SQL Table.
 
 	^ self targetClass
 		tables:
 		{
-			(
-				table
-					name:	#customers
-			).
-			(
-				table
-					name:	#orders
-			)
+			table
+				name:	#customers.
+			table
+				name:	#orders
 		}.
 ]
 
@@ -64,10 +56,10 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitBinaryExpres
 { #category : 'tests' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitFieldExpressionRudesheim [
 	self
-		assert:	
+		assert:
 		(
 			self basicTarget
-				visit:	
+				visit:
 				(
 					Rudesheim TableQuery Expression Field
 						table:	1
@@ -80,10 +72,10 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitFieldExpress
 { #category : 'tests' }
 SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitParameterExpressionRudesheim [
 	self
-		assert:	
+		assert:
 		(
 			self basicTarget
-				visit:	
+				visit:
 				(
 					Rudesheim TableQuery Expression Parameter
 						index:	1
@@ -107,16 +99,12 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 		expressionSpace Projection
 			expressions:
 			{
-				(
-					field
-						table:	1
-						field:	#id
-				).
-				(
-					field
-						table:	1
-						field:	#name
-				)
+				field
+					table:	1
+					field:	#id.
+				field
+					table:	1
+					field:	#name
 			}.
 
 	self
@@ -141,11 +129,9 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 		expressionSpace Projection
 			expressions:
 			{
-				(
-					expressionSpace Field
-						table:	1
-						field:	#id
-				)
+				expressionSpace Field
+					table:	1
+					field:	#id
 			}.
 
 	self
@@ -172,25 +158,19 @@ SQLStringForExpressionSQLBackendTableQueryRudesheimTest >> testVisitProjectionEx
 		expressionSpace Projection
 			expressions:
 			{
-				(
-					field
-						table:	1
-						field:	#id
-				).
-				(
-					field
-						table:	1
-						field:	#name
-				).
-				(
-					field
-						table:	2
-						field:	#total
-				)
+				field
+					table:	1
+					field:	#id.
+				field
+					table:	1
+					field:	#name.
+				field
+					table:	2
+					field:	#total
 			}.
 
 	self
-		assert:	
+		assert:
 		(
 			self basicTarget
 				visit:	expression
