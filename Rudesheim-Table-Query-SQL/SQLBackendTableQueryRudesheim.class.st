@@ -13,7 +13,6 @@ Class {
 
 { #category : 'namespace' }
 SQLBackendTableQueryRudesheim class >> Driver [
-
 	^ DriverSQLBackendTableQueryRudesheim.
 ]
 
@@ -47,7 +46,7 @@ from: aCollection [
 			prepareTableQuery:	aBlockClosure
 			from:	aCollection
 	)
-		valueWithArguments:	#().
+		valueWithArguments:	#(  ).
 ]
 
 { #category : 'preparing' }
@@ -62,7 +61,6 @@ from: aCollection [
 	|
 
 	tableQuery := Rudesheim TableQuery.
-
 	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=

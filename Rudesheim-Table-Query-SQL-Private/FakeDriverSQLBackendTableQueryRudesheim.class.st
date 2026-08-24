@@ -45,7 +45,7 @@ with: aCollectionOfParameterValues [
 		block
 		tableQuery
 	|
-	
+
 	tableQuery := TableQueryRudesheim.
 
 	resolvedTables :=
@@ -63,30 +63,30 @@ with: aCollectionOfParameterValues [
 	results := OrderedCollection new.
 
 	block :=
-		[
-			|
-				evaluator
-			|
+	[
+		|
+			evaluator
+		|
 
-			evaluator :=
-				tableQuery EvaluatorForExpression 
-					rows:	iterator rows
-					parameters:	aCollectionOfParameterValues.
+		evaluator :=
+			tableQuery EvaluatorForExpression
+				rows:	iterator rows
+				parameters:	aCollectionOfParameterValues.
 
-			(
-				evaluator
-					visit:	aCompiledStatement whereExpression
-			)
-				ifTrue:
-				[
-					results
-						add:
-						(
-							evaluator
-								visit:	aCompiledStatement selectExpression
-						).
-				].
-		].
+		(
+			evaluator
+				visit:	aCompiledStatement whereExpression
+		)
+			ifTrue:
+			[
+				results
+					add:
+					(
+						evaluator
+							visit:	aCompiledStatement selectExpression
+					).
+			].
+	].
 
 	iterator
 		timesRepeat:	block.
@@ -161,9 +161,7 @@ FakeDriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfTabl
 						(
 							aCollectionOfTables
 								at:	eachTableIndex
-						)
-							name
-							asString;
+						) name asString;
 						nextPutAll:	' t';
 						nextPutAll:	eachTableIndex asString.
 				].

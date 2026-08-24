@@ -11,7 +11,6 @@ Class {
 
 { #category : 'options' }
 ExpressionCaptureDelegatorTableQueryRudesheim >> forwardedResultRudesheim: anObject [
-
 	^ self class
 		delegateTo:	anObject.
 ]

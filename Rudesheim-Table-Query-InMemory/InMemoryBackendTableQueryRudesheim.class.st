@@ -10,12 +10,12 @@ Class {
 
 { #category : 'namespace' }
 InMemoryBackendTableQueryRudesheim class >> DMirrorSupport [
-	^ DMirrorSupportInMemoryBackendTableQueryRudesheim
+	^ DMirrorSupportInMemoryBackendTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }
 InMemoryBackendTableQueryRudesheim class >> OptimizationContext [
-	^ OptimizationContextInMemoryBackendTableQueryRudesheim
+	^ OptimizationContextInMemoryBackendTableQueryRudesheim.
 ]
 
 { #category : 'namespace' }
@@ -42,7 +42,7 @@ from: aCollection [
 			prepareTableQuery:	aBlockClosure
 			from:	aCollection
 	)
-		valueWithArguments:	#().
+		valueWithArguments:	#(  ).
 ]
 
 { #category : 'preparing' }
@@ -54,9 +54,8 @@ from: aCollection [
 		parameters
 		tableQuery
 	|
-	
-	tableQuery := Rudesheim TableQuery.
 
+	tableQuery := Rudesheim TableQuery.
 	statement := tableQuery ExpressionCapturingStatement new.
 
 	rows :=

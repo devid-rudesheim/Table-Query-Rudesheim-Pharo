@@ -10,5 +10,6 @@ forPlan: anEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim [
 
 { #category : '*Rudesheim-Table-Query-InMemory-Private' }
 ExpressionTableQueryRudesheim >> equalityKeyOperandRudesheim [
-	self error: 'unsupported predicate'.
+	self
+		error:	'unsupported predicate'.
 ]
