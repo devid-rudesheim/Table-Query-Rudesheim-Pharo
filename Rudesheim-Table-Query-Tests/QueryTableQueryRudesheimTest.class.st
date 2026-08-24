@@ -15,9 +15,7 @@ Class {
 
 { #category : 'accessing' }
 QueryTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Query.
+	^ Rudesheim TableQuery Query.
 ]
 
 { #category : 'accessing' }
@@ -37,14 +35,10 @@ QueryTableQueryRudesheimTest >> defaultExpectValues [
 QueryTableQueryRudesheimTest >> defaultSourceCollections [
 	^
 	{
-		(
-			1
-				to:	5
-		).
-		(
-			1
-				to:	10
-		)
+		1
+			to:	5.
+		1
+			to:	10
 	}.
 ]
 
@@ -73,20 +67,14 @@ QueryTableQueryRudesheimTest >> runInquire0 [
 					statement
 						select:
 						[
-							rows
-								first
-								asNumber
-								= rows second asNumber.
+							rows first asNumber = rows second asNumber.
 						]
 						collect:
 						[
-							rows
-								first
-								copy.
+							rows first copy.
 						].
 				]
-		)
-			asArray
+		) asArray
 		equals:	self expectValues.
 ]
 
@@ -111,24 +99,17 @@ QueryTableQueryRudesheimTest >> testAsRHTableQuery [
 	|
 
 	preparedQuery :=
-		self sourceCollections
-			asRHTableQuery
-			asInMemory
+		self sourceCollections asRHTableQuery asInMemory
 			prepareTableQuery:
 			[ :statement :rows |
 				statement
 					select:
 					[
-						rows
-							first
-							asNumber
-							= rows second asNumber.
+						rows first asNumber = rows second asNumber.
 					]
 					collect:
 					[
-						rows
-							first
-							copy.
+						rows first copy.
 					].
 			].
 
@@ -136,9 +117,8 @@ QueryTableQueryRudesheimTest >> testAsRHTableQuery [
 		assert:
 		(
 			preparedQuery
-				valueWithArguments:	#()
-		)
-			asArray
+				valueWithArguments:	#(  )
+		) asArray
 		equals:	self expectValues.
 ]
 
@@ -151,7 +131,7 @@ QueryTableQueryRudesheimTest >> testBackendMustBeProvidedAtCreation [
 				includesSelector:	#fromCollections:
 		).
 
-	#(#asInMemory #asInSQLUsing: #backend:)
+	#( #asInMemory #asInSQLUsing: #backend: )
 		do:
 		[ :eachSelector |
 			self
@@ -192,10 +172,8 @@ QueryTableQueryRudesheimTest >> testInquire0_1 [
 		sourceCollections:
 		{
 			array.
-			(
-				1
-					to:	10
-			)
+			1
+				to:	10
 		};
 		runInquire0.
 ]
@@ -225,7 +203,7 @@ QueryTableQueryRudesheimTest >> testPrepareTableQuery [
 		assert:
 		(
 			preparedQuery
-				valueWithArguments:	#()
+				valueWithArguments:	#(  )
 		) asArray
 		equals:	self expectValues.
 ]

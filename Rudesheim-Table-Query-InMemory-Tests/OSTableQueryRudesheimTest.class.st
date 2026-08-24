@@ -22,8 +22,7 @@ OSTableQueryRudesheimTest >> testOSTableQueryRudesheimOptimizersIncludeDMirrorPl
 	plan := Rudesheim TableQuery Backend InMemory Plan.
 
 	self
-		assert:
-		OSTableQueryRudesheim optimizers
+		assert:	OSTableQueryRudesheim optimizers
 		equals:
 		{
 			plan SmallInputSequential.
@@ -38,7 +37,8 @@ OSTableQueryRudesheimTest >> testWinOverridesOSTableQueryRudesheim [
 	self
 		assert:
 		(
-			WinOSTableQueryRudesheim inheritsFrom: OSTableQueryRudesheim
+			WinOSTableQueryRudesheim
+				inheritsFrom:	OSTableQueryRudesheim
 		).
 ]
 
@@ -51,8 +51,7 @@ OSTableQueryRudesheimTest >> testWinOptimizersExcludeSmallInputAndEqualityInters
 	plan := Rudesheim TableQuery Backend InMemory Plan.
 
 	self
-		assert:
-		WinOSTableQueryRudesheim optimizers
+		assert:	WinOSTableQueryRudesheim optimizers
 		equals:
 		{
 			plan SmallInputSequential.

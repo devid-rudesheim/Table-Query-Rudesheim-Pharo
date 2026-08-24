@@ -71,7 +71,6 @@ DMirrorEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWith
 
 { #category : 'executing' }
 DMirrorEqualityIntersectionPlanInMemoryBackendTableQueryRudesheim >> executeWithDMirrorWithArguments: aCollection [
-	
 	Rudesheim TableQuery Backend InMemory DMirrorSupport ensurePlayCacheDirectory.
 
 	^

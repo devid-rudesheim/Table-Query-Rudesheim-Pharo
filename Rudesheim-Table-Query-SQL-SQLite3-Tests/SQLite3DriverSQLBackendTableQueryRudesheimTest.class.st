@@ -53,24 +53,30 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> driverClass [
 SQLite3DriverSQLBackendTableQueryRudesheimTest >> insertFixtureRows [
 	connection
 		execute:	'CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);'.
+
 	connection
 		execute:	'CREATE TABLE orders (customerId INTEGER, total INTEGER);'.
+
 	connection
 		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
 		value:	1
 		value:	'Alice'.
+
 	connection
 		execute:	'INSERT INTO customers (id, name) VALUES (?, ?);'
 		value:	2
 		value:	'Bob'.
+
 	connection
 		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
 		value:	1
 		value:	150.
+
 	connection
 		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
 		value:	1
 		value:	50.
+
 	connection
 		execute:	'INSERT INTO orders (customerId, total) VALUES (?, ?);'
 		value:	2
@@ -81,22 +87,10 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> insertFixtureRows [
 SQLite3DriverSQLBackendTableQueryRudesheimTest >> querySources [
 	^
 	{
-		(
-			Rudesheim
-				TableQuery
-				Backend
-				SQL
-				Table
-				name:	#customers
-		).
-		(
-			Rudesheim
-				TableQuery
-				Backend
-				SQL
-				Table
-				name:	#orders
-		)
+		Rudesheim TableQuery Backend SQL Table
+			name:	#customers.
+		Rudesheim TableQuery Backend SQL Table
+			name:	#orders
 	}.
 ]
 
@@ -115,13 +109,14 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> tearDown [
 			connection close.
 			connection := nil.
 		].
+
 	super tearDown.
 ]
 
 { #category : 'tests' }
 SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlString [
 	self
-		assert: self preparedQuery sqlString
+		assert:	self preparedQuery sqlString
 		equals:	'SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))'.
 ]
 
@@ -138,17 +133,13 @@ SQLite3DriverSQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWith
 				statement
 					collect:
 					[
-						rows
-							first
-							name.
+						rows first name.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim TableQuery Backend SQL Table
-						name:	#customers
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers
 			}.
 
 	self

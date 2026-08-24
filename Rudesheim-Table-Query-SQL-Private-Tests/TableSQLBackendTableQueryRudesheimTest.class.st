@@ -8,11 +8,7 @@ Class {
 
 { #category : 'accessing' }
 TableSQLBackendTableQueryRudesheimTest class >> targetClass [
-	^ Rudesheim
-		TableQuery
-		Backend
-		SQL
-		Table.
+	^ Rudesheim TableQuery Backend SQL Table.
 ]
 
 { #category : 'accessing' }

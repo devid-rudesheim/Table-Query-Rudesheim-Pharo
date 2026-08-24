@@ -26,17 +26,14 @@ ProjectionExpressionTableQueryRudesheimTest >> testExpressionWrapping [
 
 	expressions :=
 	{
-		(
-			fieldExpression
-				table:	1
-				field:	#id
-		).
-		(
-			fieldExpression
-				table:	1
-				field:	#name
-		)
+		fieldExpression
+			table:	1
+			field:	#id.
+		fieldExpression
+			table:	1
+			field:	#name
 	}.
+
 	projectionExpression := expressions asTableQueryProjectionExpressionRudesheim.
 
 	self
@@ -68,16 +65,12 @@ ProjectionExpressionTableQueryRudesheimTest >> testExpressions [
 
 	expressions :=
 	{
-		(
-			fieldExpression
-				table:	1
-				field:	#id
-		).
-		(
-			fieldExpression
-				table:	1
-				field:	#name
-		)
+		fieldExpression
+			table:	1
+			field:	#id.
+		fieldExpression
+			table:	1
+			field:	#name
 	}.
 
 	projectionExpression :=

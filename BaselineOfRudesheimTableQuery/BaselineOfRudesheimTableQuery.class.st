@@ -10,176 +10,155 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 	<baseline>
 
 	spec
-		for: #common
+		for:	#common
 		do:
 		[
 			spec
-				baseline: 'RudesheimUtility'
-				with:
-				[
-					spec repository: 'github://devid-rudesheim/Utility-Rudesheim-Pharo:develop'
-				];
-
-				project: 'RudesheimUtilityTests'
-				copyFrom: 'RudesheimUtility'
-				with:
-				[
-					spec loads: #( 'tests' )
-				];
-
-				baseline: 'RudesheimKernel'
-				with:
-				[
-					spec repository: 'github://devid-rudesheim/Kernel-Rudesheim-Pharo:develop'
-				];
-
-				baseline: 'DMirror'
-				with:
-				[
-					spec repository: 'github://ObjectProfile/DMirror:master/src'
-				];
-
-				baseline: 'SQLite3'
-				with:
-				[
-					spec repository: 'github://pharo-rdbms/Pharo-SQLite3:master/src'
-				];
-
-				project: 'SQLite3Core'
-				copyFrom: 'SQLite3'
-				with:
-				[
-					spec loads: #( 'Core' )
-				];
-
-				package: 'Rudesheim-Table-Query-Private'
+				baseline:	'RudesheimUtility'
 				with:
 				[
 					spec
-						requires: #( 'RudesheimUtility' 'RudesheimKernel' )
+						repository:	'github://devid-rudesheim/Utility-Rudesheim-Pharo:develop'.
 				];
-
-				package: 'Rudesheim-Table-Query'
+				project:	'RudesheimUtilityTests'
+				copyFrom:	'RudesheimUtility'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-Private' )
+						loads:	#( 'tests' ).
 				];
-
-				package: 'Rudesheim-Table-Query-InMemory-Private'
+				baseline:	'RudesheimKernel'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-Private' )
+						repository:	'github://devid-rudesheim/Kernel-Rudesheim-Pharo:develop'.
 				];
-
-				package: 'Rudesheim-Table-Query-InMemory'
+				baseline:	'DMirror'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory-Private' )
+						repository:	'github://ObjectProfile/DMirror:master/src'.
 				];
-
-				package: 'Rudesheim-Table-Query-InMemory-DMirror-Private'
+				baseline:	'SQLite3'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-InMemory-Private' 'DMirror' )
+						repository:	'github://pharo-rdbms/Pharo-SQLite3:master/src'.
 				];
-
-				package: 'Rudesheim-Table-Query-InMemory-DMirror'
+				project:	'SQLite3Core'
+				copyFrom:	'SQLite3'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror-Private' )
+						loads:	#( 'Core' ).
 				];
-
-				package: 'Rudesheim-Table-Query-Private-Tests'
+				package:	'Rudesheim-Table-Query-Private'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query' 'RudesheimUtilityTests' )
+						requires:	#( 'RudesheimUtility' 'RudesheimKernel' ).
 				];
-
-				package: 'Rudesheim-Table-Query-Tests'
+				package:	'Rudesheim-Table-Query'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-InMemory' 'RudesheimUtilityTests' )
+						requires:	#( 'Rudesheim-Table-Query-Private' ).
 				];
-
-				package: 'Rudesheim-Table-Query-InMemory-Tests'
+				package:	'Rudesheim-Table-Query-InMemory-Private'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror' 'Rudesheim-Table-Query-Tests' )
+						requires:	#( 'Rudesheim-Table-Query-Private' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-Private'
+				package:	'Rudesheim-Table-Query-InMemory'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-Private' )
+						requires:	#( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory-Private' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL'
+				package:	'Rudesheim-Table-Query-InMemory-DMirror-Private'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-SQL-Private' )
+						requires:	#( 'Rudesheim-Table-Query-InMemory-Private' 'DMirror' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-SQLite3-Private'
+				package:	'Rudesheim-Table-Query-InMemory-DMirror'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL-Private' )
+						requires:	#( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror-Private' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-SQLite3'
+				package:	'Rudesheim-Table-Query-Private-Tests'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-SQLite3-Private' 'SQLite3Core' )
+						requires:	#( 'Rudesheim-Table-Query' 'RudesheimUtilityTests' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-Private-Tests'
+				package:	'Rudesheim-Table-Query-Tests'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-Tests' 'RudesheimUtilityTests' )
+						requires:	#( 'Rudesheim-Table-Query-InMemory' 'RudesheimUtilityTests' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-Tests'
+				package:	'Rudesheim-Table-Query-InMemory-Tests'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-Private-Tests' 'Rudesheim-Table-Query-Tests' )
+						requires:	#( 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-InMemory-DMirror' 'Rudesheim-Table-Query-Tests' ).
 				];
-
-				package: 'Rudesheim-Table-Query-SQL-SQLite3-Tests'
+				package:	'Rudesheim-Table-Query-SQL-Private'
 				with:
 				[
 					spec
-						requires: #( 'Rudesheim-Table-Query-SQL-SQLite3' 'Rudesheim-Table-Query-SQL-Tests' )
+						requires:	#( 'Rudesheim-Table-Query-Private' ).
 				];
-
-				group:		#core
-				with:		#( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-SQL' );
-
-				group:		#sqlite3
-				with:		#( 'Rudesheim-Table-Query-SQL-SQLite3' );
-
-				group:		#dmirror
-				with:		#( 'Rudesheim-Table-Query-InMemory-DMirror' );
-
-				group:		#tests
-				with:		#( 'Rudesheim-Table-Query-Tests' 'Rudesheim-Table-Query-InMemory-Tests' 'Rudesheim-Table-Query-SQL-Tests' );
-
-				group:		#sqlite3Tests
-				with:		#( 'Rudesheim-Table-Query-SQL-SQLite3-Tests' );
-
-				group:		#default
-				with:		#( #core ).
-		]
+				package:	'Rudesheim-Table-Query-SQL'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-SQL-Private' ).
+				];
+				package:	'Rudesheim-Table-Query-SQL-SQLite3-Private'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query-SQL-Private' ).
+				];
+				package:	'Rudesheim-Table-Query-SQL-SQLite3'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-SQLite3-Private' 'SQLite3Core' ).
+				];
+				package:	'Rudesheim-Table-Query-SQL-Private-Tests'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-Tests' 'RudesheimUtilityTests' ).
+				];
+				package:	'Rudesheim-Table-Query-SQL-Tests'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-SQL-Private-Tests' 'Rudesheim-Table-Query-Tests' ).
+				];
+				package:	'Rudesheim-Table-Query-SQL-SQLite3-Tests'
+				with:
+				[
+					spec
+						requires:	#( 'Rudesheim-Table-Query-SQL-SQLite3' 'Rudesheim-Table-Query-SQL-Tests' ).
+				];
+				group:	#core
+				with:	#( 'Rudesheim-Table-Query' 'Rudesheim-Table-Query-InMemory' 'Rudesheim-Table-Query-SQL' );
+				group:	#sqlite3
+				with:	#( 'Rudesheim-Table-Query-SQL-SQLite3' );
+				group:	#dmirror
+				with:	#( 'Rudesheim-Table-Query-InMemory-DMirror' );
+				group:	#tests
+				with:	#( 'Rudesheim-Table-Query-Tests' 'Rudesheim-Table-Query-InMemory-Tests' 'Rudesheim-Table-Query-SQL-Tests' );
+				group:	#sqlite3Tests
+				with:	#( 'Rudesheim-Table-Query-SQL-SQLite3-Tests' );
+				group:	#default
+				with:	#( #core ).
+		].
 ]

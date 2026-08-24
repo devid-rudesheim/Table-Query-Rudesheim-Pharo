@@ -12,7 +12,7 @@ FieldExpressionTableQueryRudesheim >> keyAccessorPathRudesheim [
 	^ self fieldSelector
 		ifNil:
 		[
-			#().
+			#(  ).
 		]
 		ifNotNil:
 		[ :aFieldSelector |

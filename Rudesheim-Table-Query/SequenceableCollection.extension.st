@@ -2,9 +2,6 @@ Extension { #name : 'SequenceableCollection' }
 
 { #category : '*Rudesheim-Table-Query' }
 SequenceableCollection >> asRHTableQuery [
-
-	^ Rudesheim
-		TableQuery
-		QuerySource
+	^ Rudesheim TableQuery QuerySource
 		fromCollections:	self.
 ]

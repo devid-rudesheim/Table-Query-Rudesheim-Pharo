@@ -77,8 +77,7 @@ SQLite3DriverSQLBackendTableQueryRudesheim >> setConnection: anObject [
 
 { #category : 'printing' }
 SQLite3DriverSQLBackendTableQueryRudesheim >> sqlStringFor: aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim [
-	^ aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim
-		sqlString.
+	^ aCompiledStatementForSQLite3RelationalDatabaseDriverSQLBackendTableQueryRudesheim sqlString.
 ]
 
 { #category : 'private' }
@@ -137,9 +136,7 @@ SQLite3DriverSQLBackendTableQueryRudesheim >> tablesSqlStringFor: aCollectionOfT
 						(
 							aCollectionOfTables
 								at:	eachTableIndex
-						)
-							name
-							asString;
+						) name asString;
 						nextPutAll:	' t';
 						nextPutAll:	eachTableIndex asString.
 				].

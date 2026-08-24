@@ -14,7 +14,7 @@ from: aCollection [
 			prepareTableQuery:	aBlockClosure
 			from:	aCollection
 	)
-		valueWithArguments:	#().
+		valueWithArguments:	#(  ).
 ]
 
 { #category : 'preparing' }
