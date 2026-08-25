@@ -39,14 +39,10 @@ SQLBackendTableQueryRudesheimTest >> querySources [
 
 	^
 	{
-		(
-			table
-				name:	#customers
-		).
-		(
-			table
-				name:	#orders
-		)
+		table
+			name:	#customers.
+		table
+			name:	#orders
 	}.
 ]
 
@@ -57,33 +53,26 @@ SQLBackendTableQueryRudesheimTest >> testAsRHTableQueryAsInSQLUsing [
 	|
 
 	query :=
-		(
-			self querySources
-				asRHTableQuery
-				asInSQLUsing:
-				(
-					Rudesheim TableQuery Backend SQL Driver Fake
-						tables:	self sourceTables
-				)
-		)
-			prepareTableQuery:
-			[ :statement :rows :parameters |
-				statement
-					select:
-					[
-						rows
-							first
-							id
-							= rows second customerId
-							& (rows second total > parameters first).
-					]
-					collect:
-					[
-						rows
-							first
-							name.
-					].
-			].
+	(
+		self querySources asRHTableQuery
+			asInSQLUsing:
+			(
+				Rudesheim TableQuery Backend SQL Driver Fake
+					tables:	self sourceTables
+			)
+	)
+		prepareTableQuery:
+		[ :statement :rows :parameters |
+			statement
+				select:
+				[
+					rows first id = rows second customerId & ( rows second total > parameters first ).
+				]
+				collect:
+				[
+					rows first name.
+				].
+		].
 
 	self
 		assert:	query sqlString
@@ -93,18 +82,18 @@ SQLBackendTableQueryRudesheimTest >> testAsRHTableQueryAsInSQLUsing [
 		assertCollection:
 		(
 			query
-				valueWithArguments:	{100}
+				valueWithArguments:
+				{
+					100
+				}
 		)
-		hasSameElements:	#('Alice' 'Bob').
+		hasSameElements:	#( 'Alice' 'Bob' ).
 ]
 
 { #category : 'tests' }
 SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlString [
 	self
-		assert:
-		self
-			preparedQuery
-			sqlString
+		assert:	self preparedQuery sqlString
 		equals:	'SELECT t1.name FROM customers t1, orders t2 WHERE ((t1.id = t2.customerId) AND (t2.total > ?))'.
 ]
 
@@ -121,29 +110,17 @@ SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithOr [
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= parameters first
-							| (rows first name = parameters second).
+						rows first id = parameters first | ( rows first name = parameters second ).
 					]
 					collect:
 					[
-						rows
-							first
-							name.
+						rows first name.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#customers
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers
 			}.
 
 	self
@@ -164,33 +141,20 @@ SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithProjection [
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= parameters first.
+						rows first id = parameters first.
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id.
-							rows
-								first
-								name
+							rows first id.
+							rows first name
 						}.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#customers
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers
 			}.
 
 	self
@@ -211,30 +175,19 @@ SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithProjectionOne
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= parameters first.
+						rows first id = parameters first.
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id
+							rows first id
 						}.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#customers
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers
 			}.
 
 	self
@@ -255,44 +208,23 @@ SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithProjectionThr
 				statement
 					select:
 					[
-						rows
-							first
-							id
-							= rows second customerId.
+						rows first id = rows second customerId.
 					]
 					collect:
 					[
 						{
-							rows
-								first
-								id.
-							rows
-								first
-								name.
-							rows
-								second
-								total
+							rows first id.
+							rows first name.
+							rows second total
 						}.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#customers
-				).
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#orders
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers.
+				Rudesheim TableQuery Backend SQL Table
+					name:	#orders
 			}.
 
 	self
@@ -313,21 +245,13 @@ SQLBackendTableQueryRudesheimTest >> testPreparedQuerySqlStringWithoutWhere [
 				statement
 					collect:
 					[
-						rows
-							first
-							name.
+						rows first name.
 					].
 			]
 			from:
 			{
-				(
-					Rudesheim
-						TableQuery
-						Backend
-						SQL
-						Table
-						name:	#customers
-				)
+				Rudesheim TableQuery Backend SQL Table
+					name:	#customers
 			}.
 
 	self

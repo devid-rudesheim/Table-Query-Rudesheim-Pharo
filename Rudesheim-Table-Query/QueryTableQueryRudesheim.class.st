@@ -15,7 +15,6 @@ Class {
 { #category : 'instance creation' }
 QueryTableQueryRudesheim class >> fromCollections: aCollection
 backend: aBackendTableQueryRudesheim [
-
 	^ super new
 		setCollections:	aCollection
 		backend:	aBackendTableQueryRudesheim.
@@ -38,7 +37,6 @@ QueryTableQueryRudesheim >> prepareTableQuery: aBlockClosure [
 { #category : 'initialization' }
 QueryTableQueryRudesheim >> setCollections: aCollection
 backend: aBackendTableQueryRudesheim [
-
 	sourceCollections := aCollection.
 	backend := aBackendTableQueryRudesheim.
 	^ self.

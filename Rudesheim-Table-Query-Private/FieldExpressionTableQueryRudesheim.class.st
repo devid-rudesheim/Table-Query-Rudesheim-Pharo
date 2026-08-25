@@ -43,9 +43,7 @@ FieldExpressionTableQueryRudesheim >> processMessage: aMessage [
 		fieldSelector isNil
 			and:
 			[
-				aMessage
-					selector
-					isUnary.
+				aMessage selector isUnary.
 			]
 	)
 		ifTrue:
@@ -83,7 +81,7 @@ FieldExpressionTableQueryRudesheim >> value [
 	|
 		expression
 	|
-	
+
 	expression := Rudesheim TableQuery Expression.
 
 	^ fieldSelector
@@ -98,6 +96,6 @@ FieldExpressionTableQueryRudesheim >> value [
 			expression Message
 				receiver:	self
 				selector:	#value
-				arguments:	#().
+				arguments:	#(  ).
 		].
 ]

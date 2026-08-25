@@ -39,7 +39,7 @@ SequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aColle
 		block
 		tableQuery
 	|
-	
+
 	tableQuery := Rudesheim TableQuery.
 
 	iterator :=
@@ -49,30 +49,30 @@ SequentialPlanInMemoryBackendTableQueryRudesheim >> executeWithArguments: aColle
 	results := OrderedCollection new.
 
 	block :=
-		[
-			|
-				evaluator
-			|
+	[
+		|
+			evaluator
+		|
 
-			evaluator :=
-				tableQuery EvaluatorForExpression
-					rows:	iterator rows
-					parameters:	aCollection.
+		evaluator :=
+			tableQuery EvaluatorForExpression
+				rows:	iterator rows
+				parameters:	aCollection.
 
-			(
-				evaluator
-					visit:	whereExpression
-			)
-				ifTrue:
-				[
-					results
-						add:
-						(
-							evaluator
-								visit:	selectExpression
-						).
-				].
-		].
+		(
+			evaluator
+				visit:	whereExpression
+		)
+			ifTrue:
+			[
+				results
+					add:
+					(
+						evaluator
+							visit:	selectExpression
+					).
+			].
+	].
 
 	iterator
 		timesRepeat:	block.

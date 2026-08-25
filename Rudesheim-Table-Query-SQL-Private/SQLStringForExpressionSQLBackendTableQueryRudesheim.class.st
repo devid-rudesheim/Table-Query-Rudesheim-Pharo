@@ -77,9 +77,7 @@ SQLStringForExpressionSQLBackendTableQueryRudesheim >> sqlStringForConstantValue
 	anObject isString
 		ifTrue:
 		[
-			^ ''''
-				, anObject
-				, ''''.
+			^ '''' , anObject , ''''.
 		].
 
 	anObject == true
@@ -104,13 +102,19 @@ SQLStringForExpressionSQLBackendTableQueryRudesheim >> tableAliasForIndex: anInt
 
 { #category : 'visiting' }
 SQLStringForExpressionSQLBackendTableQueryRudesheim >> visitBinaryExpressionRudesheim: aBinaryExpressionTableQueryRudesheim [
-	^ '('
-		, (self visit: aBinaryExpressionTableQueryRudesheim receiver)
-		, ' '
-		, (self sqlStringForBinarySelector: aBinaryExpressionTableQueryRudesheim selector)
-		, ' '
-		, (self visit: aBinaryExpressionTableQueryRudesheim argument)
-		, ')'.
+	^ '(' ,
+	(
+		self
+			visit:	aBinaryExpressionTableQueryRudesheim receiver
+	) , ' ' ,
+	(
+		self
+			sqlStringForBinarySelector:	aBinaryExpressionTableQueryRudesheim selector
+	) , ' ' ,
+	(
+		self
+			visit:	aBinaryExpressionTableQueryRudesheim argument
+	) , ')'.
 ]
 
 { #category : 'visiting' }
@@ -136,9 +140,7 @@ SQLStringForExpressionSQLBackendTableQueryRudesheim >> visitFieldExpressionRudes
 		]
 		ifNotNil:
 		[ :aSymbol |
-			alias
-				, '.'
-				, aSymbol asString.
+			alias , '.' , aSymbol asString.
 		].
 ]
 

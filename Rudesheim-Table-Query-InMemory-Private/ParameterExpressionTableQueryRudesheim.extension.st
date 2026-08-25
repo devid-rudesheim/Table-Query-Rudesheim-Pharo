@@ -19,7 +19,8 @@ parameters: aParameterEqualityCollection [
 ParameterExpressionTableQueryRudesheim >> fileEqualityWithParameterOperand: aParameterOperand
 wholeRow: anOrderedCollection
 parameters: aParameterEqualityCollection [
-	self error: 'unsupported predicate'.
+	self
+		error:	'unsupported predicate'.
 ]
 
 { #category : '*Rudesheim-Table-Query-InMemory-Private' }
@@ -36,5 +37,6 @@ parameters: aParameterEqualityCollection [
 
 { #category : '*Rudesheim-Table-Query-InMemory-Private' }
 ParameterExpressionTableQueryRudesheim >> keyOperandAppendingSelectorRudesheim: aSymbol [
-	self error: 'unsupported predicate'.
+	self
+		error:	'unsupported predicate'.
 ]

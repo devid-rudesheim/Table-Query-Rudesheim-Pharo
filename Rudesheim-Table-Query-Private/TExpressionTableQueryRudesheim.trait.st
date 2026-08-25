@@ -48,7 +48,7 @@ TExpressionTableQueryRudesheim >> processMessage: aMessage [
 	^
 	(
 		(
-			aMessage	selector isBinary
+			aMessage selector isBinary
 				and:
 				[
 					1 = wrappedArguments size.
@@ -56,15 +56,14 @@ TExpressionTableQueryRudesheim >> processMessage: aMessage [
 		)
 			ifTrue:
 			[
-				expression Binary
+				expression Binary.
 			]
 			ifFalse:
 			[
-				expression Message
+				expression Message.
 			]
 	)
-		receiver:		self
-		selector:		aMessage selector
+		receiver:	self
+		selector:	aMessage selector
 		arguments:	wrappedArguments.
-
 ]

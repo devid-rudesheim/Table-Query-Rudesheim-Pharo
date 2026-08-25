@@ -31,8 +31,8 @@ IteratorTableQueryRudesheim >> collections: aCollection [
 		ifTrue:
 		[
 			loop :=
-				[ :block |
-				].
+			[ :block |
+			].
 
 			^ self.
 		].

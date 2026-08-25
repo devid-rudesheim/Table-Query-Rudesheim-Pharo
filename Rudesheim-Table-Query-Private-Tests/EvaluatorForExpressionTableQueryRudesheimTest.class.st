@@ -14,8 +14,15 @@ EvaluatorForExpressionTableQueryRudesheimTest class >> targetClass [
 { #category : 'accessing' }
 EvaluatorForExpressionTableQueryRudesheimTest >> defaultBasicTarget [
 	^ self targetClass
-		rows:	{(3 -> 4) .  (10 -> 20)}
-		parameters:	{100}.
+		rows:
+		{
+			( 3 -> 4 ).
+			( 10 -> 20 )
+		}
+		parameters:
+		{
+			100
+		}.
 ]
 
 { #category : 'tests' }
@@ -29,12 +36,11 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitBinaryExpression [
 		Rudesheim TableQuery Expression Field
 			table:	1
 			field:	#key
-	)
-		=
-		(
-			Rudesheim TableQuery Expression Constant
-				value:	3
-		).
+	) =
+	(
+		Rudesheim TableQuery Expression Constant
+			value:	3
+	).
 
 	self
 		assert:
@@ -153,15 +159,11 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitProjectionExpression [
 		Rudesheim TableQuery Expression Projection
 			expressions:
 			{
-				(
-					fieldExpression
-						table:	1
-				).
-				(
-					fieldExpression
-						table:	2
-						field:	#key
-				)
+				fieldExpression
+					table:	1.
+				fieldExpression
+					table:	2
+					field:	#key
 			}.
 
 	self
@@ -169,7 +171,6 @@ EvaluatorForExpressionTableQueryRudesheimTest >> testVisitProjectionExpression [
 		(
 			self basicTarget
 				visit:	expression
-		)
-			asArray
-		equals:	#(4 10).
+		) asArray
+		equals:	#( 4 10 ).
 ]

@@ -13,7 +13,6 @@ Class {
 
 { #category : 'instance creation' }
 QuerySourceTableQueryRudesheim class >> fromCollections: aCollection [
-
 	^ super new
 		setCollections:	aCollection.
 ]
@@ -23,8 +22,8 @@ QuerySourceTableQueryRudesheim >> asInMemory [
 	|
 		tableQuery
 	|
-	
-	tableQuery := Rudesheim	TableQuery.
+
+	tableQuery := Rudesheim TableQuery.
 
 	^ tableQuery Query
 		fromCollections:	sourceCollections
@@ -33,24 +32,17 @@ QuerySourceTableQueryRudesheim >> asInMemory [
 
 { #category : 'converting' }
 QuerySourceTableQueryRudesheim >> asInSQLUsing: aTRelationalDatabaseDriverSQLBackendTableQueryRudesheim [
-
-	^ Rudesheim
-		TableQuery
-		Query
+	^ Rudesheim TableQuery Query
 		fromCollections:	sourceCollections
 		backend:
 		(
-			Rudesheim
-				TableQuery
-				Backend
-				SQL
+			Rudesheim TableQuery Backend SQL
 				driver:	aTRelationalDatabaseDriverSQLBackendTableQueryRudesheim
 		).
 ]
 
 { #category : 'initialization' }
 QuerySourceTableQueryRudesheim >> setCollections: aCollection [
-
 	sourceCollections := aCollection.
 	^ self.
 ]

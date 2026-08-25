@@ -46,35 +46,29 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					select:
 					[
 						(
-							rows first value
-								= rows second value
-						)
-							&
-							(
-								rows second value
-									= rows last
-							).
+							rows first value = rows second value
+						) &
+						(
+							rows second value = rows last
+						).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	1000
-					).
-					(
-						500
-							to:	550
-					).
-					(
-						1
-							to:	1000
-					)
+					1
+						to:	1000.
+					500
+						to:	550.
+					1
+						to:	1000
 				}
 					collect:
 					[ :eachCollection |
@@ -99,7 +93,7 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					eachValueHolder value.
 				]
 		)
-		equals:	#(500 500).
+		equals:	#( 500 500 ).
 
 	self
 		assert:
@@ -110,7 +104,7 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					eachValueHolder value.
 				]
 		)
-		equals:	#(550 550).
+		equals:	#( 550 550 ).
 ]
 
 { #category : 'tests' }
@@ -127,35 +121,29 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					select:
 					[
 						(
-							rows first value
-								= rows second value
-						)
-							&
-							(
-								rows second value
-									= rows last value
-							).
+							rows first value = rows second value
+						) &
+						(
+							rows second value = rows last value
+						).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	1000
-					).
-					(
-						500
-							to:	550
-					).
-					(
-						1
-							to:	1000
-					)
+					1
+						to:	1000.
+					500
+						to:	550.
+					1
+						to:	1000
 				}
 					collect:
 					[ :eachCollection |
@@ -180,7 +168,7 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					eachValueHolder value.
 				]
 		)
-		equals:	#(500 500).
+		equals:	#( 500 500 ).
 
 	self
 		assert:
@@ -191,7 +179,7 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesEqualityInter
 					eachValueHolder value.
 				]
 		)
-		equals:	#(550 550).
+		equals:	#( 550 550 ).
 ]
 
 { #category : 'tests' }
@@ -207,30 +195,24 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesWholeRowEqual
 				statement
 					select:
 					[
-						rows
-							first
-							= rows second
-							& (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	1000
-				).
-				(
-					500
-						to:	550
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1000.
+				500
+					to:	550.
+				1
+					to:	1000
 			}.
 
 	self
@@ -238,18 +220,12 @@ InMemoryBackendTableQueryRudesheimTest >> testInquireTableQueryUsesWholeRowEqual
 		equals:	51.
 
 	self
-		assert:
-		result
-			first
-			asArray
-		equals:	#(500 500).
+		assert:	result first asArray
+		equals:	#( 500 500 ).
 
 	self
-		assert:
-		result
-			last
-			asArray
-		equals:	#(550 550).
+		assert:	result last asArray
+		equals:	#( 550 550 ).
 ]
 
 { #category : 'tests' }
@@ -274,14 +250,10 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 			]
 			from:
 			{
-				(
-					1
-						to:	1001
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1001.
+				1
+					to:	1000
 			}.
 
 	self
@@ -290,7 +262,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesDMirrorSequentialAboveT
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim 	TableQuery Backend InMemory Plan DMirror Sequential.
+		equals:	Rudesheim TableQuery Backend InMemory Plan DMirror Sequential.
 ]
 
 { #category : 'tests' }
@@ -306,27 +278,24 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionBel
 				statement
 					select:
 					[
-						rows first = rows second & (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	200
-				).
-				(
-					50
-						to:	60
-				).
-				(
-					1
-						to:	200
-				)
+				1
+					to:	200.
+				50
+					to:	60.
+				1
+					to:	200
 			}.
 
 	self
@@ -335,7 +304,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionBel
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -351,27 +320,24 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 				statement
 					select:
 					[
-						rows first = rows second & (rows second = rows last).
+						rows first = rows second & ( rows second = rows last ).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			{
-				(
-					1
-						to:	1000
-				).
-				(
-					500
-						to:	550
-				).
-				(
-					1
-						to:	1000
-				)
+				1
+					to:	1000.
+				500
+					to:	550.
+				1
+					to:	1000
 			}.
 
 	self
@@ -380,7 +346,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWhe
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -398,36 +364,31 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWit
 					[
 						(
 							rows first key = rows second key
-						)
-							&
-							(
-								rows first key = rows last key
-							)
-							&
-							(
-								rows first key = parameters first
-							).
+						) &
+						(
+							rows first key = rows last key
+						) &
+						(
+							rows first key = parameters first
+						).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	1000000
-					).
-					(
-						1
-							to:	100
-					).
-					(
-						1
-							to:	1000000
-					)
+					1
+						to:	1000000.
+					1
+						to:	100.
+					1
+						to:	1000000
 				}
 					collect:
 					[ :eachCollection |
@@ -445,7 +406,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesEqualityIntersectionWit
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 ]
 
 { #category : 'tests' }
@@ -461,8 +422,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 				statement
 					select:
 					[
-						rows first
-							= rows second.
+						rows first = rows second.
 					]
 					collect:
 					[
@@ -471,14 +431,10 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 			]
 			from:
 			{
-				(
-					1
-						to:	5
-				).
-				(
-					3
-						to:	4
-				)
+				1
+					to:	5.
+				3
+					to:	4
 			}.
 
 	self
@@ -487,7 +443,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPlanForUsesSmallInputSequentialFor
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
+		equals:	Rudesheim TableQuery Backend InMemory Plan SmallInputSequential.
 ]
 
 { #category : 'tests' }
@@ -535,40 +491,32 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 					select:
 					[
 						(
-							rows first key
-								= rows second key
-						)
-							&
-							(
-								rows first key
-									= rows last key
-							)
-							&
-							(
-								rows first key
-									= parameters first
-							).
+							rows first key = rows second key
+						) &
+						(
+							rows first key = rows last key
+						) &
+						(
+							rows first key = parameters first
+						).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	200
-					).
-					(
-						50
-							to:	60
-					).
-					(
-						1
-							to:	200
-					)
+					1
+						to:	200.
+					50
+						to:	60.
+					1
+						to:	200
 				}
 					collect:
 					[ :eachCollection |
@@ -586,7 +534,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 
 	matchingResult :=
 		preparedQuery
@@ -602,11 +550,11 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 
 	self
 		assert:	matchingResult first
-		equals:	#(50 50).
+		equals:	#( 50 50 ).
 
 	self
 		assert:	missingResult asArray
-		equals:	#().
+		equals:	#(  ).
 ]
 
 { #category : 'tests' }
@@ -625,47 +573,39 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 					select:
 					[
 						(
-							rows first value key
-								= rows second value key
-						)
-							&
-							(
-								rows first value key
-									= rows last value key
-							)
-							&
-							(
-								rows first value key
-									= parameters first
-							).
+							rows first value key = rows second value key
+						) &
+						(
+							rows first value key = rows last value key
+						) &
+						(
+							rows first value key = parameters first
+						).
 					]
 					collect:
 					[
-						{rows first value key .  rows last value key}.
+						{
+							rows first value key.
+							rows last value key
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	200
-					).
-					(
-						50
-							to:	60
-					).
-					(
-						1
-							to:	200
-					)
+					1
+						to:	200.
+					50
+						to:	60.
+					1
+						to:	200
 				}
 					collect:
 					[ :eachCollection |
 						eachCollection
 							collect:
 							[ :eachInteger |
-								eachInteger -> (eachInteger -> eachInteger).
+								eachInteger -> ( eachInteger -> eachInteger ).
 							].
 					]
 			).
@@ -676,7 +616,7 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 			preparedQuery
 				planFor:	preparedQuery optimizationContext
 		) class
-		equals: Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
+		equals:	Rudesheim TableQuery Backend InMemory Plan EqualityIntersection.
 
 	matchingResult :=
 		preparedQuery
@@ -692,11 +632,11 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryUsesParameterEquality
 
 	self
 		assert:	matchingResult first
-		equals:	#(50 50).
+		equals:	#( 50 50 ).
 
 	self
 		assert:	missingResult asArray
-		equals:	#().
+		equals:	#(  ).
 ]
 
 { #category : 'tests' }
@@ -715,40 +655,32 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryWithParameterEquality
 					select:
 					[
 						(
-							rows first key
-								= rows second key
-						)
-							&
-							(
-								rows first key
-									= rows last key
-							)
-							&
-							(
-								rows first key
-									= parameters first
-							).
+							rows first key = rows second key
+						) &
+						(
+							rows first key = rows last key
+						) &
+						(
+							rows first key = parameters first
+						).
 					]
 					collect:
 					[
-						{rows first .  rows last}.
+						{
+							rows first.
+							rows last
+						}.
 					].
 			]
 			from:
 			(
 				{
-					(
-						1
-							to:	200
-					).
-					(
-						1
-							to:	200
-					).
-					(
-						1
-							to:	200
-					)
+					1
+						to:	200.
+					1
+						to:	200.
+					1
+						to:	200
 				}
 					collect:
 					[ :eachCollection |
@@ -774,12 +706,12 @@ InMemoryBackendTableQueryRudesheimTest >> testPreparedQueryWithParameterEquality
 
 	result :=
 		plan
-			executeWithArguments:	#(1).
+			executeWithArguments:	#( 1 ).
 
 	self
 		assert:	result asArray
 		equals:
 		{
-			#(1 1).
+			#( 1 1 )
 		}.
 ]
