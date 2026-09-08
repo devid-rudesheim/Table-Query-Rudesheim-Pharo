@@ -18,7 +18,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						repository:	'github://devid-rudesheim/Utility-Rudesheim-Pharo:develop'.
+						repository:	'github://devid-rudesheim/Utility-Rudesheim-Pharo:main'.
 				];
 				project:	'RudesheimUtilityTests'
 				copyFrom:	'RudesheimUtility'
@@ -31,7 +31,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						repository:	'github://devid-rudesheim/Kernel-Rudesheim-Pharo:develop'.
+						repository:	'github://devid-rudesheim/Kernel-Rudesheim-Pharo:main'.
 				];
 				baseline:	'DMirror'
 				with:
