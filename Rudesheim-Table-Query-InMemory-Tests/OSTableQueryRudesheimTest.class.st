@@ -1,10 +1,15 @@
 Class {
 	#name : 'OSTableQueryRudesheimTest',
-	#superclass : 'TestCase',
+	#superclass : 'BasicRudesheimTest',
 	#category : 'Rudesheim-Table-Query-InMemory-Tests-OS',
 	#package : 'Rudesheim-Table-Query-InMemory-Tests',
 	#tag : 'OS'
 }
+
+{ #category : 'accessing' }
+OSTableQueryRudesheimTest class >> targetClass [
+	^ OSTableQueryRudesheim.
+]
 
 { #category : 'tests' }
 OSTableQueryRudesheimTest >> testDelegatesThroughRudesheimOSDispatch [
@@ -22,7 +27,7 @@ OSTableQueryRudesheimTest >> testOSTableQueryRudesheimOptimizersIncludeDMirrorPl
 	plan := Rudesheim TableQuery Backend InMemory Plan.
 
 	self
-		assert:	OSTableQueryRudesheim optimizers
+		assert:	self targetClass optimizers
 		equals:
 		{
 			plan SmallInputSequential.
@@ -38,7 +43,7 @@ OSTableQueryRudesheimTest >> testWinOverridesOSTableQueryRudesheim [
 		assert:
 		(
 			WinOSTableQueryRudesheim
-				inheritsFrom:	OSTableQueryRudesheim
+				inheritsFrom:	self targetClass
 		).
 ]
 
