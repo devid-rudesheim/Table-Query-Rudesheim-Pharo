@@ -20,18 +20,18 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 					spec
 						repository:	'github://devid-rudesheim/Utility-Rudesheim-Pharo:develop'.
 				];
-				project:	'RudesheimUtilityTests'
-				copyFrom:	'RudesheimUtility'
-				with:
-				[
-					spec
-						loads:	#( 'tests' ).
-				];
 				baseline:	'RudesheimKernel'
 				with:
 				[
 					spec
 						repository:	'github://devid-rudesheim/Kernel-Rudesheim-Pharo:develop'.
+				];
+				project:	'RudesheimKernelTests'
+				copyFrom:	'RudesheimKernel'
+				with:
+				[
+					spec
+						loads:	#( 'tests' ).
 				];
 				baseline:	'DMirror'
 				with:
@@ -92,13 +92,13 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires:	#( 'Rudesheim-Table-Query' 'RudesheimUtilityTests' ).
+						requires:	#( 'Rudesheim-Table-Query' 'RudesheimKernelTests' ).
 				];
 				package:	'Rudesheim-Table-Query-Tests'
 				with:
 				[
 					spec
-						requires:	#( 'Rudesheim-Table-Query-InMemory' 'RudesheimUtilityTests' ).
+						requires:	#( 'Rudesheim-Table-Query-InMemory' 'RudesheimKernelTests' ).
 				];
 				package:	'Rudesheim-Table-Query-InMemory-Tests'
 				with:
@@ -134,7 +134,7 @@ BaselineOfRudesheimTableQuery >> baseline: spec [
 				with:
 				[
 					spec
-						requires:	#( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-Tests' 'RudesheimUtilityTests' ).
+						requires:	#( 'Rudesheim-Table-Query-SQL' 'Rudesheim-Table-Query-Tests' 'RudesheimKernelTests' ).
 				];
 				package:	'Rudesheim-Table-Query-SQL-Tests'
 				with:
