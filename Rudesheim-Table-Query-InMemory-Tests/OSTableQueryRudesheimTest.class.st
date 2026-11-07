@@ -15,7 +15,7 @@ OSTableQueryRudesheimTest class >> targetClass [
 OSTableQueryRudesheimTest >> testDelegatesThroughRudesheimOSDispatch [
 	self
 		assert:	Rudesheim TableQuery Backend InMemory PreparedQuery optimizers
-		equals:	Smalltalk os rudesheim tableQuery optimizers.
+		equals:	OSPlatform current rudesheim tableQuery optimizers.
 ]
 
 { #category : 'tests' }
