@@ -25,7 +25,7 @@ select: aSelectExpressionTableQueryRudesheim [
 
 { #category : 'optimization' }
 PreparedQueryInMemoryBackendTableQueryRudesheim class >> optimizers [
-	^ Smalltalk os rudesheim tableQuery optimizers.
+	^ OSPlatform current rudesheim tableQuery optimizers.
 ]
 
 { #category : 'optimization' }

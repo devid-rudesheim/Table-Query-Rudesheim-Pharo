@@ -1,5 +1,5 @@
 "
-Default/base optimizer table for the in-memory backend, reached as `Smalltalk os rudesheim tableQuery` on a POSIX-like OS (including macOS, via inheritance from MacOSRudesheim < OSRudesheim). Includes the DMirror-backed plans, which require the optional `dmirror` load group (see the Table-Query README) because DMirror declares its own OSSubprocess dependency, which is POSIX-only. WinOSTableQueryRudesheim overrides #optimizers for Windows to drop those plans.
+Default/base optimizer table for the in-memory backend, reached as `OSPlatform current rudesheim tableQuery` on a POSIX-like OS (including macOS, via inheritance from MacOSRudesheim < OSRudesheim). Includes the DMirror-backed plans, which require the optional `dmirror` load group (see the Table-Query README) because DMirror declares its own OSSubprocess dependency, which is POSIX-only. WinOSTableQueryRudesheim overrides #optimizers for Windows to drop those plans.
 "
 Class {
 	#name : 'OSTableQueryRudesheim',
