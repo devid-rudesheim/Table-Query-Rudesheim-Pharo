@@ -1,5 +1,5 @@
 "
-Overrides OSTableQueryRudesheim (its superclass) for Windows, reached as `Smalltalk os rudesheim tableQuery` on Windows. Drops the DMirror-backed plans, because DMirror declares its own OSSubprocess dependency, which is POSIX-only and unavailable on Windows; falls back to SmallInputSequential/EqualityIntersection (and, if neither optimizer accepts the query, plain sequential iteration).
+Overrides OSTableQueryRudesheim (its superclass) for Windows, reached as `OSPlatform current rudesheim tableQuery` on Windows. Drops the DMirror-backed plans, because DMirror declares its own OSSubprocess dependency, which is POSIX-only and unavailable on Windows; falls back to SmallInputSequential/EqualityIntersection (and, if neither optimizer accepts the query, plain sequential iteration).
 "
 Class {
 	#name : 'WinOSTableQueryRudesheim',
